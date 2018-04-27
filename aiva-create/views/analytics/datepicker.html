@@ -1,0 +1,57 @@
+<div class="mighty-picker__holder">
+    <div class="mighty-picker__wrapper">
+        <button
+            type="button" class="btn btn-sm btn-left mighty-picker__prev-month"
+            ng-click="moveMonth(-1)"
+        >    
+            <i class='fa fa-chevron-left'></i>  
+        </button>
+        <div 
+            class="mighty-picker__month"
+            ng-repeat="month in months track by $index"
+        >
+            <div class="mighty-picker__month-name" ng-bind="month.name"></div>
+            
+            <div class="mighty-picker__month-name-year">
+                <div class="month" ng-bind="month.name.split(' ')[0]"></div>
+                <div class="year" ng-bind="month.name.split(' ')[1]"></div>
+            </div>            
+            
+            <table class="mighty-picker-calendar">
+                <tbody>
+                    <tr class="mighty-picker-calendar__days">
+                        <th ng-repeat="day in ::month.weeks[0]" class="mighty-picker-calendar__weekday">
+                            {{ day.date.format('dd')}}
+                        </th>
+                    </tr>
+                    <tr ng-repeat="week in month.weeks">
+                        <td 
+                            title='{{day | json}}'
+                            ng-class='{"mighty-picker-calendar__day": day, "mighty-picker-calendar__day--selected": day.selected, "mighty-picker-calendar__day--disabled": day.disabled, "mighty-picker-calendar__day--in-range": day.inRange, "mighty-picker-calendar__day--marked": day.marker}'           
+                            ng-repeat="day in week track by $index" 
+                            ng-click="select(day)"
+                        >
+                            <div class="mighty-picker-calendar__day-wrapper"> 
+                                {{ day.date.date()}}
+                            </div>
+                            <div class="mighty-picker-calendar__day-marker-wrapper">
+                                <div 
+                                    class="mighty-picker-calendar__day-marker"
+                                    ng-if="day.marker"
+                                    ng-bind="day.marker"
+                                >
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button 
+            type="button" class="btn btn-sm btn-right mighty-picker__next-month"
+            ng-click="moveMonth(1)"
+        >    
+            <i class='fa fa-chevron-right'></i>  
+        </button>
+    </div>
+</div>

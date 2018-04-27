@@ -1,0 +1,57 @@
+<div id="trigger-mouseover" class="timing-trigger" ng-class="{'trigger-disabled' : !triggerObj.enabled}">
+
+    <div class="trigger-block" ng-show="selectedValue">
+        <div class="selected-trigger-content">
+            <div class="details-label">Trigger Details</div>
+
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio name="trigger_time_value" value="selectedValue">
+                    </span>
+                </div>
+                <label>
+                    Display after hovering over elements for
+                    <input type="text" small-input-with-arrows name="mouseover" ng-model="inputValue" /> seconds
+                </label>
+            </div>
+
+            <div class="select-element">
+                <a href='javascript:void(0)'>Select Element</a>
+            </div>
+            
+            <div class="screenshot">
+                Screeshot Here
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="trigger-block" ng-show="!selectedValue">
+        <div
+            class="picture"
+            ng-click="select()"
+            ng-if="triggerObj.background_uri"
+            style="width: {{triggerObj.width}}px; height: {{triggerObj.height}}px; background:url({{triggerObj.background_uri}}) no-repeat {{triggerObj.background_position}}" 
+        >
+        </div>        
+    </div>
+    
+    <div class="select-trigger">
+        <div class="input-wrapper">
+            <span
+                custom-radio 
+                click="select"
+                name="name"
+                enabled="triggerObj.enabled"
+                value="selectedValue"
+            >
+            </span>
+        </div>
+        
+        <label ng-click="select()">
+            <span class="trigger-title" ng-bind="triggerObj.name"></span><br />
+            <span class="trigger-description" ng-bind="triggerObj.description"></span>
+        </label>
+    </div>
+    
+</div>

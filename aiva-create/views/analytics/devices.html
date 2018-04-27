@@ -1,0 +1,28 @@
+<!-- 
+    @deprecated 2016-11-26 
+-->
+<div class="campaign-devices">
+    <div style="cursor:pointer; text-align:center; margin-bottom:30px" ng-click='selectAll()'>
+        <img src="assets/images/devices/devices-all.png" style="width:70%" />
+    </div>
+    
+    <div class='space'>
+        <button type="button" ng-click='toggle("lg")' 
+                class="device device-lg {{ isSelected('lg') ? 'selected' : '' }}"></button>
+    </div>
+    <!--
+    <div class='space'>
+        <button type="button" ng-click='toggle("md")' 
+                class="device device-md {{ isSelected('md') ? 'selected' : '' }}"></button>
+    </div>
+    <div class='gutter'>
+        <button type="button" ng-click='toggle("sm")' 
+                class="device device-sm {{ isSelected('sm') ? 'selected' : '' }}"></button>
+    </div>
+    -->
+    <div class='space'>
+        <button type="button" ng-click='toggle("xs")' 
+                class="device device-xs {{ isSelected('xs') ? 'selected' : '' }}"></button>
+    </div>
+    
+</div>

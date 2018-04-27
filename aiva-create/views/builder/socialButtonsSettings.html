@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <div class="modal-header clearfix">
+        <h4 class="modal-title pull-left">Configure {{$root.socialLink.type.charAt(0).toUpperCase() + $root.socialLink.type.slice(1)}} Link</h4>
+        <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    </div>
+    <div class="modal-body">
+        <form name="SocialButtonData" ng-submit="submit()">
+
+            <div class="alert alert-danger" ng-if="error">{{error}}</div>
+
+            <div ng-show="$root.socialLink.type == 'facebook'">
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input type="text" name="url" id="url" class="form-control" placeholder="https://www.facebook.com/YourPageHere" ng-model="fb.url">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="shareButton"><input type="checkbox" name="shareButton" id="shareButton" ng-model="fb.shareButton"> Include Share Button</label>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-class="{'disabled': !fb.url}">{{ 'Submit' | translate }}</button>
+                </div>
+            </div>
+
+            <div ng-show="$root.socialLink.type == 'twitter'">
+                <div class="form-group">
+                    <label for="screenName">Username</label>
+                    <input type="text" name="screenName" id="screenName" class="form-control" placeholder="Username without @" ng-model="t.screenName">
+                </div>
+                <div class="form-group">
+                    <label for="btnSize">Size</label>
+                    <select name="btnSize" id="btnSize" ng-model="t.btnSize" class="form-control">
+                        <option value="s">Small</option>
+                        <option value="l">Large</option>
+                    </select>
+                </div>
+
+                <div class="form-group text-center">
+                    <img src="assets/images/icons-builder/social/t-{{$root.socialLink.option + 1}}.png" ng-style="t.btnSize == 'l' && {'transform':'scale(1.3)'}">
+                </div>
+
+                <div class="modal-footer clearfix">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-class="{'disabled': !t.screenName || loading}">
+                        <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
+                        {{ 'Submit' | translate }}
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

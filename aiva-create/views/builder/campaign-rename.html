@@ -1,0 +1,22 @@
+<div class="campaign-rename {{class}} {{ editing ? 'editing' : '' }}" ng-show="visible">
+    
+    <label ng-show="!editing" class="btn-left" ng-bind="campaignName"></label>
+    <button
+        ng-show="!editing" 
+        title="Rename campaign" 
+        class="btn-right" 
+        ng-click="edit()"
+    >
+        <i class="fa fa-pencil"></i>
+    </button>
+    
+    <input ng-show="editing" class="btn-left" type="text" ng-model="campaignName" />
+    <button
+        ng-show="editing" 
+        title="Rename campaign" 
+        class="btn-right btn-confirm"
+        ng-click="submit()"
+    >
+        <i class="fa fa-check"></i>
+    </button>
+</div>

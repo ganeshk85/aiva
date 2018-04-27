@@ -1,0 +1,139 @@
+<div class="modal-content" style="transform: scale(0.75);">
+    <div class="modal-header clearfix">
+        <span class="modal-title pull-left">Insert Video</span>
+        <!--<button type="button" class="close pull-right" data-dismiss="modal">-->
+        <!--<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>-->
+        <!--</button>-->
+    </div>
+    <div class="modal-body">
+        <div class="tab-content">
+            <form id="addVideoForm" name="addVideoForm">
+                <div class="active tab-pane" id="url">
+                    <h2>{{ 'enterVideoWebUrl' | translate }}</h2>
+                    <span class="videoUrlIcon"></span>
+                    <input type="text" required name="videoUrl" ng-model="webVideoUrl"
+                           class="form-control webVideoInput" ng-pattern="/(https?:\/\/[^\s]+)/g">
+                    <div class="errorMessagesContainer" ng-messages="addVideoForm.videoUrl.$error">
+                        <div class="errorMessage" ng-message="required">This URL is required.</div>
+                        <div class="errorMessage" ng-message="pattern">This is not valid URL.</div>
+                    </div>
+                    <div class="checkbox">
+                        <div class="optionsTitle">Playback Settings:</div>
+                        <input type="checkbox" id="autoplayInputModal" ng-model="autoplay" value="false">
+                        <label for="autoplayInputModal">
+                            {{ 'autoplay' | translate }}
+                        </label>
+                        <input type="checkbox" id="muteInputModal" ng-model="muted" value="false">
+                        <label for="muteInputModal">
+                            {{ 'muted' | translate }}
+                        </label>
+                        <input type="checkbox" id="loopInputModal" ng-model="loop" value="false">
+                        <label for="loopInputModal">
+                            {{ 'loop' | translate }}
+                        </label>
+                        &nbsp;
+                    </div>
+                    <div class="checkbox durationContainer">
+                        <input type="checkbox" id="customDurationInputModal" ng-model="customDuration" value="false">
+                        <label for="customDurationInputModal">Custom Duration:</label>
+                        <div class="timeInputsContainer">
+                            <span class="videoTimeLabel">Start Time:</span>
+                            <input ng-disabled="!customDuration" type="text" ng-model="startTime" name="startTime"
+                                   class="videoTimeInput" style="margin-right: 30px;" required
+                                   placeholder="m:ss" ng-pattern="/^(?:0[0-5]|[0123456789]?[0-9]):?[0-5][0-9]$/"/>
+
+                            <span class="videoTimeLabel">End Time:</span>
+                            <input ng-disabled="!customDuration" type="text" ng-model="endTime" name="endTime"
+                                   class="videoTimeInput" required
+                                   placeholder="m:ss" ng-pattern="/^(?:0[0-5]|[0123456789]?[0-9]):?[0-5][0-9]$/"/>
+
+                            <!--<span class="videoTimeLabel">Start Time:</span>-->
+                            <!--<div class="innerTimeContainer" style="margin-right:30px;">-->
+                            <!--<input ng-disabled="!customDuration" ng-blur="checkForVoid('minutesStart')"-->
+                            <!--ng-focus="detectFocusedElStart('minutesStart')"-->
+                            <!--class="videoTimeInput" id="minutesStartInput" type="number" min="0" step="1"-->
+                            <!--value="00" ng-model="minutesStart"/>-->
+                            <!--<span class="separator">:</span>-->
+                            <!--<input ng-disabled="!customDuration" ng-blur="checkForVoid('secondsStart')"-->
+                            <!--ng-change="restrictNumber('secondsStart')"-->
+                            <!--ng-focus="detectFocusedElStart('secondsStart')"-->
+                            <!--class="videoTimeInput endTimeInput" id="secondsStartInput" type="number" min="0"-->
+                            <!--step="1" value="00" ng-model="secondsStart"/>-->
+                            <!--<div class="timeChangeButtonsContainer" style="left: 200px;">-->
+                            <!--<span class="increaseTimeButton" ng-click="increaseTimeStart()"></span>-->
+                            <!--<span class="decreaseTimeButton" ng-click="decreaseTimeStart()"></span>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+
+                            <!--<span class="videoTimeLabel">End Time:</span>-->
+                            <!--<div class="innerTimeContainer">-->
+                            <!--<input ng-disabled="!customDuration" ng-blur="checkForVoid('minutesEnd')"-->
+                            <!--ng-focus="detectFocusedElEnd('minutesEnd')"-->
+                            <!--class="videoTimeInput" id="minutesEndInput" type="number" min="0" step="1"-->
+                            <!--value="00" ng-model="minutesEnd"/>-->
+                            <!--<span class="separator">:</span>-->
+                            <!--<input ng-disabled="!customDuration" ng-blur="checkForVoid('secondsEnd')"-->
+                            <!--ng-change="restrictNumber('secondsEnd')"-->
+                            <!--ng-focus="detectFocusedElEnd('secondsEnd')"-->
+                            <!--class="videoTimeInput endTimeInput" id="secondsEndInput" min="0" type="number"-->
+                            <!--step="1"-->
+                            <!--value="00" ng-model="secondsEnd"/>-->
+                            <!--<div class="timeChangeButtonsContainer" style="right: 14px;">-->
+                            <!--<span class="increaseTimeButton" ng-click="increaseTimeEnd()"></span>-->
+                            <!--<span class="decreaseTimeButton" ng-click="decreaseTimeEnd()"></span>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+
+                            <!--<span class="videoTimeLabel">Start Time:</span>-->
+                            <!--<input focus-me="startTimeFocused"
+                             my-enter ng-disabled="!customDuration" style="margin-right: 30px;"-->
+                            <!--class="videoTimeInput" id="startTimeInputModal" ng-model="startTime" type="number" min="0">-->
+                            <!--<span class="startFilteredValue"
+                            ng-click="passFocus('start')">{{startTime | secondsToDateTime | date:'mm:ss'}}s</span>-->
+                            <!--<span class="videoTimeLabel">End Time:</span>-->
+                            <!--<input focus-me="endTimeFocused" id="endTimeInputModal" my-enter
+                             ng-disabled="!customDuration" class="videoTimeInput" ng-model="endTime"-->
+                            <!--type="number" min="0">-->
+                            <!--<span class="endFilteredValue"
+                             ng-click="passFocus('end')">{{endTime | secondsToDateTime | date:'mm:ss' }}s</span>-->
+                        </div>
+
+
+                        &nbsp;
+                    </div>
+                    <div class="errorMessagesContainer" ng-show="improperTimingValue">
+                        <div class="errorMessage" >Start time value is bigger then end time value.</div>
+                    </div>
+                    <div class="errorMessagesContainer" ng-messages="addVideoForm.endTime.$error">
+                        <div class="errorMessage" ng-message="required">This field is required</div>
+                        <div class="errorMessage" ng-message="pattern">Start time value doesn't match m:ss pattern</div>
+                    </div>
+                    <div class="errorMessagesContainer" ng-messages="addVideoForm.startTime.$error">
+                        <div class="errorMessage" ng-message="required">This field is required</div>
+                        <div class="errorMessage" ng-message="pattern">End time value doesn't match m:ss pattern</div>
+                    </div>
+
+                    <div class="descriptionContainer">
+                        <p class="generalNotes">{{ 'mustBeDirectLinkVideo' | translate }}</p>
+                        <p class="additionalNotes"> * {{ 'youtubeVideoNotification' | translate }}</p>
+                    </div>
+                    <!--<p>{{ 'videoUrlExample' | translate }}</p>-->
+                </div>
+
+                <div class="modal-footer clearfix">
+                    <button ng-disabled="addVideoForm.$invalid" class="btn btn-primary btn-lg add-video"
+                            ng-click="useLinkedVideo()">{{ 'useVideo' | translate
+                        }}
+                    </button>
+                    <button class="btn btn-primary btn-lg cancel-video" data-dismiss="modal">{{ 'cancelVideo' |
+                        translate
+                        }}
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

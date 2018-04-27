@@ -1,0 +1,83 @@
+<div top-navigation title="Profile Settings"></div>
+<section class="document">
+    <div left-navigation></div>
+
+    <div class="inner-container">
+        <div settings-navigation></div>
+        <div class="settings-container" style="height: {{innerHeight}}px">
+            <h1>Profile Settings</h1>
+
+            <div class="form form-limited" style="width: 400px">
+                <div class="form-row">
+                    <div class="error-label" ng-if="errors.first_name"  ng-bind="errors.first_name"></div>
+                    <label>First Name</label>
+                    <input type="text" class="form-control" ng-model="object.first_name" />
+                </div>
+                <div class="form-row">
+                    <div class="error-label" ng-if="errors.last_name"  ng-bind="errors.last_name"></div>
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" ng-model="object.last_name" />
+                </div>
+                <div class="form-row">
+                    <div class="error-label" ng-if="errors.email"  ng-bind="errors.email"></div>
+                    <label>Email</label>
+                    <input type="text" class="form-control" ng-model="object.email" />
+                </div>
+                <div class="form-row">
+                    <div class="error-label" ng-if="errors.timezone"  ng-bind="errors.timezone"></div>
+                    <label>Time Zone</label>
+                    <select
+                        class="form-control" ng-model="object.timezone"
+                        ng-options="(value) for value in timezones"
+                    >
+                    </select>
+                </div>
+
+                <div class="form-row" ng-if="$root.user.is_pro">
+                    <div class="error-label" ng-if="errors.logo_squared" style="position: relative" ng-bind="errors.logo_squared"></div>
+                    <label>Squared Brand Logo</label>
+                    &nbsp; &nbsp;
+                    <span ng-show='!object.logo_squared'>
+                        <img src='assets/pdf/logo.png' style='width: 50px; height: 50px' />
+                    </span>
+                    <span ng-show='object.logo_squared'>
+                        <img ng-src='{{object.logo_squared}}' style='width: 50px; height: 50px' />
+                    </span>
+                    &nbsp; &nbsp;
+                    <button class="btn btn-default"
+                        style='line-height:12px'
+                        ng-file-select ng-file-change="upload($files, 'logo_squared')" ng-multiple="false">
+                        Upload
+                    </button>
+                </div>
+
+                <div class="form-row" ng-if="$root.user.is_pro">
+                    <div class="error-label" ng-if="errors.logo" style="position: relative" ng-bind="errors.logo"></div>
+                    <label>Brand Logo</label>
+                    &nbsp; &nbsp;
+                    <span ng-show='!object.logo'>
+                        <img src='assets/pdf/logo_big.png' style='width: auto; height: 50px' />
+                    </span>
+                    <span ng-show='object.logo'>
+                        <img ng-src='{{object.logo}}' style='width: auto; height: 50px' />
+                    </span>
+                    &nbsp; &nbsp;
+                    <button class="btn btn-default"
+                        style='line-height:12px'
+                        ng-file-select ng-file-change="upload($files, 'logo')" ng-multiple="false">
+                        Upload
+                    </button>
+                </div>
+                <div class="form-row padded">
+                    <button
+                        ng-click="save()"
+                        style="width: 100%" class="btn btn-success"
+                    >
+                        Update Profile
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

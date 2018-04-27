@@ -1,0 +1,40 @@
+<div class="modal-content">
+    <div class="modal-header clearfix">
+        <h4 class="modal-title pull-left">Insert Image</h4>
+        <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    </div>
+    <div class="modal-body">
+        <ul class="nav nav-tabs" bl-media-manager-tabs>
+            <li ng-class="activeTab == 'upload' ? 'active' : ''" ng-click="activeTab = 'upload'"><a href="">Upload</a></li>
+            <li ng-class="activeTab == 'url' ? 'active' : ''" ng-click="activeTab = 'url'"><a href="">By URL</a></li>
+        </ul>
+        
+        <div class="tab-content">
+            <div ng-class="activeTab == 'upload' ? 'active' : ''" class="tab-pane clearfix" id="upload">
+                <div class="col-sm-10" id="images-cont">
+                    <div id="upload-container" ng-file-drop="onFileSelect($files)">
+                        <img class="img-responsive" src="assets/images/filedrop.png">
+                        <h2>{{ 'dropImageToUpload' | translate }}</h2>
+                        <div class="separator"><span>{{ 'or' | translate }}</span></div>
+                        <button class="btn btn-success btn-lg" ng-file-select="onFileSelect($files)" data-multiple="true">{{ 'selectImageFrom' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div ng-class="activeTab == 'url' ? 'active' : ''" class="tab-pane" id="url">
+                <h2>{{ 'enterImageWebUrl' | translate }}</h2>
+                <input type="text" ng-model="webImageUrl" class="form-control">
+                <!--<div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="downloadLocally" value="true"> {{ 'downloadLocally' | translate }}
+                    </label>
+                </div>-->
+                <p>{{ 'mustBeDirectLink' | translate }}</p>
+                <p>{{ 'imageUrlExample' | translate }}</p>
+            </div>
+            <div class="modal-footer clearfix">
+                <button class="btn btn-primary btn-lg" ng-click="useLinkedImage()">{{ 'useImage' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

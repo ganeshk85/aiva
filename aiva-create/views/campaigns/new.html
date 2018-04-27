@@ -1,0 +1,307 @@
+<div top-navigation title="Choose Template for New Campaign"></div>
+
+<section class="document" id="dashboard-container">
+
+    <div left-navigation></div>
+
+    <div class="inner-container" style="height: {{ innerHeight - 60 }}px">
+        <div id="new-project-container" class="spaced">
+            <div class="form" style="text-align:center; width: auto">
+                <button
+                        class="btn btn-success btn-block start-with-blank"
+                        ng-click="showNameModal()"
+                >
+                    {{ 'startWithBlank' | translate }}
+                </button>
+                <!--<select id="new-project-gallery-sort" class="sel" ng-change="appliedSorting($)">-->
+                <!--<option value="popularity">Sort by: Popularity</option>-->
+                <!--<option value="created">Sort by: Date Created</option>-->
+                <!--</select>-->
+                <!--<select id="new-project-gallery-sort" class="sel"-->
+                <!--ng-options="rule as rule.name for rule in sortingRules "-->
+                <!--ng-model="selectedRule" ng-init="selectedRule = sortingRules[0]"-->
+                <!--ng-change="selectSortingRule()">-->
+                <!--</select>-->
+
+                <div dropdown-select="ddSelectOptions"
+                     dropdown-model="ddSelectSelected"
+                     dropdown-item-label="text"
+                     dropdown-onchange="selectSortingRule(selected)">
+                </div>
+                <div id="new-project-gallery-filters" style="margin-top:20px">
+
+
+                </div>
+                <select style="display: none" id="new-project-gallery-filter" class="sel sel-invert">
+                    <option value="" disabled selected>Add Filter</option>
+                    <option value="">Top Position</option>
+                </select>
+            </div>
+            <pseudo-scroller infinite-scroll infinite-scroll-down='scrollUp()' infinite-scroll-up='scrollDown()'
+                             infinite-scroll-distance='2'
+                             class="pseudo-scroller-container"></pseudo-scroller>
+            <div class="templatesContainer">
+                <div class="outerMasonry" masonry >
+                    <div class="masonry-brick" expand-template
+                         ng-repeat="template in templates.all"
+                         ng-click="showNameModal(template)"
+                         data-id="{{ template.id }}"
+                         data-popularity="{{ template.popularity }}"
+                         data-created="{{ template.date_created }}"
+                         data-tags="{{ template.filter_tags }}">
+                        <a href="javascript:void(0)" class="grid_link">
+                            <!--<img class="img layer img-responsive img-1 img-0" ng-src="{{ template.thumbnail }}">-->
+                            <div class="layer color-layer img img-responsive img-0"
+                                 style="background: #bef4cb;"></div>
+                            <div class="layer color-layer img img-responsive img-1"
+                                 style="background: #3cdd64;"></div>
+                            <div class="layer color-layer img img-responsive img-2"
+                                 style="background: #ffffff;"></div>
+                            <img class="img layer img-responsive img-3" ng-src="{{ template.thumbnail }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="no-results" ng-show="filteredTemplates && filteredTemplates.length == 0">{{ 'noTemplateMatches'
+                | translate }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="project-name-modal">
+    <div class="modal-dialog" style="max-width:500px">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:25px">
+                <button type="button" class="close" data-dismiss="modal" style="opacity:1;"><span aria-hidden="true" style="line-height:inherit; color:#666666;margin-right: 14px;"><i class="fa fa-times" style="font-size: 17px;margin-top: 9px;"></i></span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="fa fa-pencil"></i> {{ 'createNewProject' | translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix">
+                    <div class="col-sm-2"><label for="project-name">{{ 'name' | translate }}</label></div>
+                    <div class="col-sm-10"><input type="text" class="form-control" name="project-name" ng-model="name">
+                    </div>
+                </div>
+                <div class="clearfix" ng-show="clients.length > 1" style='padding-top: 10px;'>
+                    <div class="col-sm-2">
+                        <label for="client_name">Website:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <select 
+                            class="form-control" name="client_name" ng-model="client_name"
+                            ng-options='c.client_name as c.client_name for c in clients'
+                        >
+                        </select>
+                    </div>
+                </div>
+                <p class="text-danger error"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="loader" ng-if="loading"><i class="fa fa-spinner fa-spin"></i></div>
+                <button type="button" class="btn btn-danger" style="background-color:#666666; border:0" data-dismiss="modal">{{ 'cancel' | translate }}</button>
+                <button type="button" class="btn btn-success" ng-click="createNewProject()" style="background-color:#2cdd5b">{{ 'create' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    #new-project-container .form .sel {
+        outline: none;
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: #38db62;
+        border: 1px solid #37be5b;
+        border-radius: 20px;
+        line-height: 30px;
+        color: white;
+    }
+
+    #new-project-container .form .sel-invert {
+        color: inherit;
+        background-color: white;
+        border-style: dashed;
+        color: #37be5b;
+    }
+
+    #new-project-container .form .btn {
+        padding: 0;
+    }
+
+    #new-project-container {
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 178px;
+        width: 100%;
+    }
+
+    .templatesContainer .masonry-brick:hover {
+        z-index: 8;
+    }
+
+    .templatesContainer .masonry-brick .img {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .templatesContainer .masonry-brick .img {
+        max-width: 255px;
+        background-color: white;
+        object-fit: contain;
+        object-position: top;
+    }
+
+    .templatesContainer .masonry-brick .img-3 {
+        z-index: 9;
+    }
+
+    .templatesContainer .masonry-brick:hover, .templatesContainer .masonry-brick:hover .layer {
+        border: none;
+    }
+
+    .templatesContainer .masonry-brick .img-0,
+    .templatesContainer .masonry-brick .img-1,
+    .templatesContainer .masonry-brick .img-2 {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        border: 2px solid silver;
+    }
+    
+    .templatesContainer .masonry-brick .img-3 {
+        opacity: 1;
+        border: 0px solid silver;
+        background-color: white;
+        padding: 4px;
+    }
+
+    .templatesContainer .masonry-brick:hover .layer {
+        display: block;
+    }
+
+    .templatesContainer .masonry-brick:hover .img-3 {
+        opacity: 1;
+    }
+
+    .templatesContainer .masonry-brick:hover .img-0.color-layer {
+        opacity: 0.55;
+    }
+
+    .templatesContainer .masonry-brick:hover .img-1.color-layer {
+        opacity: 0.65;
+    }
+
+    .templatesContainer .masonry-brick:hover .img-2.color-layer {
+        opacity: 0.75;
+    }
+
+    .templatesContainer .masonry-brick .layer.color-layer {
+        width: 263px;
+    }
+    .masonry-brick {
+        padding: 7px;
+    }
+    .masonry-brick a{
+        cursor: auto;
+    }
+
+    .masonry-brick.loaded {
+        display: block;
+    }
+
+    .outerMasonry, .masonry-brick {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .pseudo-scroller-container {
+        display: block;
+        pointer-events: none;
+        width: 100%;
+        position: absolute;
+        overflow-y: scroll;
+        z-index: 9999;
+        opacity: 0.5;
+    }
+
+    #viewport, body, html {
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+    }
+
+    #view {
+        position: absolute;
+        left: 0;
+    }
+
+    #new-project-container .form {
+        text-align: center;
+        width: 200px;
+        top: 80px;
+        position: absolute;
+        z-index: 10000;
+    }
+
+    .templatesContainer {
+        transform: translate(0px, 150px);
+        position: fixed;
+        top: 0;
+        width: 90%;
+    }
+
+    .left-nav {
+        z-index: 9;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wrap-dd-select {
+        top: 6px;
+        left: 230px;
+        border: 1px solid #37be5b;
+        color: #fff;
+        background: #38db62;
+        font-weight: normal;
+        padding: 5px;
+    }
+
+    .wrap-dd-select:hover {
+        background: #22be4a;
+    }
+
+    .wrap-dd-select::after {
+        border-color: #fff transparent;
+    }
+
+    .grid_link {
+        position: relative;
+        z-index: 1;
+        display: block;
+    }
+
+</style>

@@ -1,0 +1,32 @@
+<div 
+    class="position-trigger {{ selectedValue ? 'selected' : '' }}"
+    ng-class="{'trigger-disabled' : !triggerObj.enabled}"
+>
+    <div 
+        class="picture"
+        ng-click="select()"
+        ng-if="triggerObj.background_uri"
+        style="width: {{triggerObj.width}}px; height: {{triggerObj.height}}px; background:url({{triggerObj.background_uri}}) no-repeat {{triggerObj.background_position}}" 
+    >
+    </div>
+    <div class="select-trigger" style="margin-top:10px;">
+        
+            <div class="input-wrapper">
+                <span
+                    custom-radio 
+                    click="select"
+                    name="triggerObj.short_name"
+                    enabled="triggerObj.enabled"
+                    value="selectedValue"
+                >
+                </span>
+            </div>
+            <label
+                style="padding-left:0px; cursor:pointer;"
+                ng-click="select()"
+            >
+                <span class="trigger-title" ng-bind="triggerObj.name"></span>
+            </label>
+        
+    </div>
+</div>

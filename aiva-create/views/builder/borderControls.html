@@ -1,0 +1,50 @@
+<div class="border-controls" ng-show="active">
+    <div style="display: flex; margin-bottom:14px; align-items: left">
+        <div class="cell">
+            <input type="text" id="all" aiva-border-only-preview ng-model="widthAll.value" ng-model-options="{debounce:100}" ng-change="valueChanged('widthAll', {{widthAll.value ? widthAll.value : 0}})">
+        </div>
+        <div class="cell">
+            <input type="text" id="top" aiva-border-only-preview ng-model="widthTop.value" ng-model-options="{debounce:100}" ng-change="valueChanged('widthTop', {{widthTop.value ? widthTop.value : 0}})">
+        </div>
+        <div class="cell">
+            <input type="text" id="left" aiva-border-only-preview ng-model="widthLeft.value" ng-model-options="{debounce:100}" ng-change="valueChanged('widthLeft', {{widthLeft.value ? widthTop.value : 0}})">
+        </div>
+        <div class="cell">
+            <input type="text" id="bottom" aiva-border-only-preview ng-model="widthBottom.value" ng-model-options="{debounce:100}" ng-change="valueChanged('widthBottom', {{widthBottom.value ? widthBottom.value : 0}})">
+        </div>
+        <div class="cell">
+            <input type="text" id="right" aiva-border-only-preview ng-model="widthRight.value" ng-model-options="{debounce:100}" ng-change="valueChanged('widthRight', {{widthRight.value ? widthRight.value : 0}})">
+        </div>
+    </div>
+    <div style="display: flex; margin-bottom: 11px">
+        <div id="border-color-picker" aiva-border-color-preview class="border-color-preview color-picker-trigger"
+             style="border: 1px #8a8a8a dotted; cursor: pointer; background: {{ colors.border }}">
+        </div>
+        <div class="form" style="margin-left: 8px; width:100px">
+            <select id="border-style" class="form-control" ng-model="style.value" 
+                    style="background: white; color: #666; border: 1px #d9d9d9 solid; font-size: 10px; padding: 0px 10px;"
+                    ng-change="valueChanged('style', '{{style.value ? style.value : 'none'}}')">
+                <option value="none">None</option>
+                <option value="solid">Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+                <option value="double">Double</option>
+                <option value="groove">Groove</option>
+                <option value="ridge">Ridge</option>
+                <option value="inset">Inset</option>
+                <option value="outset">Outset</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div  style="display: flex; width: 170px; margin-bottom: 5px">
+        <div style="flex: 1">
+            <span style="font-size:10px;">Border Roundness</span>
+        </div>
+        <div style="flex: 1; text-align:right;">
+            <input type="text" id="border-roundness"
+                   maxlength="2" ng-model="radius.value" ng-disabled="radius.disabled" 
+                   ng-model-options="{debounce: 300}" ng-change="valueChanged('radius', {{radius.value ? radius.value : 0}})">
+        </div>
+    </div>
+</div>

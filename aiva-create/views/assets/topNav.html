@@ -1,0 +1,13 @@
+<nav class="top-nav" ng-controller="NavbarController">
+    <a href="#/campaigns/all/table">
+        <div class="header"> &nbsp; </div>
+    </a>
+    <div class="panel">
+        <button class="btn-logout" title="Log out" ng-click="logout()"></button>
+        <a class="btn-username" href="#/settings/profile">
+            <span>{{ user.email }}</span>
+            <i class="small-drop"></i>
+        </a>
+        <label class="caption" ng-bind="title"></label>
+    </div>
+</nav>

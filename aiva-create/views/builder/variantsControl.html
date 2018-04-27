@@ -1,0 +1,104 @@
+<div class="form create-new-variant-modal" style="left: {{ (innerWidth - 384 ) / 2 }}px" ng-show="vm.showCreate">
+    <h4>Create New Variant</h4>
+    <div>Select Base Variant For the New Variant</div>
+    <div class="controls">
+        <div ng-repeat="variant in vm.displayVariants">
+            <div 
+                title="{{variant.id}}"
+                ng-class="variant.selected ? 'active' : 'inactive'"
+                ng-click="vm.selectVariant(variant.id)"
+            >
+            </div>
+        </div>
+    </div>
+    <div class="carousel">
+        <button class="btn-ctrl btn-arrow-left" ng-click="selectPrev()"></button>
+        <button class="btn-ctrl btn-arrow-right" ng-click="selectNext()"></button>
+        <div class="variant-screenshot-wrapper">
+            <div class="variant-screenshot"></div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-bottom: 10px;" ng-show="vm.selectedBaseVariantForNew">
+        <div ng-show="!vm.selectedBaseVariantForNew.active">
+            <img src="assets/images/variants/pulse-inactive.png" style="width:16px; height: 11px;" />
+            <span class="variant-percentage inactive">N/A</span>
+        </div>
+        <div ng-show="vm.selectedBaseVariantForNew.active">
+            <img src="assets/images/variants/pulse-active.png" style="width:16px; height: 11px;" />
+            <span class="variant-percentage" ng-bind="vm.selectedBaseVariantForNew.percentage"></span>
+            %
+        </div>
+    </div>
+    <div class="buttons">
+        <button 
+            class="btn btn-success" 
+            ng-disabled="!vm.canCreateNewVariant()" 
+            ng-click="vm.createNewVariant()"
+        >
+            Create
+        </button>
+        <button class="btn btn-default" ng-click="vm.showCreate = false;">Cancel</button>
+    </div>
+</div>
+
+<div class="modal-content">
+    <div class="modal-header clearfix">
+    </div>
+    <div class="modal-body">
+        <div class="variant-container-wrapper" 
+             style="width: {{vm.getInnerWidth(vm.displayVariants.length + 1)}}px">
+            
+            <div class="variant-container first">
+                <button ng-click="vm.showCreate = true;" class="btn-create-variant">
+                    <i class="fa fa-plus"></i>
+                    <span>Create Variant</span>
+                </button>
+            </div>
+            
+            <div class="variant-container" ng-repeat="variant in vm.displayVariants" ng-class="variant.selected ? 'selected' : ''">
+                <div class="variant-top clearfix">
+                    
+                    <div class="right">
+                        <div ng-show="!variant.active">
+                            <img src="assets/images/variants/pulse-inactive.png" style="width:16px; height: 11px;" />
+                            <span class="variant-percentage inactive">N/A</span>
+                        </div>
+                        <div ng-show="variant.active">
+                            <img src="assets/images/variants/pulse-active.png" style="width:16px; height: 11px;" />
+                            <input maxlength="3" class="variant-percentage" type="text" ng-model="variant.percentage" ng-model-options="{debounce: 500}">
+                            %
+                        </div>
+                        <!-- <input id="variant-percentage" type="number" ng-model="variant.percentage" ng-model-options="{debounce: 500}">-->
+                    </div>
+                    
+                    <div class="left">
+                        <!-- <input class="variant-checkbox" type="checkbox" ng-model="variant.active"> -->
+                        <img src="assets/images/variants/checkbox-off.png" 
+                             style="cursor:pointer; width: 37px; height:22px;" 
+                             ng-show="!variant.active" 
+                             ng-click="variant.active = true;"  />
+                        <img src="assets/images/variants/checkbox-on.png"
+                             style="cursor:pointer; width: 37px; height:22px;" 
+                             ng-show="variant.active" 
+                             ng-click="variant.active = false;" />
+                    </div>
+                    
+                </div>
+                <div class="variant-middle">
+                    <div class="variant-screenshot" title="id: {{variant.id}}" ng-click="vm.selectVariant(variant.id)">
+                    </div>
+                </div
+                
+                <div class="variant-bottom">
+                    <div class="btn-group">
+                        <button title="Copy Variant" class="btn-left variant-copy" ng-click="vm.copyVariant(variant.id)">
+                        </button>
+                        <button title="Delete Variant" class="btn-right variant-delete" ng-click="vm.deleteVariant(variant.id)">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

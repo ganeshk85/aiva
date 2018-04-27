@@ -1,0 +1,57 @@
+@zooming-control-height: 56px;
+@zooming-control-border-radius: 28px;
+@zooming-control-inner-width: 70px;
+@zooming-control-font-size: 18px;
+@zooming-control-z-index: 1000;
+
+.zooming-control-panel {
+    position: fixed;
+    z-index: @zooming-control-z-index;
+    right: 50px;
+    bottom: 30px;
+    background: #000;
+    color: white;
+    opacity: 0.5;
+    border-radius: @zooming-control-border-radius;
+    height: @zooming-control-height;
+    line-height: @zooming-control-height;
+    label {
+        width: @zooming-control-inner-width;
+        text-align: center;
+        border: none;
+        font-size: @zooming-control-font-size;
+    }
+    button {
+        width: @zooming-control-height - 5px;
+        height: @zooming-control-height;
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: @zooming-control-font-size;
+        
+        &:hover {
+            background: #666;
+        }
+        &:focus, &:active {
+            outline: none;
+        }
+        &:disabled {
+            opacity: 0.5;
+            &:hover {
+                background: transparent;
+            }
+        }
+    }
+    .btn-left {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: @zooming-control-border-radius;
+        border-bottom-left-radius: @zooming-control-border-radius;
+    }
+    .btn-right {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: @zooming-control-border-radius;
+        border-bottom-right-radius: @zooming-control-border-radius;
+    }
+}

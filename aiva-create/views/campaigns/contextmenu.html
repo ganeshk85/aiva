@@ -1,0 +1,58 @@
+<button ng-if="mode === 'list'"  class="btn btn-row btn-default" ng-click="show()">
+    <img src="assets/images/campaigns/icon-settings.png" style="width:60%" alt="" />
+</button>
+<div style="float:right" ng-if="mode !== 'list'">
+    <button ng-click="show()" class="btn btn-default btn-transparent">
+        <i class="fa fa-chevron-down"></i>
+    </button>
+</div>
+
+<div ng-class="mode === 'list' ? 'context-menu-holder' : ''">
+
+    <ul class="context-menu" ng-show="visible">
+        <div class="context-header">
+            <button class="top-right" ng-click="hide()"><i class="fa fa-chevron-up"></i></button>
+            <span>Action Menu</span>
+        </div>
+        <li>
+            <a href="javascript:void(0)"  class="edit" bl-open-in-builder="{{campaign.name}}">
+                Edit Campaign
+            </a>
+        </li>
+        <li ng-if="isTemplateCreator()">
+            <a href="javascript:void(0)" class="createTemplate" ng-click="run('createTemplate')">
+                Create Template
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" ng-click="run('analytics')" class="analytics">
+                View Analytics
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="emails" ng-click="run('viewEmails')">
+                View Submitted Emails
+            </a>
+        </li>
+        <li ng-if="!isPublished()">
+            <a href="javascript:void(0)" class="activate" ng-click="run('togglePublished')">
+                Activate Campaign
+            </a>
+        </li>
+        <li ng-if="isPublished()">
+            <a href="javascript:void(0)" class="deactivate" ng-click="run('togglePublished')">
+                Deactivate Campaign
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="duplicate" ng-click="run('duplicate')">
+                Duplicate CTA
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="delete" ng-click="run('delete')">
+                Delete Campaign
+            </a>
+        </li>
+    </ul>
+</div>

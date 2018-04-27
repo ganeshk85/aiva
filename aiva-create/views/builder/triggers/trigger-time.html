@@ -1,0 +1,81 @@
+<div id="trigger-time" class="timing-trigger" ng-class="{'trigger-disabled' : !triggerObj.enabled}">
+    
+    <div class="trigger-block" ng-show="selectedValue">
+        <div class="selected-trigger-content">
+            <div class="details-label">Trigger Details</div>
+
+            <div class="details">
+                <label>
+                    Display after <input type="text" small-input-with-arrows name="time" ng-model="inputValue" /> <br />
+                    seconds on the page
+                </label>
+            </div>
+            
+<!--                
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue" value="page" enabled="true">
+                    </span>
+                </div>
+                <label ng-click="selectRadio('triggerValue', 'page')">
+                    Display after <input type="text" small-input-with-arrows ng-model="inputValue" /> <br />
+                    seconds on the page
+                </label>
+            </div>
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue" value="section" enabled="true" >
+                    </span>
+                </div>
+                <label ng-click="selectRadio('triggerValue', 'section')">
+                    Display after <input type="text" small-input-with-arrows ng-model="inputValue" /> <br />
+                    seconds on a section<br />
+                    of the page
+                </label>
+            </div>
+            <div class="choose-selection">
+                <a href='javascript:void(0)'>Choose Selection</a>
+            </div>
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue"  value="close" enabled="true">
+                    </span>
+                </div>
+                <label ng-click="selectRadio('triggerValue', 'close')">
+                    Close the overlay<br />
+                    after <input type="text" small-input-with-arrows 
+                         ng-model="inputValue" /> seconds
+                </label>
+            </div>
+-->
+        </div>
+    </div>
+    
+    <div class="trigger-block" ng-show="!selectedValue">
+        <div 
+            class="picture"
+            ng-click="select()"
+            ng-if="triggerObj.background_uri"
+            style="width: {{triggerObj.width}}px; height: {{triggerObj.height}}px; background:url({{triggerObj.background_uri}}) no-repeat {{triggerObj.background_position}}" 
+        >
+        </div>        
+    </div>
+    
+    <div class="select-trigger">
+        <div class="input-wrapper">
+            <span
+                custom-radio 
+                click="select"
+                name="name"
+                enabled="triggerObj.enabled"
+                value="selectedValue"
+            >
+            </span>
+        </div>
+        
+        <label ng-click="select()">
+            <span class="trigger-title" ng-bind="triggerObj.name"></span><br />
+            <span class="trigger-description" ng-bind="triggerObj.description"></span>
+        </label>
+    </div>
+</div>

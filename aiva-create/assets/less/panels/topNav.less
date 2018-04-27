@@ -1,0 +1,94 @@
+.top-nav {
+    background: white;
+    position: fixed;
+    z-index:101;
+    top: 0px;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px #cecece solid;
+    
+    .header {
+        position: absolute;
+        width: 178px;
+        height: 60px !important;
+        z-index: 3;
+        display: block;
+        background: #323b4c url(../images/logo.png ) 20px 10px no-repeat;
+        background-size: 57%;
+    }
+    .panel {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        @media( max-width: 768px ) { display: none; }
+    }
+    .panel .caption {
+        font-size: 16px;
+        font-weight: 100;
+        font-family: Roboto,Noto,'Helvetica Neue',Helvetica,Arial,sans-serif;
+        line-height: 55px;
+        height: 50px;
+        padding-left: 36px;
+        float: left;
+        margin-left: 178px;
+    }
+
+    .panel button, .panel a {
+        border: 0px;
+        display: block;
+        width: 60px;
+        height: 56px;
+        font-family: Roboto,Noto,'Helvetica Neue',Helvetica,Arial,sans-serif;
+        
+        span { 
+            overflow: hidden; 
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            height: 56px;
+            line-height: 56px;
+        }
+        &:focus, &:active, &:hover {
+            outline:none; border: none;
+        }
+        &:hover {
+            background-color: #f7f7f7;
+        }
+        &.btn-logout {
+            float: right;
+            margin-right: 10px;
+            background: transparent url(../images/nav/logout.png ) center center no-repeat;
+            background-size: 50%;
+        }
+        &.btn-logout:hover {
+            background-color: #f7f7f7;
+        }
+        &.btn-username {
+            float: right;
+            width: auto;
+            padding-left: 10px;
+            padding-right: 0px;
+            // background: transparent url(../images/nav/userpic.png ) 10px center  no-repeat;
+            // background-size: 15%;
+        }        
+        &.btn-username:hover {
+            background-color: #f7f7f7;
+        }
+    }
+    
+    .big-drop, .small-drop {
+        display: inline-block;
+        width: 20px;
+        height: 56px;
+    }
+    .big-drop {
+        background: transparent url(../images/nav/drop-big.png ) 0px center  no-repeat;
+        background-size: 33%;
+    }
+    .small-drop {
+        background: transparent url(../images/nav/drop-small.png ) 0px center  no-repeat;
+        background-size: 33%;
+    }
+
+}

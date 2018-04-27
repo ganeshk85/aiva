@@ -1,0 +1,30 @@
+<div class="export-modal">
+    
+    <h3>Export As File</h3>
+    
+    <div class="form form-limited" style="width: 320px;">
+        <div class="form-row">
+            <label>Start Date</label>
+            <div dropdown-date-picker ng-model="startDate" format="MM/DD/YYYY"></div>
+        </div>
+
+        <div class="form-row">
+            <label>End Date</label>
+            <div dropdown-date-picker ng-model="endDate" format="MM/DD/YYYY"></div>
+        </div>
+        
+        <div class="form-row">
+            <label>File Format</label>
+            <select ng-model="fileFormat" class="form-control">
+                <option value="csv">CSV</option>
+            </select>
+        </div>
+    
+        <div class="form-row padded">
+            <button ng-click="save()" style="width: 100%" class="btn btn-success">
+                Export Now
+            </button>
+        </div>
+    </div>
+</div>
+        

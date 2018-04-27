@@ -1,0 +1,66 @@
+<div class='form-row'>
+    <label>
+        Select Date Range
+    </label>
+</div>
+<div class='form-row' style='margin-top:0px; text-align:center'>
+    
+    <button 
+        ng-class='{selected: isPeriodSelected("")}'
+        ng-click='changePeriod("")' 
+        class="btn btn-default btn-select-dateperiod"
+    >
+        Custom
+    </button>
+    <button 
+        ng-class='{selected: isPeriodSelected(90)}'
+        ng-click='changePeriod(90)' 
+        class="btn btn-default btn-select-dateperiod"
+    >
+        90 days
+    </button>
+    <button
+        ng-class='{selected: isPeriodSelected(30)}'
+        ng-click='changePeriod(30)' 
+        class="btn btn-default btn-select-dateperiod"
+    >
+        30 days
+    </button>
+
+</div>
+<div class='form-row' style='text-align:center; margin-bottom:10px; color: #666;'>
+    from: 
+    <button 
+        ng-class='{selected: selectingFrom}'
+        class='input-datepick' 
+        ng-click='toggleFrom()' ng-disabled='isDisabled()' 
+        ng-bind='from | nice_dt_yy' 
+    >
+    </button>
+    to:  
+    <button
+        ng-class='{selected: selectingTo}'
+        class='input-datepick' 
+        ng-click='toggleTo()' 
+        ng-disabled='isDisabled()' 
+        ng-bind='to | nice_dt_yy' 
+    >
+    </button>
+</div>
+
+<div style="position: relative; margin: 0px auto; width: 320px;">
+    <div ng-show='selectingFrom' class='custom-calendar'>
+        <mighty-datepicker 
+            range-from="true" before="to"
+            ng-model="from" options="optionsStart"
+        >
+        </mighty-datepicker>
+    </div>
+    <div ng-show='selectingTo' class='custom-calendar'>
+        <mighty-datepicker 
+            range-to="true" after="from"
+            ng-model="to" options="optionsFinish"
+            >
+        </mighty-datepicker>
+    </div>
+</div>

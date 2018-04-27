@@ -1,0 +1,89 @@
+<div top-navigation title="Payment Settings"></div>
+<section class="document">
+    <div left-navigation></div>
+
+    <div class="inner-container">
+        <div settings-navigation></div>
+        <div class="settings-container" style="height: {{innerHeight}}px">
+            <h1>Payment</h1>
+
+            <div ng-if="!$root.user.is_pro" class="upgrade-message">
+                <h3 class="pull-left">Upgrade to PRO for only $49.99<small>/month</small></h3>
+                <a href="#/settings/clients?upgrade=1" class="btn btn-lg btn-success btn-round pull-right" ng-click="upgrade">Upgrade Now</a>
+            </div>
+
+            <div class="form form-limited credit-card" ng-if="mode == '' && $root.user.is_pro" style="width: 450px;">
+                <h4>CARDS <a href="" class="pull-right" ng-click="addCard()" ng-class="{'disabled': loading}"><i class="fa fa-plus"></i> Add New Card</a></h4>
+
+                <div class="card clearfix" ng-repeat="card in customer.sources.data">
+                    <div>**** **** **** {{card.last4}}</div>
+                    <div>{{card.exp_month}}/{{card.exp_year}}</div>
+                    <div ng-if="card.id == customer.default_source"><i>Primary</i></div>
+                    <div ng-if="card.id != customer.default_source"><a href="" ng-click="makePrimary(card.id)" ng-class="{'disabled': loading}"><span ng-if="loading && primaryLoading == card.id"><i class="fa fa-spinner fa-pulse fa-fw"></i></span> Make Primary</a></div>
+                    <a href="" class="remove-card" ng-click="deleteCardModal(card.id)" ng-class="{'disabled': loading}">Remove</a>
+                </div>
+            </div>
+
+            <div class="form form-limited" ng-if="mode == 'add-card'" style="width: 620px">
+                <h4>Add New Card</h4>
+
+                <form id="payment-form" ng-submit="submitCard()">
+                    <credit-card-form></credit-card-form>
+                </form>
+
+                <div class="form-row padded">
+                    <a href="" ng-click="cancel()">< Back</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="delete-card-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <div ng-if="selectedCard != customer.default_source">
+                        <h4>Are you sure you want to delete this card?</h4>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-lg btn-block" ng-click="deleteCard(selectedCard)" ng-class="{'disabled': loading}">
+                                    <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span> Delete
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-default btn-lg btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="selectedCard == customer.default_source">
+                        <h4>You can't delete a primary card</h4>
+                        <button class="btn btn-default btn-lg btn-block" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-round fade" id="add-card-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">Add New Card</h3>
+                <br>
+                <form id="payment-form" ng-submit="submitCard()" class="form">
+                    <credit-card-form></credit-card-form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

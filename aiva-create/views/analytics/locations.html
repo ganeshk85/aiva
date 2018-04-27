@@ -1,0 +1,73 @@
+<div class='campaign-locations' style="width: 374px">
+
+    <div style="min-width: 354px; max-width: 354px; height:200px; position:relative;">
+        <img 
+            src="assets/images/analytics/dashboard-map-black-118x3.png" 
+            style="position:absolute; top: 0px; z-index: 0; width:354px; height:186px;" 
+        />
+        <div>
+            <div 
+                ng-repeat="(key, val) in location_map.points"
+                style="
+                    border-radius: 2px; border: none; opacity: 0.5;
+                    position:absolute; width:4px; height: 4px; background: #1ab644;
+                    left: {{ mapX(key) }}px; top: {{ mapY(key) }}px; z-index: {{ $index }};
+                "
+                title="{{ mapCaption(key) }}"
+            >
+            </div>
+        </div>
+<!--
+        <div title="Dublin"  style="position:absolute; width:1px; height: 186px; background: #744;
+             left: {{ mapX( 'IR|DUBLIN|53.3498|6.2603') }}px; top: 0px; z-index: 1;">
+        </div>
+        <div title="Dublin" style="position:absolute; height:1px; width: 354px; background: #744;
+             top: {{ mapY( 'IR|DUBLIN|53.3498|6.2603') }}px; left: 0px; z-index: 1;">
+        </div>
+               
+        <div title="Redmond" style="position:absolute; width:1px; height: 186px; background: #488;
+             left: {{ mapX( 'US|REDMOND|47.6740|-122.1215') }}px; top: 0px; z-index: 1;">
+        </div>
+        <div title="Redmond" style="position:absolute; height:1px; width: 354px; background: #488;
+             top: {{ mapY( 'US|REDMOND|47.6740|-122.1215') }}px; left: 0px; z-index: 1;">
+        </div> 
+-->
+    </div>
+    
+<!-- 
+<div class="form-inline">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>SHIFT-X: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_SHIFT_X" style="width: 50px" /></td>
+                <td>SHIFT-Y: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_SHIFT_Y" style="width: 50px" /></td>
+            </tr>
+            <tr>
+                <td>WIDTH: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_WIDTH" style="width: 50px"  /></td>
+                <td>HEIGHT: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_HEIGHT" style="width: 50px"  /></td>
+            </tr>
+            <tr>
+                <td>SCALE-X: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_SCALE_X" style="width: 50px" /></td>
+                <td>SCALE-Y: </td>
+                <td><input type="text" class=form-control" ng-model="MAP_SCALE_Y" style="width: 50px"  /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->
+
+    <div ng-if="location_map.countries">
+        <strong>Top 5 Countries:</strong>
+        <br />
+        <span ng-repeat="(country,value) in location_map.countries" ng-if="$index < 5">
+            <span ng-bind="($index+1) + '. &nbsp; ' + country"></span>
+            &nbsp; &nbsp; 
+            <br ng-if="$index == 2" />
+        </span>
+    </div>
+</div>

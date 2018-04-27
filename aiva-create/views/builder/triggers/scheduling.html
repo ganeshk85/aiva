@@ -1,0 +1,139 @@
+<div id="triggers-scheduling">
+    <div class="column-calendar">
+
+        <h3>Date Range</h3>
+
+        <div class="clearfix">
+            <div class="inline-radio-label">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="range" model="schedule.range" value="allyear" enabled="true">
+                    </span>
+                </div>
+                <label style="cursor: pointer" ng-click="select('range', 'allyear')">
+                    Year Round
+                </label>
+            </div>
+
+            <div class="inline-radio-label">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="range" model="schedule.range" value="scheduled" enabled="true">
+                    </span>
+                </div>
+                <label style="cursor: pointer" ng-click="select('range', 'scheduled')">
+                    Scheduled
+                </label>
+            </div>
+        </div>
+
+        <div style="position:relative; overflow: hidden">
+
+            <div ng-show="schedule.range !== 'scheduled'" 
+                 style="position:absolute; background: #fcfcfc; opacity: 0.9;
+                z-index: 3; width: 100%; height: 100%; top: 0px; left: 0px;"></div>
+
+            <div class="calendar-range">
+                <div class="pickers clearfix">
+                    <div class="picker-left">
+
+                        <h4>Start Date</h4>
+                        <div class="date-wrapper">
+                            <i class="fa fa-calendar-o"></i>
+                            <span>&nbsp;</span>
+                            <span ng-bind="begin | nice_date"></span>
+                        </div>
+
+                        <mighty-datepicker 
+                            range-from="true" before="end"
+                            ng-model="begin" options="optionsStart"
+                        >
+                        </mighty-datepicker>
+                    </div>
+                    <div class="picker-arrow"  ng-show='begin'>
+                        <div class="daterange-arrow" style='padding:0; margin:0'></div>
+                    </div>
+                    <div class="picker-right"  ng-show='begin'>
+
+                        <h4>End Date</h4>
+                        <div class="date-wrapper">
+                            <i class="fa fa-calendar-o"></i>
+                            <span>&nbsp;</span>
+                            <span ng-bind="end | nice_date"></span>
+                        </div>
+
+                        <mighty-datepicker 
+                            range-to="true" after="begin"
+                            ng-model="end" options="optionsFinish"
+                            >
+                        </mighty-datepicker>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        
+    </div>
+    <div class="column-time form">
+
+        <h3>Time of Day</h3>
+
+        <div class="clearfix">
+            <div class="inline-radio-label">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="time" model="schedule.time" value="allday" enabled="true">
+                    </span>
+                </div>
+                <label style="cursor: pointer" ng-click="select('time', 'allday')">
+                    All Day
+                </label>
+            </div>
+
+            <div class="inline-radio-label">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="time" model="schedule.time" value="timed" enabled="true">
+                    </span>
+                </div>
+                <label style="cursor: pointer" ng-click="select('time', 'timed')">
+                    Timed
+                </label>
+            </div>                        
+        </div>
+
+        <div style="position:relative; overflow: hidden">
+            <div ng-show="schedule.time !== 'timed'"
+                style="position:absolute; background: #fcfcfc; opacity: 0.9;
+                z-index: 3; width: 100%; height: 100%; top: 0px; left: 0px;"></div>
+            
+            <h3 style="margin-top: 20px;"> Schedule </h3>
+            
+            <div ng-repeat="p in schedule.hours" class="hours clearfix" 
+                 style="border: 1px #e8e8e8 solid; padding: 8px; width: 300px; border-radius: 5px; background: white; margin-bottom: 5px;">
+                <div style="float:left; width:100px;">
+                    <div dropdown-day-of-week ng-model="p.period"></div>
+                </div>
+                <div style="float:left; width:65px;">
+                    <div dropdown-hour class='dropdown-hour-from' ng-model="p.from"></div>
+                </div>
+                <div style="float:left;" class="daterange-arrow">
+                </div>
+                <div style="float:left; width:65px;">
+                    <div dropdown-hour class='dropdown-hour-to' ng-model="p.to"></div>
+                </div>
+                <div style="float:left; width:20px;">
+                    <button ng-click="removeHours(p)" class="btn btn-sm" style="line-height:12px; border-radius:0px; border:0px; background: transparent;">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn btn-success" ng-click="addHours()" style="line-height: 25px; width:100%">
+                <i class="fa fa-plus"></i>
+                Add New Schedule
+            </button>
+            
+            <div style="padding-bottom: 140px">&nbsp;</div>
+        </div>
+
+    </div>
+</div>

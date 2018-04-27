@@ -1,0 +1,38 @@
+<div class="triggers-list-heading">
+    <h3>Target Visitors</h3>
+
+    <div class="clearfix">
+        <div class="inline-radio-label">
+            <div class="input-wrapper">
+                <span custom-radio-group group="users" model="target.users" value="all" enabled="true">
+                </span>
+            </div>
+            <label ng-click="select('users', 'all')" style="cursor: pointer">
+                All Visitors
+            </label>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="inline-radio-label">
+            <div class="input-wrapper">
+                <span custom-radio-group group="users" model="target.users" value="new" enabled="true">
+                </span>
+            </div>
+            <label ng-click="select('users', 'new')" style="cursor: pointer">
+                New Users
+            </label>
+        </div>                
+    </div>                            
+    <div class="clearfix">
+        <div class="inline-radio-label">
+            <div class="input-wrapper">
+                <span custom-radio-group group="users" model="target.users" value="returning" enabled="true">
+                </span>
+            </div>
+            <label ng-click="select('users', 'returning')" style="cursor: pointer">
+                Returning Users
+            </label>
+        </div>                
+    </div> 
+   
+</div>

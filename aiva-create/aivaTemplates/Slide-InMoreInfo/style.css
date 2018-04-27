@@ -1,0 +1,22 @@
+.cta-lg { background: rgb(205, 75, 63); }
+
+.cta-lg .shape-1479421277268 { border-left-color: rgb(205, 75, 63); }
+
+.cta-lg .textBox-1479421377715 { color: rgb(255, 255, 255); font-size: 22px; font-weight: bold; text-align: center; }
+
+.cta-lg .button-1479421476266 { background: rgba(0, 0, 0, 0); border-color: rgb(255, 255, 255); border-width: 2px; border-radius: 100px; color: rgb(255, 255, 255); font-size: 24px; font-weight: bold; }
+
+.cta-lg .button-1479421476266:hover, .cta-lg .button-1479421476266:focus, .cta-lg .button-1479421476266:active { background: rgba(0, 0, 0, 0); }
+
+.cta-sm .shape-1479421593744 { border-left-color: rgb(205, 75, 63); }
+
+.cta-sm .textBox-1479421593755 { color: rgb(255, 255, 255); font-size: 22px; font-weight: bold; text-align: center; }
+
+.cta-sm .button-1479421593800 { background: rgba(0, 0, 0, 0); border-color: rgb(255, 255, 255); border-width: 2px; border-radius: 100px; color: rgb(255, 255, 255); font-size: 24px; font-weight: bold; }
+
+.cta-sm .button-1479421593800:hover, .cta-sm .button-1479421593800:focus, .cta-sm .button-1479421593800:active { background: rgba(0, 0, 0, 0); }
+
+.cta .button-1479421593800 { font-family: "Open Sans"; font-size: 24px; }
+
+.cta-sm { background: rgb(205, 75, 63); }
+

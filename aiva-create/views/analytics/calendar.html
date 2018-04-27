@@ -1,0 +1,38 @@
+<div style="position: relative">
+    <div class="calendar-range-picker">
+        <div class="pickers clearfix">
+            <div class="picker-left custom-calendar">
+                <mighty-datepicker 
+                    range-from="true" before="b"
+                    ng-model="a" options="optionsStart"
+                >
+                </mighty-datepicker>
+            </div>
+            <div class="picker-right custom-calendar">
+                <mighty-datepicker 
+                    range-to="true" after="a"
+                    ng-model="b" options="optionsFinish"
+                    >
+                </mighty-datepicker>
+            </div>
+        </div>
+        <div class="form">
+            <button 
+                class="btn btn-success" 
+                ng-click="ok()"
+            >
+                Select Date Range
+            </button>
+            <button 
+                class="btn btn-default"
+                ng-click="cancel()"
+            >
+                Cancel
+            </button>
+        </div>
+        
+        
+
+    </div>
+    
+</div>

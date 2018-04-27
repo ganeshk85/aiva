@@ -1,0 +1,33 @@
+<div top-navigation title="Emails"></div>
+
+<section class="document">
+    <div left-navigation></div>
+    
+    <div class="inner-container form data-spaced" style="height: {{innerHeight - 70}}px">
+        <div class="clearfix header-panel form-inline">
+
+            <div class="right">
+                <button ng-click="export()" class="btn btn-success btn-export">Export As File</button>
+            </div>
+            <h1>Emails</h1>
+            <div class="vertical-separator"></div>
+            <div class="control">
+                <select 
+                    class="form-control" 
+                    ng-model="campaignName" 
+                    ng-change="onChangeCampaign()"
+                    ng-options="campaign.id as campaign.name for campaign in campaigns"
+                >
+                </select>
+            </div>
+            
+        </div>
+        
+        <div ng-show="errorMessage">
+            <div class="alert alert-danger" ng-bind="errorMessage"></div>
+        </div>
+        
+        <div id="grid" class="ag-fresh" style="height: {{innerHeight - 200 }}px"></div>
+                
+    </div>
+</section>       

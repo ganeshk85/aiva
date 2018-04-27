@@ -1,0 +1,264 @@
+<div class="narrow-panel" style="height:254px;">
+    <div id="elements" data-name="elements" ng-controller="aivaElementsController">
+
+        <div class="panel-box" style="padding: 10px 4px 15px 4px">
+
+            <div class="button-group v-space">
+                <button
+                        id="overlaySettings"
+                        type="button" class="btn-tool" ng-click="buttonCtaBase()"
+                >
+                    <img
+                            src="assets/images/icons-builder/overlay-settings1227.png"
+                            alt="" style="width:100%;height:auto;"
+                    />
+                    <div class="caption">
+                        Overlay Settings
+                    </div>
+                </button>
+            </div>
+
+            <div class="button-group" style="margin-top:5px">
+                <div class="group-row">
+                    <div class="left ctrl-dropdown" stay-open freeze="freezeMenu">
+                        <button id="shapeTool" type="button" ng-click="selectElementCategory('shape')"
+                                ng-class="{'selected' : selectedElementCategory==='shape' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }"
+                                data-submenu data-toggle="dropdown"></button>
+
+                        <ul class="dropdown-menu shapes-menu">
+                            <li class="dropdown-submenu enabled">
+                                <a class="shapes" tabindex="0">Shapes</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-shapes></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="lines" tabindex="0">Lines</a>
+
+                                <ul class="dropdown-menu coming-soon">
+                                    <li><a tabindex="0" builder-tool-coming-soon></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="arrows" tabindex="0">Arrows</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-coming-soon>!</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="equations" tabindex="0">Equations</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-coming-soon></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right ctrl-dropdown" stay-open freeze="freezeMenu">
+                        <button id="inputsTool" type="button" ng-click="selectElementCategory('inputs')"
+                                ng-class="{'selected' : selectedElementCategory==='inputs' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }"
+                                data-submenu data-toggle="dropdown"></button>
+
+                        <ul class="dropdown-menu inputs-menu">
+                            <li class="dropdown-submenu enabled">
+                                <a class="buttons" tabindex="0">Buttons</a>
+                                <ul class="dropdown-menu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" builder-tool-buttons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="inputs" tabindex="0">Input fields</a>
+                                <ul class="dropdown-menu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" builder-tool-inputs></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="dropdowns" tabindex="0">Drop Downs</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-coming-soon></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="emojis" tabindex="0">Emojis</a>
+
+                                <ul class="dropdown-menu emoji-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" builder-tool-emojis></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--<li class="dropdown-submenu enabled">-->
+                            <!--<a class="icons" tabindex="0"><i class="fa fa-lg fa-hand-paper-o" ></i> Icons</a>-->
+
+                            <!--<ul class="dropdown-menu icon-submenu">-->
+                            <!--<li class="input-submenu">-->
+                            <!--<a tabindex="0" builder-tool-icons></a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="videos" tabindex="0">Videos</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-coming-soon></a></li>
+                                </ul>
+                            </li>
+                            -->
+                            <li class="dropdown-submenu coming-soon">
+                                <a class="countdowns" tabindex="0">Countdowns</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" builder-tool-coming-soon></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="social-links" tabindex="0">Social Links</a>
+                                <ul class="dropdown-menu" style="width: 350px;">
+                                    <li class="input-submenu">
+                                        <builder-tool-social-buttons></builder-tool-social-buttons>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="group-row">
+                    <div class="left">
+                        <button id="textTool" type="button" ng-click="aivaElementSelected($event, 'textBox', 'textBox')"
+                                ng-class="{'selected' : selectedElementCategory==='textBox' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }"></button>
+                    </div>
+                    <div class="right">
+                        <button id="imagesTool" type="button" ng-click="selectElementCategory('images')" launch-image-upload
+                                ng-class="{'selected' : selectedElementCategory==='images' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }"></button>
+                    </div>
+                </div>
+
+                <div class="group-row" style="margin-top:1px;">
+                    <div class="left">
+                        <button
+                            id="videoTool" type="button"
+                            ng-click="selectElementCategory('video')"
+                            launch-video-upload
+                            ng-class="{'selected' : selectedElementCategory==='video' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }">
+                        </button>
+                    </div>
+                    <div class="right ctrl-dropdown" stay-open freeze="freezeMenu">
+                        <button
+                                id="iconsTool" type="button"
+                                ng-click="selectElementCategory('icons')"
+                                ng-class="{'selected' : selectedElementCategory==='icons' && !$root.ctaBaseOpen, 'disabled' : $root.ctaBaseOpen }"
+                                data-submenu data-toggle="dropdown">
+                        </button>
+                        <ul class="dropdown-menu inputs-menu">
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-hand-paper-o"></i> Hand Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Hand Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-bus"></i> Transportation Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Transportation Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-arrow-circle-o-down"></i> Directional
+                                    Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Directional Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-align-left"></i> Text Editor Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Text Editor Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-dollar"></i> Currency Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Currency Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-venus-mars"></i> Gender Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Gender Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-apple"></i> Brand Icons</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Brand Icons" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu enabled">
+                                <a class="icons" tabindex="0"><i class="category-icons fa fa-lg fa-star"></i> Other</a>
+
+                                <ul class="dropdown-menu icon-submenu">
+                                    <li class="input-submenu">
+                                        <a tabindex="0" category="Other" builder-tool-icons></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="button-group">
+                <div class="group-row">
+                    <div class="left">
+                        <button ng-controller="BackgroundController"
+                                class="btn-tool btn-tool-colored  btn-tool-left color-picker-trigger" id="paintTool"
+                                type="button"
+                                ng-click="open()">
+                            <div class="clr"
+                                 style="background-color:{{colors.background ? colors.background : 'transparent'}}"></div>
+                        </button>
+                    </div>
+                    <div class="right">
+                        <button class="btn-tool btn-tool-colored btn-tool-right"
+                                ng-click="showBorderDialog()"
+                                id="borderTool" type="button">
+                            <div class="clr" style="background-color:{{colors.border ? colors.border : 'transparent'}}"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

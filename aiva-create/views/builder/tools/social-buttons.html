@@ -1,0 +1,174 @@
+<div class="menu-social-links">
+    <uib-accordion close-others="true">
+        <div uib-accordion-group class="" is-open="status.facebook" template-url="views/templates/accordion-in-menu.html">
+            <uib-accordion-heading>
+                <span class="social-icon icon-facebook">Facebook</span>
+                <i class="pull-right glyphicon glyphicon-chevron-down" ng-if="!status.facebook"></i>
+                <span class="pull-right" ng-if="status.facebook">{{active.facebook + 1}}/5</span>
+            </uib-accordion-heading>
+            <div uib-carousel active="active.facebook" interval="false">
+                <div uib-slide index="0">
+                    <p>Box Count Layout</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'facebook', 0)">
+                        <img src="assets/images/icons-builder/social/fb-1.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="1">
+                    <p>Standard Layout With Faces</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'facebook', 1)">
+                        <img src="assets/images/icons-builder/social/fb-2.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="2">
+                    <p>Standard Layout</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'facebook', 2)">
+                        <img src="assets/images/icons-builder/social/fb-3.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="3">
+                    <p>Button Count Layout</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'facebook', 3)">
+                        <img src="assets/images/icons-builder/social/fb-4.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="4">
+                    <p>Button Layout</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'facebook', 4)">
+                        <img src="assets/images/icons-builder/social/fb-5.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div uib-accordion-group class="" is-open="status.twitter" template-url="views/templates/accordion-in-menu.html">
+            <uib-accordion-heading>
+            <span class="social-icon icon-twitter">Twitter</span>
+            <i class="pull-right glyphicon glyphicon-chevron-down" ng-if="!status.twitter"></i>
+                <span class="pull-right" ng-if="status.twitter">{{active.twitter + 1}}/4</span>
+            </uib-accordion-heading>
+            <div uib-carousel active="active.twitter" interval="false">
+                <div uib-slide index="0">
+                    <p>Button</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'twitter', 0)">
+                        <img src="assets/images/icons-builder/social/t-1.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="1">
+                    <p>Button With Username</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'twitter', 1)">
+                        <img src="assets/images/icons-builder/social/t-2.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="2">
+                    <p>Button With Count</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'twitter', 2)">
+                        <img src="assets/images/icons-builder/social/t-3.png" alt="">
+                    </div>
+                </div>
+                <div uib-slide index="3">
+                    <p>Button With Username and Count</p>
+                    <div class="social-img" ng-click="aivaSocialElementSelected($event, 'twitter', 3)">
+                        <img src="assets/images/icons-builder/social/t-4.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </uib-accordion>
+</div>
+<style>
+.menu-social-links, .menu-social-links div {
+    padding-left: 0!important;
+    padding-bottom: 0!important;
+}
+.menu-social-links .carousel-indicators {
+    display: none!important;
+}
+.menu-accordion-title {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5em;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.menu-accordion-title:hover,
+.menu-accordion-title:focus {
+    text-decoration: none;
+    color: #666;
+    background: #eee;
+    outline: none;
+}
+.menu-accordion-title i,
+.menu-accordion-title span {
+    vertical-align: middle;
+}
+.menu-accordion-title i.fa {
+    font-size: 18px;
+    margin-right: 5px;
+}
+.menu-accordion .carousel {
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.menu-accordion .carousel-inner p {
+    background: #f5f5f5;
+    font-size: 13px;
+    padding: 5px 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.menu-accordion .social-img {
+    height: 100px;
+    background: #fdfdfd;
+}
+.menu-accordion .social-img:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+.menu-accordion .social-img img {
+    max-height: 80px;
+    max-width: 280px;
+}
+.menu-accordion .carousel-control {
+    background: none!important;
+}
+.menu-accordion .glyphicon-chevron-left,
+.menu-accordion .glyphicon-chevron-right {
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    margin-top: 0!important;
+}
+.menu-accordion .glyphicon-chevron-left:before,
+.menu-accordion .glyphicon-chevron-right:before {
+    content: ''!important;
+}
+.menu-accordion .glyphicon-chevron-left {
+    background: url(assets/images/icons-builder/social/arrow-left.png);
+}
+.menu-accordion .glyphicon-chevron-right {
+    background: url(assets/images/icons-builder/social/arrow-right.png);
+}
+.menu-accordion .glyphicon-chevron-down {
+    background: #eee;
+    padding: 5px;
+    border-radius: 50%;
+}
+.menu-social-links .panel-group {
+    margin-bottom: 0!important;
+}
+.menu-social-links .social-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 25px;
+}
+.menu-social-links .social-icon.icon-facebook {
+    background-image: url(assets/images/icons-builder/facebook.png);
+}
+.menu-social-links .social-icon.icon-twitter {
+    background-image: url(assets/images/icons-builder/twitter.png);
+}
+</style>

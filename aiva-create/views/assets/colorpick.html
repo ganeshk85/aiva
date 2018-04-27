@@ -1,0 +1,173 @@
+<div class="aiva-color-picker noselect" ng-show="visible">
+    
+    <div class="header" ng-show="tabsVisible()" style="display:flex">
+        <button 
+            ng-show="tabIsVisible('foreground')"
+            class="tab" ng-class="{active: tabIsActive('foreground')}" ng-click="switchTab('foreground')">
+            Foreground
+        </button>
+        <button 
+            ng-show="tabIsVisible('background')"
+            class="tab" ng-class="{active: tabIsActive('background')}" ng-click="switchTab('background')">
+            Background
+        </button>
+        <button
+            style="width:90px"
+            ng-show="tabIsVisible('border')"
+            class="tab" ng-class="{active: tabIsActive('border')}" ng-click="switchTab('border')">
+<!--        <div class="tab-color" style="background: {{rgbInTab('border')}}"></div>-->
+            Border
+        </button>
+        <button
+            style="width:90px"
+            ng-show="tabIsVisible('text')"
+            class="tab" ng-class="{active: tabIsActive('text')}" ng-click="switchTab('text')">
+<!--        <div class="tab-color" style="background: {{rgbInTab('text')}}"></div> -->
+            Text
+        </button>
+    </div>
+    <div class="body">
+        <div style="position: absolute; color:#fafafa; font-size: 9px; right: 10px; top: 3px">
+            <!-- {{decToHex(getR())}} {{decToHex(getG())}} {{decToHex(getB())}} -->
+            &nbsp;
+            {{ currentTab }}
+        </div>
+        <div class="add-menu-overlap" ng-show="addMenuVisible"></div>
+        <div class="add-menu" ng-show="addMenuVisible">
+            <button ng-click='addColorToAccountPalette()'>Add to account palette</button>
+        </div>
+
+        <div style="padding-top:20px; padding-left:230px; ">
+            <div 
+                ng-repeat="color in profileCells track by $index"
+                class="color-cell" 
+                style='background: {{color}}'
+                ng-if='$index < 2*11'
+                ng-click="selectFromPreset(color)"
+                ng-right-click="(itemMenuIndex === $index) ? toggleRemove($index) : openMenuByIndex($index)" 
+                ng-class="{active: isActiveColor(color)}"
+            >
+                <div ng-show="itemMenuIndex === $index" 
+                     title="{{itemMenuIndex}} vs {{$index}}" 
+                     class="menu-item-dropdown">
+                    <button ng-click='removeFromPalette(color)'>Remove from palette</button>
+                </div>
+            </div>
+            <div 
+                ng-repeat="color in emptyCells track by $index"
+                class="color-cell" 
+                ng-if='$index < (2*11 - profileCells.length)'
+            >
+            </div>
+            <div 
+                ng-repeat="(key,color) in presetCells"
+                ng-if="key==='Transparent'"
+                class="color-cell" 
+                title="{{key}}" 
+                style='background: url(assets/images/transparent20x20.png) 0px 0px no-repeat; background-size: 100%;'
+                ng-click="selectFromPreset(color)"
+                ng-class="{active: isActiveColor(color)}"
+            >
+            </div>
+            <div 
+                ng-repeat="(key, color) in presetCells track by $index"
+                class="color-cell" 
+                ng-if='$index < (11*11 - 2*11) && key !== "Transparent"'
+                title="{{key}}" 
+                style='background: {{color}}'
+                ng-click="selectFromPreset(color)"
+                ng-class="{active: isActiveColor(color)}"
+            >
+            </div>
+        </div>
+        
+        <div class="big-color-circle" style="background: {{rgbInTab( currentTab )}}"></div>
+        
+        <div class="small-color-circles">
+            <div class="circle circle-1" ng-click="selectPrevious(0)" style="background: {{getPrevious(0)}}"></div>
+            <div class="circle circle-2" ng-click="selectPrevious(1)" style="background: {{getPrevious(1)}}"></div>
+            <div class="circle circle-3" ng-click="selectPrevious(2)" style="background: {{getPrevious(2)}}"></div>
+            <div class="circle circle-4" ng-click="selectPrevious(3)" style="background: {{getPrevious(3)}}"></div>
+        </div>
+        <div class="hex-editor">
+            <label>HEX:</label>
+            <div ng-show="!editingHex" ng-click="startEditingHex()" class='input' ng-bind="color().toHexString()"></div>
+            <input ng-show="editingHex" ng-blur="stopEditingHex()" 
+                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                   class='input' type='text' ng-model="hexValue"></span>
+            <button 
+                class='btn-plus-menu' 
+                ng-class='{open: addMenuVisible}'
+                ng-click="toggleAdd()"
+            >
+            </button>
+        </div>
+        
+        <div class="rgba-editor">
+            <div class="rgba-row">
+                <div 
+                    class="slider" 
+                    aiva-color-picker-slider="r"
+                    max="255"
+                    style="background: linear-gradient(to right, #00{{decToHex(getG())}}{{decToHex(getB())}} 0%, #ff{{decToHex(getG())}}{{decToHex(getB())}} 100%)"
+                >
+                    <div class="pointer" style="left:{{getR() * 100 / 255 }}%"></div>
+                </div>
+                <span class="letter">R</span>
+                <span class="value" ng-bind="getR()"></span>
+            </div>
+            <div class="rgba-row">
+                <div 
+                    class="slider"
+                    aiva-color-picker-slider="g"
+                    max="255"
+                    style="background: linear-gradient(to right, #{{decToHex(getR())}}00{{decToHex(getB())}} 0%, #{{decToHex(getR())}}FF{{decToHex(getB())}} 100%)"
+                >
+                    <div class="pointer" style="left:{{getG() * 100 / 255 }}%"></div>
+                </div>
+                <span class="letter">G</span>
+                <span class="value" ng-bind="getG()"></span>
+            </div>
+            <div class="rgba-row">
+                <div 
+                    class="slider"
+                    aiva-color-picker-slider="b"
+                    max="255"
+                    style="background: linear-gradient(to right, #{{decToHex(getR())}}{{decToHex(getG())}}00 0%, #{{decToHex(getR())}}{{decToHex(getG())}}ff 100%)"
+                >
+                    <div class="pointer" style="left:{{getB() * 100 / 255 }}%"></div>
+                </div>
+                <span class="letter">B</span>
+                <span class="value" ng-bind="getB()"></span>
+            </div>
+            <div class="rgba-row">
+                <div
+                    class="slider"
+                    aiva-color-picker-slider="a"
+                    max="1"
+                    style="background: linear-gradient(to right, transparent 0%, #{{decToHex(getR())}}{{decToHex(getG())}}{{decToHex(getB())}} 100%)"
+                >
+                    <div class="pointer" style="left:{{getA() * 100 }}%"></div>
+                </div>
+                <span class="letter">A</span>
+                <span class="value" ng-bind="getA()"></span>
+            </div>
+        </div>
+        
+        <div 
+            class="hue-editor" 
+            aiva-color-picker-slider="h"
+            max="360"
+        >
+            <div class="pointer" style="left:{{getH() * 100 / 360 }}%"></div>
+        </div>
+
+        <!-- <div>hasHue={{hasHue(color())}} hue={{hue}}</div> -->
+        
+        <div class="sl-editor" style="background: linear-gradient(180deg, {{getHslHex(1, 1)}}, {{getHslHex(0, 0)}})">
+            <div class="inner" aiva-color-picker-slider-2d="sa" max="1">
+                <div class="pointer" style="bottom: {{ getV() * 100 }}%; left:{{ getS() * 100 }}%"></div>
+            </div>
+        </div>
+    </div>
+</div>

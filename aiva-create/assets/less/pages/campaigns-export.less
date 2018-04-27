@@ -1,0 +1,146 @@
+.multi-select {
+    background: white;
+    display: block;
+    border: none;
+   
+    .value {
+        text-align: left;
+        padding-left: 17px;
+        
+        color: #666;
+        
+        display: block;
+        width: 100%;
+        line-height: 36px;
+        height: 36px;
+        border: 1px #e8e8e8 solid;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        
+        background: white url(../images/campaigns/dropdown-closed.png) no-repeat 0px 0px;
+        background-position: 310px center;
+        &:active, &:focus { outline: none; }
+    }
+    &.open,
+    &.open button.value {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    &.open button.value {
+        background-image: url(../images/campaigns/dropdown-open.png);
+    }
+    
+    .filter {
+        line-height: 36px;
+        color: #666;
+        height: 36px;
+        padding: 0px 17px;
+        font-size: 13px;
+        border-left: 1px #e8e8e8 solid;
+        border-right: 1px #e8e8e8 solid;
+        border-bottom: 1px #e8e8e8 solid;
+        
+        .tools {
+            float: right;
+            margin-right: -8px;
+        }
+        input {
+            width: 92px;
+            height: 22px;
+            border-radius: 10px;
+            background: #f7f7f7 url(../images/campaigns/search-bk-icon.png) no-repeat 5px center;
+            border:none;
+            color: #666;
+            padding: 0px 20px;
+            &:active, &:focus { outline: none; }
+        }
+        select.sort-control {
+            width: 92px;
+            height: 22px;
+            border-radius: 10px;
+            background: #f7f7f7;
+            border: none;
+            color: #666;
+            padding: 0px 10px;
+            &:active, &:focus { outline: none; }
+        }
+    }
+
+    .list {
+        max-height: 100px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-left: 1px #e8e8e8 solid;
+        border-right: 1px #e8e8e8 solid;
+        border-bottom: 1px #e8e8e8 solid;
+        
+        button {
+            color: #666;
+            background: white;
+            display: block;
+            width: 100%;
+            line-height: 18px;
+            overflow: hidden;
+            height: 18px;
+            border: none;
+            padding: 0px 17px;
+            padding-left: 38px;
+            text-align: left;
+            font-size: 12px;
+            background: transparent url('../images/campaigns/green-box-off.png') no-repeat 0px 0px;
+            background-position: 17px center;
+            cursor: pointer;
+            
+            &.selected {
+                background-image: url('../images/campaigns/green-box-on.png');
+            }
+            
+            &:hover{ background-color: #e8e8e8; }
+            &:active, &:focus { outline: none; }
+        }
+    }
+}
+
+.input-datepick {
+    display: inline-block;
+    vertical-align: center; 
+    border: 1px #e5e5e5 solid;
+    border-radius: 15px;
+    width: 128px;
+    height: 38px;
+    line-height: 38px;
+    background: white url(../images/campaigns/input-datepick.png) no-repeat right center;
+    padding-left: 10px;
+    padding-right: 45px;
+    text-align: center;
+    &:active, &:focus { outline: none; }
+    &:disabled { background-color: transparent; }
+    &.selected {
+        color: #2cdd5b;
+        border: 1px #2cdd5b solid;
+        background-image: url(../images/campaigns/input-datepick-green.png) ;
+    }
+}
+
+.btn-select-dateperiod {
+    background: transparent;
+    width: 32%;
+    border-radius: 10px;
+    color: #666;
+    
+    &:hover {
+        background: transparent;
+    }
+    &:active, &:focus { 
+        outline: none; box-shadow: none;
+    }
+    &.selected {
+        color: #2cdd5b;
+        border: 1px #2cdd5b solid;
+        background: transparent;
+    }
+}

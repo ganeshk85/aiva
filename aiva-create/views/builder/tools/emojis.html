@@ -1,0 +1,21 @@
+<div class="emojis-search-window reset-margins">
+    <div class="reset-margins" ng-model-options="{ debounce: 300 }">
+        <input 
+            class="emojis-search"
+            type="text" 
+            placeholder="Search Emoticons"
+            ng-model="emojisSearch" 
+        />
+    </div>
+
+    <div class="emojis-search-results clearfix reset-margins">
+        <div 
+            ng-repeat="emoji in emojis | filter:emojisSearch | limitTo: 200"
+            class="aiva-element-emoji" 
+            ng-click="aivaElementSelected($event, 'emoji', emoji.unicode)"
+            title="{{emoji.shortname}}"
+        >
+            <img ng-src="assets/images/emojis/64/{{emoji.unicode}}.png" width="26" height="26" />
+        </div>
+    </div>
+</div>

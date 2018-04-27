@@ -1,0 +1,744 @@
+<div id="aiva-color-picker-overlay" aiva-color-picker-overlay></div>
+<div id="aiva-border-dialog-overlay" aiva-border-dialog-overlay></div>
+
+<section id="viewport" class="clearfix" ng-controller="NavbarController">
+    <div class="flyout-from-right" ng-class="flyoutOpen ? 'open' : 'closed'">
+        <div class="flyout-content" ng-class="activePanel == 'templates' ? 'open' : 'closed'" id="templates-panel"
+             ng-controller="TemplatesController" bl-render-templates>
+            <div bl-close-flyout-panel></div>
+
+            <section class="row inner-content">
+                <div class="col-sm-6" id="templates-list"></div>
+                <div class="col-sm-6" id="templates-preview"></div>
+            </section>
+
+            <section class="row flyout-panel-toolbar" bl-template-actions>
+                <span>{{ 'withSelected' | translate }}</span>
+                <button class="btn btn-primary use-template" ng-enabled="selectedTemplate">{{ 'use' | translate }}
+                </button>
+                <button class="btn btn-primary edit-template" ng-enabled="selectedTemplate">{{ 'edit' | translate }}
+                </button>
+                <button class="btn btn-danger delete-template" ng-enabled="selectedTemplate">{{ 'delete' | translate
+                    }}
+                </button>
+
+                <button class="btn btn-success save-page-as-template">{{ 'saveAsTemplate' | translate }}</button>
+                <div class="loader" ng-if="templates.loading"><i class="icon icon-spin6 icon-spin"></i></div>
+            </section>
+
+            <div class="modal fade" id="save-template-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header clearfix">
+                            <button type="button" class="close pull-right" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span>
+                            </button>
+                            <h4 class="modal-title">{{ 'createEditTemplate' | translate }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="name">{{ 'templateName' | translate }}</label>
+                                <input type="text" ng-model="templateData.name" class="form-control" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">{{ 'templateCategory' | translate }}</label>
+                                <select name="category" class="form-control" ng-model="templateData.category">
+                                    <option ng-repeat="category in templates.categories" value="{{ category }}">{{
+                                        category.ucFirst() }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="color">{{ 'templatePrimaryColor' | translate }}</label>
+                                <select name="color" class="form-control" ng-model="templateData.color">
+                                    <option ng-repeat="color in templates.colors" value="{{ color.name }}">{{
+                                        color.name.ucFirst() }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="checkbox" ng-if="templateData.type == 'edit'">
+                                <label>
+                                    <input ng-model="templateData.replaceContents" type="checkbox">
+                                    <span>{{ 'replaceTemplateContents' | translate }}</span>
+                                </label>
+                            </div>
+                            <div class="text-danger">{{ template.error }}</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success">{{ 'saveAndClose' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="description-container"></div>
+
+    <aside id="elements-container" ng-controller="ElementsPanelController">
+        <section id="elements-panel" bl-el-panel-filterable>
+
+            <div class="main-nav" left-panel-navigation>
+                <selected-tab></selected-tab>
+                <!--                ui-sref="campaigns"-->
+                <div class="push-top">
+                    <div class="nav-item nav-item-back" ng-click="project.leavePage()" bl-tooltip="dashboard"
+                         not-selectable>
+                        <img class="back-img" src="assets/images/icons-builder/left-arrow.png"/>
+                    </div>
+                </div>
+
+                <div class="nav-item main-nav-item" data-name="aivabuilder"
+                     ng-class="{ active: panels.active === 'aivabuilder' }">
+                    <div class="main-nav-icon brush-icon"></div>
+                    <span>{{:: 'builder' | translate }}</span>
+                </div>
+                <div class="nav-item main-nav-item" data-name="triggers"
+                     ng-class="{ active: panels.active === 'triggers' }">
+                    <div class="main-nav-icon triggers-icon"></div>
+                    <span>{{:: 'triggers' | translate }}</span>
+                </div>
+
+            </div>
+            <div class="panel-inner">
+                <div class="panel" ng-class="{ open: panels.active === 'aivabuilder' }" data-name="aivabuilder"
+                     bl-panels-accordion>
+                    <bl-elements-panel></bl-elements-panel>
+                    <div ng-controller="ActionsController as vm" ng-show="vm.showControls">
+                        <div class="ActionSelectWithImgHeader ActionSelectWithImg" ng-class='{active:active}'
+                             ng-click="toggleActive()">
+                            <span ng-bind="vm.selected.name || 'Actions'"></span>
+                            <ul class="vertical-nav">
+                                <li ng-repeat="action in action_list" ng-click="vm.change(action.command)"
+                                    ng-style="{'background-image':'url('+action.iconUrl+')'}">{{action.name}}
+                                    <span class="submenuArrow" ng-if="action.action"></span>
+                                    <ul class="sub-menu borderT" ng-if="action.action">
+                                        <li ng-repeat="action in action.action" ng-click="vm.change(action.command)"
+                                            ng-style="{'background-image':'url('+action.iconUrl+')'}">
+                                            {{ action.name }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="text-toolbar" ng-controller="TextController" bl-text-controls class="narrow-panel"></div>
+                    <div id="video-toolbar" ng-controller="VideoController" class="narrow-panel hidden">
+                        <div class="checkbox toolbar-panel-options">
+                            <div class="optionsTitle">PLAYBACK</div>
+                            <input type="checkbox" id="autoplayInput" ng-model="autoplay" value="false">
+                            <label for="autoplayInput">
+                                {{ 'autoplay' | translate }}
+                            </label>
+                            <input type="checkbox" id="muteInput" ng-model="muted" value="false">
+                            <label for="muteInput">
+                                {{ 'muted' | translate }}
+                            </label>
+                            <input type="checkbox" id="loopInput" ng-model="loop" value="false">
+                            <label for="loopInput">
+                                {{ 'loop' | translate }}
+                            </label>
+                            &nbsp;
+                        </div>
+
+                        <div class="checkbox toolbar-panel-options durationContainer">
+                            <div class="optionsTitle">DURATION</div>
+                            <input type="checkbox" id="customDurationInput" ng-model="customDuration" value="false">
+                            <label for="customDurationInput">Set duration</label>
+                            <div class="timeInputsContainer">
+                                <form id="editVideoForm" name="editVideoForm">
+                                    <span class="videoTimeLabel">Start Time:</span>
+                                    <input ng-disabled="!customDuration" type="text" ng-model="startTime"
+                                           name="startTime"
+                                           class="videoTimeInput" required
+                                           placeholder="m:ss" ng-pattern="/^(?:0[0-5]|[0123456789]?[0-9]):?[0-5][0-9]$/"/>
+
+                                    <span class="videoTimeLabel">End Time:</span>
+                                    <input ng-disabled="!customDuration" type="text" ng-model="endTime" name="endTime"
+                                           class="videoTimeInput" required
+                                           placeholder="m:ss" ng-pattern="/^(?:0[0-5]|[0123456789]?[0-9]):?[0-5][0-9]$/"/>
+                                    <div class="errorMessagesContainer" ng-show="improperTimingValue">
+                                        <div class="errorMessage">Start time value is bigger then end time value.</div>
+                                    </div>
+                                    <div class="errorMessagesContainer" ng-messages="editVideoForm.endTime.$error">
+                                        <div class="errorMessage" ng-message="required">This field is required</div>
+                                        <div class="errorMessage" ng-message="pattern">Start time value doesn't match
+                                            m:ss pattern
+                                        </div>
+                                    </div>
+                                    <div class="errorMessagesContainer" ng-messages="editVideoForm.startTime.$error">
+                                        <div class="errorMessage" ng-message="required">This field is required</div>
+                                        <div class="errorMessage" ng-message="pattern">End time value doesn't match
+                                            m:ss pattern
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <!--<span class="videoTimeLabel">Start Time:</span>-->
+                                <!--<input focus-me="startTimeFocused" id="startTimeInput" my-enter ng-disabled="!customDuration"-->
+                                <!--class="videoTimeInput" ng-model="startTime" type="number" min="0">-->
+                                <!--<span class="startFilteredValue" ng-click="passFocus('start')">{{startTime | secondsToDateTime | date:'mm:ss'}}s</span>-->
+                                <!--<span class="videoTimeLabel">End Time:</span>-->
+                                <!--<input focus-me="endTimeFocused" id="endTimeInput" my-enter ng-disabled="!customDuration" class="videoTimeInput" ng-model="endTime"-->
+                                <!--type="number" min="0">-->
+                                <!--<span class="endFilteredValue"  ng-click="passFocus('end')">{{endTime | secondsToDateTime | date:'mm:ss' }}s</span>-->
+                            </div>
+                            &nbsp;
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="triggers" ng-class="{ open: panels.active === 'triggers' }" class="panel" data-name="triggers"
+                     ng-controller="TriggersController as vm">
+
+
+                    <div id="triggers-container" class="container-gradient">
+                        <triggers-list ng-if="vm.ready"></triggers-list>
+                    </div>
+
+                </div>
+
+                <div id="pages" ng-class="{ open: panels.active === 'pages' }" class="panel" data-name="pages"
+                     ng-controller="PagesController">
+                    <bl-pages-panel></bl-pages-panel>
+                </div>
+                <div id="themes" ng-class="{ open: panels.active === 'themes' }" class="panel" data-name="themes"
+                     ng-controller="ThemesController" bl-render-themes>
+                    <bl-themes-panel></bl-themes-panel>
+                </div>
+                <div id="settings" ng-class="{ open: panels.active === 'settings' }" class="panel" data-name="settings"
+                     ng-controller="SettingsController">
+                </div>
+                <section>
+                    <div class="bottom-navigation">
+                        <div class="button-group">
+                            <!--<div class="button-preview" ng-click="project.preview()" ng-disabled="savingChanges"></div>-->
+                            <div class="button-export" ng-click="project.export()" ng-disabled="pushLive"></div>
+                            <div class="button-save" ng-click="project.save()" ng-disabled="savingChanges"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+
+    </aside>
+    <div id="middle">
+        <div aiva-color-picker></div>
+        <div aiva-border-dialog></div>
+
+        <div campaign-rename-panel class="panels.active" visible="!ctaBaseOpen"></div>
+
+        <div cta-base class="cta-base-controller"></div>
+
+        <div id="builder-context-menu" ng-controller="ContextMenuController" ng-show="contextMenuOpen">
+            <ul class="dropdown-menu" ng-mouseout="clearActiveItems()">
+                <li ng-repeat="item in menuItems" ng-mouseover="hasSubItems(item) && (enableSubMenu(item))"
+                    ng-click="command(item)" ng-class="hasSubItems(item) ? 'dropdown-submenu' : ''">
+                    <div ng-show="item.divider" class="divider"></div>
+                    <a ng-show="!item.divider" style="background-image: url('{{item.image}}'); line-height:2em;">
+                        {{item.name}}
+                    </a>
+                    <ul ng-show="displaySubItems(item)" class="dropdown-menu">
+                        <li ng-show="item.active" ng-repeat="subItem in item.subItems" ng-click="command(subItem)">
+                            <a ng-show="subItem.image" style="background-image: url('{{subItem.image}}');">{{subItem.name}}</a>
+                            <a ng-show="!subItem.image" class="noimage">{{subItem.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="frame-wrapper"
+             style="margin-top: 0px; width: 100%; height: 100%"
+
+             bl-builder
+             bl-resizable
+             bl-iframe-nodes-sortable
+             bl-iframe-nodes-selectable
+             bl-iframe-text-editable
+             bl-iframe-context-menu
+             aiva-emoji-drawing
+             aiva-icon-drawing
+             aiva-shape-drawing
+             aiva-button-drawing
+             aiva-textbox-drawing
+             aiva-form-input-drawing
+             multi-select-drag
+        >
+
+            <div class="highlights-wrapper">
+                <section id="highlights">
+
+
+                    <!-- multiple select boxes -->
+                    <!-- create and destroy as needed -->
+
+                    <div id="select-box">
+                        <!--
+                                                <div class="select-box-actions" bl-context-box-actions>
+                                                    <span class="element-tag"></span>
+                                                    <i class="icon icon-trash" data-action="delete"></i>
+                                                </div>
+                        -->
+                        <div class="resize-handles">
+                            <span data-direction="nw" class="drag-handle nw-handle"></span>
+                            <span data-direction="n" class="drag-handle n-handle"></span>
+                            <span data-direction="ne" class="drag-handle ne-handle"></span>
+                            <span data-direction="e" class="drag-handle e-handle"></span>
+                            <span data-direction="se" class="drag-handle se-handle"></span>
+                            <span data-direction="s" class="drag-handle s-handle"></span>
+                            <span data-direction="sw" class="drag-handle sw-handle"></span>
+                            <span data-direction="w" class="drag-handle w-handle"></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="iframe-wrapper">
+                <iframe id="iframe" frameborder="0" class="full-width" style="border:0px;"></iframe>
+            </div>
+
+
+            <div id="frame-overlay" class="hidden"></div>
+        </div>
+
+        <ai-zoom-control></ai-zoom-control>
+
+        <div class="side-device-switcher">
+            <div class="device-switcher">
+                <div class="devices">
+
+                    <div
+                        class="device-circle"
+                        ng-class="{ deviceLarge: activeCanvasSize === 'lg'}"
+                    >
+                        <div title="Large Screens" ng-class="{ active: activeCanvasSize === 'lg' }"
+                             ng-click="displayDesktop()" class="size-desktop">
+                        </div>
+                    </div>
+
+                    <div
+                        class="device-circle "
+                        ng-class="{ deviceLarge: activeCanvasSize === 'sm', disabled: !mobileEnabled}"
+                    >
+                        <div title="Tablets"
+                             ng-class="{ active: activeCanvasSize === 'sm', disabled: mobileEnabled === false }"
+                             ng-click="displayMobile()" class="size-tablet">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="fonts-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header clearfix">
+                    <div title="Close Modal" class="close-modal" data-dismiss="modal">
+                        <i class="icon icon-cancel-circled"></i>
+                    </div>
+
+                    <h4 class="modal-title pull-left">{{ 'selectOneOf' | translate }} {{
+                        fonts.paginator.sourceItems.length }} {{ 'googleFonts' | translate }}</h4>
+                    <div class="pagi-container pull-right">
+                        <ul class="pagination" bl-fonts-pagination></ul>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <ul class="fonts-list">
+                        <li ng-repeat="font in fonts.paginator.currentItems" style="font-family: {{ font.family }}"
+                            ng-click="fonts.apply(font)">
+                            <div class="font-preview">{{ 'fontsLorem' | translate }}</div>
+                            <div class="font-details clearfix">
+                                <div class="pull-left">{{ font.family+', '+font.category }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="images-modal">
+        <div class="modal-dialog" ng-controller="ImageUploadController">
+            <image-upload></image-upload>
+        </div>
+    </div>
+    <div class="modal fade" id="videos-modal">
+        <div class="modal-dialog" ng-controller="VideoUploadController">
+            <video-upload></video-upload>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="link-modal">
+        <div class="modal-dialog">
+            <link-entry></link-entry>
+        </div>
+    </div>
+
+    <!--<div class="modal fade" id="variants-modal">
+        <div class="modal-dialog">
+            <ai-variants-control></ai-variants-control>
+        </div>
+    </div>-->
+
+    <div class="modal fade" id="social-media-modal">
+        <div class="modal-dialog">
+            <social-buttons-settings></social-buttons-settings>
+        </div>
+    </div>
+</section>
+
+<div id="preview-closer" class="hidden" ng-click="closePreview()">
+    <i class="icon icon-cancel"></i>
+</div>
+<div id="aiva-overlay"></div>
+<style>
+    .inner-panel-flyout .inner-panel-context-box .subbutton {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+
+    .inner-panel-flyout .inner-panel-context-box .subshapes {
+        left: 0;
+        position: relative;
+        text-align: left;
+        border: none;
+        outline: 0px;
+        width: 100%;
+        padding: 10px 10px 10px 10px;
+        background-color: #fff;
+        color: black;
+    }
+
+    .subshapes.selected {
+        background-color: #dedede !important;
+        color: black;
+    }
+
+    .subshapes .clr {
+        position: absolute;
+        width: 30px;
+        left: 10px;
+        height: 5px;
+        top: 33px;
+    }
+
+    .subshapes:focus, .subshapes:active {
+        outline: none;
+        color: #3d85c6 + rgb(50, 50, 50);
+    }
+
+    .subshapes:hover {
+        outline: none;
+        background-color: #385366;
+        color: #3d85c6 + rgb(50, 50, 50);
+    }
+
+    .inner-panel-flyout .inner-panel-context-box.subbuttons {
+        position: absolute;
+        /*left: 160px;*/
+        width: 200px;
+        top: 0;
+        padding: 10px 4px 10px 4px;
+        border: 1px solid #666;
+        background-color: #fff;
+    }
+
+    .inner-panel-flyout .inner-panel-context-box .subbuttons {
+        position: absolute;
+        left: 200px;
+        width: 230px;
+        top: 0;
+        padding: 10px;
+        border: 1px solid #666;
+        background-color: #fff;
+    }
+
+    .inner-panel-flyout .inner-panel-context-box .subbuttons hr {
+        border: 1px solid #000;
+        border-bottom: 0;
+        margin: 4px;
+    }
+
+    .btn-tool.subbuttons {
+        background-color: #263845;
+        color: #3d85c6;
+        position: relative;
+        outline: none;
+        border: none !important;
+    }
+
+    .btn-tool.subbuttons.selected {
+        background-color: #3c7ba7 !important;
+    }
+
+    .btn-tool.subbuttons .clr {
+        position: absolute;
+        width: 30px;
+        left: 10px;
+        height: 5px;
+        top: 33px;
+    }
+
+    .btn-tool.subbuttons:focus, .btn-tool.subbuttons:active {
+        outline: none;
+        color: #3d85c6 + rgb(50, 50, 50);
+    }
+
+    .btn-tool.subbuttons:hover {
+        outline: none;
+        background-color: #385366;
+        color: #3d85c6 + rgb(50, 50, 50);
+    }
+
+    .subbutton.toolrectangle {
+        background-color: #ddd;
+    }
+
+    .subbutton.toolrectangle.selected {
+        background-color: #888;
+    }
+
+    .subbutton.toolrectangle1 {
+        background-color: #ddd;
+        border-radius: 7px;
+    }
+
+    .subbutton.toolrectangle1.selected {
+        background-color: #888;
+        border-radius: 7px;
+    }
+
+    .subbutton.toolrectangle2 {
+        background: linear-gradient(135deg, transparent 0px, #ddd 0) top left,
+        linear-gradient(225deg, transparent 5px, #ddd 0) top right,
+        linear-gradient(315deg, transparent 0px, #ddd 0) bottom right,
+        linear-gradient(45deg, transparent 0px, #ddd 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+    }
+
+    .subbutton.toolrectangle2.selected {
+        background: linear-gradient(135deg, transparent 0px, #888 0) top left,
+        linear-gradient(225deg, transparent 5px, #888 0) top right,
+        linear-gradient(315deg, transparent 0px, #888 0) bottom right,
+        linear-gradient(45deg, transparent 0px, #888 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+    }
+
+    .subbutton.toolrectangle3 {
+        background: linear-gradient(135deg, transparent 5px, #ddd 0) top left,
+        linear-gradient(225deg, transparent 5px, #ddd 0) top right,
+        linear-gradient(315deg, transparent 0px, #ddd 0) bottom right,
+        linear-gradient(45deg, transparent 0px, #ddd 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+    }
+
+    .subbutton.toolrectangle3.selected {
+        background: linear-gradient(135deg, transparent 5px, #888 0) top left,
+        linear-gradient(225deg, transparent 5px, #888 0) top right,
+        linear-gradient(315deg, transparent 0px, #888 0) bottom right,
+        linear-gradient(45deg, transparent 0px, #888 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+    }
+
+    .subbutton.toolrectangle4 {
+        background-color: #ddd;
+        border-radius: 7px 7px 0px 0px;
+    }
+
+    .subbutton.toolrectangle4.selected {
+        background-color: #888;
+        border-radius: 7px 7px 0px 0px;
+    }
+
+    .subbutton.toolrectangle5 {
+        background-color: #ddd;
+        border-radius: 7px 0px 7px 0px;
+    }
+
+    .subbutton.toolrectangle5.selected {
+        background-color: #888;
+        border-radius: 7px 0px 7px 0px;
+    }
+
+    .subbutton.toolellipse {
+        background-color: #ddd;
+        border-radius: 50% 50%;
+    }
+
+    .subbutton.toolellipse.selected {
+        background-color: #888;
+        border-radius: 50% 50%;
+    }
+
+    .subbutton.tooltriangleup {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 30px solid #ddd;
+    }
+
+    .subbutton.tooltriangleup.selected {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 30px solid #888;
+    }
+
+    .subbutton.toolrectangle6 {
+        background: linear-gradient(135deg, transparent 10px, #ddd 0) top left,
+        linear-gradient(225deg, transparent 10px, #ddd 0) top right,
+        linear-gradient(315deg, transparent 10px, #ddd 0) bottom right,
+        linear-gradient(45deg, transparent 10px, #ddd 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+    }
+
+    .subbutton.toolrectangle6.selected {
+        background: linear-gradient(135deg, transparent 10px, #888 0) top left,
+        linear-gradient(225deg, transparent 10px, #888 0) top right,
+        linear-gradient(315deg, transparent 10px, #888 0) bottom right,
+        linear-gradient(45deg, transparent 10px, #888 0) bottom left;
+        background-size: 51% 51%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+    }
+
+    .toolstarfive {
+        margin: 1px 4px;
+        position: relative;
+        display: block;
+        color: #ddd;
+        width: 0px;
+        height: 0px;
+        border-right: 20px solid transparent;
+        border-bottom: 14px solid #ddd;
+        border-left: 20px solid transparent;
+        -moz-transform: rotate(35deg);
+        -webkit-transform: rotate(35deg);
+        -ms-transform: rotate(35deg);
+        -o-transform: rotate(35deg);
+    }
+
+    .toolstarfive:before {
+        border-bottom: 16px solid #ddd;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: 5px;
+        left: -13px;
+        display: block;
+        content: '';
+        -webkit-transform: rotate(-35deg);
+        -moz-transform: rotate(-35deg);
+        -ms-transform: rotate(-35deg);
+        -o-transform: rotate(-35deg);
+    }
+
+    .toolstarfive:after {
+        position: absolute;
+        display: block;
+        color: #ddd;
+        top: 16px;
+        left: -21px;
+        width: 0px;
+        height: 0px;
+        border-right: 20px solid transparent;
+        border-bottom: 14px solid #ddd;
+        border-left: 20px solid transparent;
+        -webkit-transform: rotate(-70deg);
+        -moz-transform: rotate(-70deg);
+        -ms-transform: rotate(-70deg);
+        -o-transform: rotate(-70deg);
+        content: '';
+    }
+
+    .toolstarfive.selected {
+        margin: 1px 4px;
+        position: relative;
+        display: block;
+        color: #888;
+        width: 0px;
+        height: 0px;
+        border-right: 20px solid transparent;
+        border-bottom: 14px solid #888;
+        border-left: 20px solid transparent;
+        -moz-transform: rotate(35deg);
+        -webkit-transform: rotate(35deg);
+        -ms-transform: rotate(35deg);
+        -o-transform: rotate(35deg);
+    }
+
+    .toolstarfive.selected:before {
+        border-bottom: 16px solid #888;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: 5px;
+        left: -13px;
+        display: block;
+        content: '';
+        -webkit-transform: rotate(-35deg);
+        -moz-transform: rotate(-35deg);
+        -ms-transform: rotate(-35deg);
+        -o-transform: rotate(-35deg);
+    }
+
+    .toolstarfive.selected:after {
+        position: absolute;
+        display: block;
+        color: #888;
+        top: 16px;
+        left: -21px;
+        width: 0px;
+        height: 0px;
+        border-right: 20px solid transparent;
+        border-bottom: 14px solid #888;
+        border-left: 20px solid transparent;
+        -webkit-transform: rotate(-70deg);
+        -moz-transform: rotate(-70deg);
+        -ms-transform: rotate(-70deg);
+        -o-transform: rotate(-70deg);
+        content: '';
+    }
+</style>
+
+<div class="inner-panel-flyout flyout-right" style="top:190px" ng-show="false">
+    <div class="inner-panel-context-box">
+        <button type="button" title="" class="btn btn-x2 btn-tool draggable-image">
+            <i class="fa fa-file-image-o"></i>
+            <span>Image</span>
+        </button>
+        <button type="button" title="" class="btn btn-x2 btn-tool draggable-video">
+            <i class="fa fa-youtube-play"></i>
+            <span>Video</span>
+        </button>
+    </div>
+</div>
+
+

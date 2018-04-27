@@ -1,0 +1,65 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<h1>Review</h1>
+<div class="row" style="margin:5em; padding:3em; background-color: lightblue;">
+  <div class="col-sm-8">
+    <h1>Scale</h1>
+    billed annually
+  </div>
+  <div class="col-sm-4"><h2>$4</h2></div>
+</div>
+<a href="./">Change plan</a>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-row">
+        <label>
+            <input type="text" id="coupon" data-stripe="coupon" placeholder="ENTER PROMO CODE">
+        </label>
+        <button onclick="codeCheck()">Apply</button>
+    </div>
+
+    <p id="filler"></p>
+  </div>
+  <div class="col-md-6">
+    SUBTOTAL $<span>20</span><br>
+    DISCOUNT $<span>0</span><br>
+    TOTAL $<span>20</span><br>
+    <a href="new" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">CONTINUE</a>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+    Stripe.setPublishableKey('pk_test_kwmQAcHmUbVvW98mhZh0wOP0');
+</script>
+
+<script>
+    function codeCheck() {
+        var price = 20
+        var code = document.getElementById("coupon").value
+        if (code == "") {
+            console.log("bad code")
+        }
+        else {
+            var oReq = new XMLHttpRequest(); //New request object
+            oReq.onload = function() {
+                //This is where you handle what to do with the response.
+                //The actual data is found on this.responseText
+                try {
+                    var invoice = JSON.parse(this.responseText);
+
+                }
+                catch(err) {
+                    document.getElementById("filler").innerHTML += "The code: \"" + code + "\" is invalid." + "<br>";
+                }
+            };
+            oReq.open("get", "plans/promo/"+code, true);
+
+            oReq.send();
+        }
+    }
+
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

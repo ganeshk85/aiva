@@ -1,0 +1,67 @@
+<div id="cta-base-management" style="display:none;">
+    
+    <cta-base-dragbar></cta-base-dragbar>
+
+
+    <div id="cta-base-options">
+            <div class="cta-base-control">
+                <select id="cta-base-size" ng-model="selected" ng-options="opt as opt.name for opt in selectOptions" ng-change="presetSizeUpdate()">
+                </select>
+            </div>
+            <div class="cta-base-control size-input">
+                <input type="text" ng-model="cta[activeCanvasSize].widthInputValue" ng-model-options="{debounce: 500}" 
+                input-with-arrows maxlength="4" style="color:#444;" />
+                <span>Width</span>
+            </div>
+            <div class="cta-base-control size-input">
+                <input type="text" ng-model="cta[activeCanvasSize].heightInputValue" ng-model-options="{debounce: 500}" 
+                input-with-arrows maxlength="4" style="color:#444;" />
+                <span>Height</span>
+            </div>
+            <div class="cta-base-control">
+                <img class="lock" />
+            </div>
+            <div class="cta-base-control">
+                <div id="cta-options-twisty">
+                    <span>Settings <span class="tri"></span></span>
+                    <div class="dropdown collapsed" style="display:none;">
+                        <div class="dropdown-row">
+                            <input id="cta-base-dim" type="checkbox" ng-model="dimBackground" />
+                            <label for="cta-base-dim">Dim page <span></span></label>
+                        </div>
+                        <div class="dropdown-row">
+                            <input id="cta-lock-scrolling" type="checkbox" ng-model="lockScrolling" />
+                            <label for="cta-lock-scrolling">Lock scrolling <span></span></label>
+                        </div>
+
+                        <div class="dropdown-row">
+                            <input id="cta-background-unclickable" type="checkbox" ng-model="backgroundUnclickable" />
+                            <label for="cta-background-unclickable">Background unclickable <span></span></label>
+                        </div>
+                        
+                        <div class="dropdown-row" ng-show="activeCanvasSize === 'sm'">
+                            <input id="cta-hide-from-mobile-users" type="checkbox" ng-model="hideFromMobileUsers" />
+                            <label for="cta-hide-from-mobile-users">Hide from mobile users <span></span></label>
+                        </div>
+                        
+                        <div class="dropdown-row" ng-show="activeCanvasSize === 'lg'">
+                            <input id="cta-hide-from-desktop-users" type="checkbox" ng-model="hideFromDesktopUsers" />
+                            <label for="cta-hide-from-desktop-users">Hide from desktop users <span></span></label>
+                        </div>
+                    </div>
+                </div>      
+                <script>
+                    document.getElementById("cta-options-twisty").addEventListener('click', function(e){
+                        if(e.target !== e.currentTarget && !$(e.target).hasClass('tri')) return;
+                        var dropDown = document.querySelector("#cta-options-twisty > .dropdown");
+                        dropDown.style.display=dropDown.style.display=="none" ? "inherit" : "none";
+                    });
+                </script>
+            </div>
+            <div class="cta-base-control">
+                <button ng-click="save()" class="btn btn-success">Save</button>
+            </div>
+            <div class="cta-base-control">
+                <button ng-click="cancel()" class="btn btn-default">Cancel</button>
+            </div>
+</div>

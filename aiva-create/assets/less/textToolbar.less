@@ -1,0 +1,162 @@
+@toolbar-background : transparent;
+@toolbar-box-background : transparent;
+@toolbar-color : #333;
+
+#text-toolbar, #video-toolbar {
+	opacity: 0.95;
+	padding: 7px;
+	background: @toolbar-background;
+	border-radius: 2px;
+	z-index: 6;
+
+	.user-select(none);
+
+	.ui-selectmenu-button {
+		background: @toolbar-box-background;
+		color: @toolbar-color;
+	}
+	.ui-selectmenu-menu {
+		background: @toolbar-box-background;
+	}
+	.ui-menu .ui-menu-item {
+		background: @toolbar-background;
+		color: @toolbar-color;
+	}
+	li.ui-state-focus {
+		background: @toolbar-box-background - rgb(80,80,80) !important ;
+		color: @toolbar-color !important;
+	}
+	.ui-menu .ui-menu-item:first {
+		padding-top: 10px;
+	}
+	.ui-menu {
+		border: 1px #bbb solid;
+		border-top: 5px;
+        height: 250px;
+	}
+	ul {
+		margin-bottom: 0px;
+	}
+
+	#icons-list {
+		display: none;
+		position: absolute;
+		margin-top: 50px;
+		height: 400px;
+		background-color: @toolbar-background;
+		padding: 5px;
+		width: 100%;
+		left: 0;
+
+		> ul {
+			max-height: 345px;
+			overflow: auto;
+		}
+
+		> input {
+			width: 100%;
+			background-color: @toolbar-box-background;
+			color: @panel-color;
+			padding: 0 15px;
+			border: none;
+			outline: none;
+			height: 35px;
+			vertical-align: middle;
+			margin-bottom: 10px;
+		}
+
+		li > i {
+			font-size: 25px;
+			width: 25px;
+			color: @toolbar-color;
+			margin: 6px;
+
+			&:hover {
+				transform: scale(1.4);
+				color: #fff;
+			}
+		}
+	}
+
+	> #toolbar-font, #toolbar-size {
+		background: @toolbar-box-background;
+		float: left;
+		height: 28px;
+        width: 60px;
+		margin-right: 5px;
+		color: @panel-color;
+		border: none;
+		outline: #F3F3F3 solid 1px;
+	}
+
+	> #link-details {
+		background: @toolbar-background;
+		padding: 45px 15px 15px;
+		display: block;
+
+		> input {
+			display: inline-block;
+			width: 43%;
+
+			&:first-of-type {
+				margin-right: 8px;
+			}
+		}
+
+		> .btn {
+			padding-top: 7px;
+			padding-bottom: 7px;
+			margin: 0 0 4px 8px;
+		}
+	}
+
+	> .toolbar-style {
+		float: left;
+		height: 30px;
+
+		> div {
+			float: left;
+			background: @toolbar-box-background;
+			width: 35px;
+			height: 100%;
+			text-align: center;
+			padding: 6px;
+			margin-right: 2px;
+			border: none;
+			color: @toolbar-color;
+			border-radius: 3px;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+			outline: none;
+			font-weight: bold;
+			font: bold 16px Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
+
+			&:hover {
+				background-color: lighten(@toolbar-box-background, 5%);
+			}
+		}
+
+		> .align-left, .wrap-link {
+			margin-left: 5.5px;
+		}
+
+		> .bold {
+			margin-left: 3px;
+		}
+
+		> .italic {
+			font-style: italic;
+		}
+
+		> .underline {
+			text-decoration: underline;
+		}
+
+		> .strike {
+			text-decoration: line-through;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}

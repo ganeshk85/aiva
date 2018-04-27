@@ -1,0 +1,49 @@
+{
+  "prefer-stable": true,
+  "require": {
+    "silex/silex": "1.3.*",
+    "illuminate/database": "5.0.*",
+    "twig/twig": "1.23.*",
+    "intervention/image": "2.*",
+    "cartalyst/sentry": "2.*",
+    "oyejorge/less.php": "1.7.*",
+    "league/flysystem": "1.0.*",
+    "monolog/monolog": ">=1.0.0",
+    "stripe/stripe-php": "4.1.1",
+
+    "symfony/validator": "2.8.*",
+    "symfony/filesystem": "2.8.*",
+    "symfony/finder": "2.8.*",
+    "symfony/dom-crawler": "2.8.*",
+    "symfony/css-selector": "2.8.*",
+    "symfony/var-dumper": "2.7.*",
+    "symfony/translation": "2.8.13",
+    "symfony/config": "2.8.*",
+    "symfony/yaml": "2.8.*",
+    "symfony/twig-bridge": "2.8.*",
+
+    "raven/raven": "^0.13.0",
+    "vlucas/phpdotenv": "^2.2",
+    "robmorgan/phinx": "^0.6.5",
+    "geoip2/geoip2" : "~2.0",
+    "firebase/php-jwt": "^4.0",
+    "electrolinux/phpquery": "^0.9.6",
+    "setasign/fpdi-tcpdf": "^1.6",
+    "tecnickcom/tc-lib-pdf-font": "^1.7",
+    "achrafsoltani/mailgunserviceprovider": "^1.0",
+    "mailgun/mailgun-php": "^2.1",
+    "php-http/curl-client": "^1.6",
+    "guzzlehttp/psr7": "^1.3"
+  },
+
+  "autoload": {
+    "psr-4": {
+       "Builder\\": "builder"
+    }
+  },
+  "require-dev": {
+    "symfony/browser-kit": "^3.1",
+    "phpunit/phpunit": "^4.8",
+    "fzaninotto/faker": "^1.6"
+  }
+}

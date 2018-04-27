@@ -1,0 +1,31 @@
+<div class="campaign-week">
+    <div class="table-responsive" style='overflow-x:auto;'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th class="column" ng-repeat="ind in indexes" ng-bind="getDayOfWeek(ind)"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(hindex,hi) in hourIntervals">
+                    <th class="hour" ng-bind='hi'></th>
+                    <th class="column" ng-repeat="ind in indexes">
+                        <div
+                            ng-show="getTotals( ind, hindex) > 0"
+                            title="{{ getSubmissions( ind, hindex ) }} of {{ getTotals( ind, hindex) }}"
+                            class="total"
+                            style='left: 6px; width:{{ (86 - 12) * getTotals( ind, hindex ) / getMaxDayTotals( ind ) }}px;'
+                        >
+                            <div ng-show="hasSubmissions(ind, hindex)" 
+                                 class="value"
+                                 style='width:{{ (86 - 12) * getSubmissions(ind, hindex) / getMaxDayTotals( ind ) }}px;'>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

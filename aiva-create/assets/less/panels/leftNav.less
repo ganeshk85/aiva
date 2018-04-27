@@ -1,0 +1,165 @@
+.left-nav {
+    position: fixed;
+    left: 0px;
+    top: 59px;
+    width: 178px;
+    background: #191f2a;
+
+    h3 {
+        font-weight: 700;
+        padding-left: 28px;
+        margin: 37px 0 18px 0;
+        color: #ededed !important;
+        font-size: 16px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0px;
+
+        li {
+            a {
+                text-decoration: none !important;  
+                display: block;
+                line-height: 40px;
+                font-size: 14px;
+                color: #fcfcfc;
+                font-weight: 300 !important;
+                padding-left: 50px;
+                position: relative;
+                
+                background: transparent;
+                background-repeat: no-repeat;
+                background-position: 18px center;
+                background-size: 13%;
+                
+                border-left: 8px transparent solid;
+                border-right: 0px;
+                z-index: 1;
+            }
+
+            a:hover {
+                background-color: #323b4c;
+            }
+            a.active {
+                background-color: #323b4c;
+                border-left: 8px #1ab644 solid;
+            }
+
+            a.active::after {
+                content: " ";
+                background: transparent url("../images/nav/menu-active-ptr.png") no-repeat 0px 0px;
+                background-size: cover;
+                width: 16px;
+                height: 40px;
+                position: absolute;
+                z-index: 10;
+                left: 168px;
+                top: 0;
+            }
+        }
+    }
+
+    hr {
+        background: #4f545e;
+        border: 0px;
+        height: 1px;
+    }
+    
+    
+    a.analytics {
+        background-image: url("../images/icons-green/analytics.png");
+    }
+    a.analytics.active {
+        background-image: url("../images/icons-green/analytics-active.png");
+    }
+
+    a.campaigns {
+        background-image: url("../images/icons-green/campaigns.png");
+    }
+    a.campaigns.active {
+        background-image: url("../images/icons-green/campaigns-active.png");
+    }
+    
+    a.settings {
+        background-image: url("../images/icons-green/settings.png");
+    }
+    a.settings.active {
+        background-image: url("../images/icons-green/settings-active.png");
+    }
+
+    a.support {
+        background-image: url("../images/icons-green/support.png");
+    }
+    a.support.active {
+        background-image: url("../images/icons-green/support-active.png");
+    }
+    a.emails {
+        background-image: url("../images/icons-green/emails.png");
+    }
+    a.emails.active {
+        background-image: url("../images/icons-green/emails-active.png");
+    }
+    a.traffic {
+        background-image: url("../images/icons-green/traffic.png");
+    }
+    a.traffic.active {
+        background-image: url("../images/icons-green/traffic-active.png");
+    }
+
+    a.integrations {
+        background-image: url("../images/icons-green/integrations.png");
+    }
+    a.integrations.active {
+        background-image: url("../images/icons-green/integrations-active.png");
+    }
+}
+
+.container-gradient {
+    background-color: #fcfcfc;
+    background: linear-gradient(45deg, #FFFFFF 0%, #F8F8F8 100%) !important;
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+section.document {
+    width: 100%;
+    position: relative;
+    top: 0 !important;
+    left: 0 !important;
+    margin-top: 60px;
+    padding-left: 178px;
+    overflow: auto;
+    
+    font-weight: 300;
+    color: #666;
+       
+    .inner-container {
+        padding: 0px 0px !important;
+        background-color: #fcfcfc;
+    }
+   
+    .inner-container.spaced, .spaced {
+        padding: 20px 36px !important;
+        padding-right: 20px !important;
+    }
+    .inner-container.data-spaced, .data-spaced {
+        padding: 38px 20px 20px 20px !important;
+        background: #fcfcfc;
+    }
+    
+    a {
+        color: #666;
+    }
+    
+    a:hover, a:active {
+        text-decoration: none;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: Roboto,Noto,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    }
+    h1 {
+        font-size: 28px;
+        margin-top: 0px;
+    }
+}

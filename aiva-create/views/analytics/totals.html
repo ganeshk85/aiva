@@ -1,0 +1,65 @@
+<div class='campaign-totals'>
+    <table>
+        <tbody>
+            <tr>
+                <td style='padding-right:20px;padding-top:10px; width: 52px;'>
+                    <img ng-show="period.objective === 'Submissions'" src='assets/images/analytics/envelope.png' style='width:51px' alt='' />
+                    <img ng-show="period.objective === 'Clicks'" src='assets/images/analytics/target.png' style='width:51px' alt='' />
+                </td>
+                <td>
+                    <div class="value value-big" 
+                         ng-bind="period.submissions"
+                         style='font-size:40px; font-weight:bold;'
+                    >
+                    </div>
+                </td>
+                <td style='padding-left:20px; padding-bottom: 7px; vertical-align:bottom;'>
+                    <div ng-show="previous.submissions < period.submissions">
+                        <img src='assets/images/analytics/up.png' style='width: 12px;' alt='Growth' />
+                        <span 
+                            title="Previously: {{previous.submissions}}" 
+                            style='font-size: 24px; font-weight: bold; color: #00c300'
+                        >
+                            <span ng-bind="previous.submissions === 0 ? 100 : ((period.submissions - previous.submissions)* 100 / previous.submissions ).toFixed(2)"></span>%
+                        </span>
+                    </div>
+                    <div ng-show="previous.submissions > period.submissions">
+                        <img src='assets/images/analytics/down.png' style='width: 12px;' alt='Growth' />
+                        <span 
+                            title="Previously: {{previous.submissions}}" 
+                            style='font-size: 24px; font-weight: bold; color: #c42e00'
+                        >
+                            <span ng-bind="previous.submissions === 0 ? 100 : ((previous.submissions - period.submissions) * 100 / previous.submissions ).toFixed(2)"></span>%
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan='2'>
+                    <a ng-show="period.objective === 'Submissions'" href="#/emails/{{name}}">
+                        <span>Emails submitted</span>
+                        <img src='assets/images/analytics/small-plus.png' style='width: 12px;' alt='' />
+                    </a>
+                    <a ng-show="period.objective === 'Clicks'"  href="#/urls/{{name}}">
+                        <span>URLS clicked</span>
+                        <img src='assets/images/analytics/small-plus.png' style='width: 12px;' alt='' />
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+   <div class="canvas">
+        <div
+            chart-lines
+            colors="chart.colors"
+            names="chart.names"
+            x="chart.x"
+            y="chart.y"
+            series="chart.series"
+            values="chart.values"
+        ></div>
+   </div>
+    
+</div>

@@ -1,0 +1,43 @@
+<div top-navigation title="Please select campaign"></div>
+
+<section class="document">
+    <div left-navigation></div>
+    
+    <div class="inner-container" style="background: #f8f8f8; height: {{ innerHeight - 60 }}px">
+
+        <div class="campaign-selector">
+            <div class="header">
+                <h1>Select A Campaign</h1>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-click="sortByName()">
+                            Name
+                            <i ng-if="sortOrder[0] === 'name'" class="fa fa-chevron-up"></i>
+                            <i ng-if="sortOrder[0] === '-name'" class="fa fa-chevron-down"></i>
+                        </th>
+                        <th ng-click="sortByClient()">
+                            Client
+                            <i ng-if="sortOrder[0] === 'client'" class="fa fa-chevron-up"></i>
+                            <i ng-if="sortOrder[0] === '-client'" class="fa fa-chevron-down"></i>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in campaigns | orderBy: sortOrder" ng-click="select(row)">
+                        <td style="width:30px"></td>
+                        <td ng-bind="row.name"></td>
+                        <td ng-bind="row.client"></td>
+                        <td style="width:30px">
+                            <i class="fa fa-chevron-right"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</section>

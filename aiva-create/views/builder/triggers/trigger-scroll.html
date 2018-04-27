@@ -1,0 +1,81 @@
+<div id="trigger-scroll" class="timing-trigger" ng-class="{'trigger-disabled' : !triggerObj.enabled}">
+
+    <div class="trigger-block" ng-show="selectedValue">
+        <div class="selected-trigger-content">
+            <div class="details-label">Trigger Details</div>
+            
+            <div class="details">
+                <label>
+                    Display when the user scrolls past 
+                    <input type="text" small-input-with-arrows name="scroll" ng-model="inputValue" />% 
+                    of the page
+                </label>
+            </div>
+                            
+<!--                
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue"  value="bottom" enabled="true">
+                    </span>
+                </div>
+                <label>
+                    Display when scrolling to the bottom of the page
+                </label>
+            </div>
+
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue"  value="section" enabled="true">
+                    </span>
+                </div>
+                <label>
+                    Display when to designated section of the page
+                </label>
+            </div>
+
+            <div class="choose-selection">
+                <a href='javascript:void(0)'>Choose Selection</a>
+            </div>
+            <div class="details">
+                <div class="input-wrapper">
+                    <span custom-radio-group group="triggerValue" model="triggerTimeValue"  value="re-scrolling" enabled="true">
+                    </span>
+                </div>
+                <label>
+                    Reopen overlay when re-scrolling to area
+                </label>
+            </div>
+-->                
+        </div>
+    </div>
+    
+    
+    <div class="trigger-block" ng-show="!selectedValue">
+        <div 
+            class="picture"
+            ng-click="select()"
+            ng-if="triggerObj.background_uri"
+            style="width: {{triggerObj.width}}px; height: {{triggerObj.height}}px; background:url({{triggerObj.background_uri}}) no-repeat {{triggerObj.background_position}}" 
+        >
+        </div>         
+    </div>
+    
+    <div class="select-trigger">
+        <div class="input-wrapper">
+            <span
+                custom-radio 
+                click="select"
+                name="name"
+                enabled="triggerObj.enabled"
+                value="selectedValue"
+            >
+            </span>
+        </div>
+        
+        <label ng-click="select()">
+            <span class="trigger-title" ng-bind="triggerObj.name"></span><br />
+            <span class="trigger-description" ng-bind="triggerObj.description"></span>
+        </label>
+    </div>
+    
+</div>

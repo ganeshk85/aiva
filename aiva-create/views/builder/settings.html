@@ -1,0 +1,21 @@
+<div class="categories" bl-panels-accordion>
+    <div class="accordion-item" ng-repeat="(category, categorySettings) in settings.all" ng-class="{ open: category === 'autoSave' }">
+        <div class="accordion-heading">{{:: category | translate }} <i class="icon icon-down-open-1"></i></div>
+        <div class="accordion-body">
+            <div class="settings-container">
+                <div class="form-group setting" ng-repeat="setting in categorySettings">
+                    <div class="with-toggle" ng-if="isBoolean(setting.value)">
+                        <div class="label">{{ setting.name.toTitleCase() }}:</div>
+                        <div class="toggle toggle-light" data-name="{{setting.name}}" bl-settings-toggler="{{setting.value ? 'on' : 'off'}}"></div>
+                        <p>{{ setting.description }}</p>
+                    </div>
+                    <div class="with-input" ng-if="!isBoolean(setting.value)">
+                        <div class="label">{{ setting.name.toTitleCase() }}:</div>
+                        <input type="text" class="form-control" ng-model="setting.value">
+                        <p>{{ setting.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+<div class="backdrop" ng-click="hideContextMenu()" ng-show="isContextMenuVisible"></div>
+<div top-navigation title="Campaigns"></div>
+<div aiva-single-color-picker></div>
+
+<section class="document" id="dashboard-container">
+
+    <div left-navigation></div>
+
+    <div class="inner-container spaced" style="height: {{ innerHeight - 60 }}px">
+
+        <div class="top-toolbar clearfix" style="margin-bottom: 5px">
+
+            <div style="float:right" class="form">
+
+                <div class="form-inline">
+
+                    <div class="btn-group btn-group-mode">
+                        <a
+                            class="btn btn-first-in-group btn-mode-list"
+                            ng-class="filter.viewMode === 'list' ? 'btn-success' : 'btn-default'"
+                            href="#/campaigns/{{filter.status}}/list"
+                        >
+                        </a>
+                        <a
+                            class="btn btn-last-in-group btn-mode-table"
+                            ng-class="filter.viewMode === 'table' ? 'btn-success' : 'btn-default'"
+                            href="#/campaigns/{{filter.status}}/table"
+                        >
+                        </a>
+                    </div>
+                    &nbsp; &nbsp;
+                    <a href="#/campaigns/new" class="btn btn-success" style="padding-left: 20px; padding-right: 20px;">
+                        <img src="assets/images/campaigns/btn-icon-plus.png" alt="" />
+                        &nbsp; &nbsp;
+                        Create Campaign
+                    </a>
+                    <button type="button" ng-click="export()" class="btn btn-success" style="padding-left: 20px; padding-right: 20px;" ng-if="$root.user.is_pro">
+                        <img src="assets/images/campaigns/btn-icon-report.png" alt="" />
+                        &nbsp; &nbsp;
+                        Create Report
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-inline left-side">
+                <h1>
+                    Campaigns
+                </h1>
+
+                <select class="form-control" ng-model="filter.status">
+                    <option value="all">All Campaigns</option>
+                    <option value="active">Active Campaigns</option>
+                    <option value="inactive">Inactive Campaigns</option>
+                </select>
+
+                <select class="form-control" ng-model="filter.sort">
+                    <option value="updated">Earliest Go First</option>
+                    <option value="updated_desc">Recent Go First</option>
+                    <option value="name">By Names A-Z</option>
+                    <option value="name_desc">By Names Z-A</option>
+                    <option value="status">Active Go First</option>
+                    <option value="status_desc">Inactive Go First</option>
+                </select>
+
+                <input
+                    class="form-control" ng-model="filter.query" style="width: 200px"
+                    placeholder="Type Name To Filter..."
+                    />
+            </div>
+        </div>
+
+        <div class='clearfix'></div>
+
+        <div class="table-responsive" style="overflow-x: auto; width: 100%"
+                ng-show="filter.viewMode === 'list'">
+            <div class="form" style="min-width: 1030px;">
+                <div class="table" style="margin-top:30px">
+                    <div class="table-header clearfix">
+                        <div class="column column-name first-column" style="padding-left: 30px;">Name</div>
+                        <div class="column column-submissions">Submissions</div>
+                        <div class="column column-last-updated">Last Updated</div>
+                        <div class="column column-client">Client</div>
+                    </div>
+                    <div
+                        class="table-row clearfix" ng-repeat="campaign in campaigns | filter : isVisible | orderBy : comparator">
+
+                        <div class="column column-name first-column">
+                            <button
+                                bl-open-in-builder="{{ campaign.name }}"
+                                class="btn btn-row btn-default"
+                                style="width:100%; padding-left: 10px; text-align:left; font-weight:bold"
+                                ng-bind="campaign.name"
+                                >
+                            </button>
+                        </div>
+                        <div class="column column-submissions">
+                            <div>
+
+                                <strong>{{submissionNumber(campaign)}}</strong>
+                                <span ng-bind="submissionLabel(campaign)"></span>
+
+                            </div>
+                        </div>
+                        <div class="column column-last-updated" ng-bind="formatTime(campaign.updated_at)"></div>
+                        <div class="column column-client" ng-bind="campaign.client"></div>
+                        <div class="column column-pulse">
+                            <button class="btn btn-row btn-default">
+                                <div campaign-health-chart data="health[campaign.name.toLowerCase()]"></div>
+                            </button>
+                        </div>
+                        <div class="column column-space10"></div>
+                        <div class="column column-wide-icon">
+                            <button class="btn btn-row btn-default">
+                                <img src="assets/images/campaigns/icon-ab.png" style="width:60%" alt="A/B Tests" />
+                            </button>
+                        </div>
+                        <div class="column column-icon">
+                            <button ng-click="analytics(campaign)" class="btn btn-row btn-default">
+                                <img src="assets/images/campaigns/icon-charts.png" style="width:60%" alt="Analytics" />
+                            </button>
+                        </div>
+                        <div class="column column-wide-icon">
+                            <div campaign-context-menu mode='list' campaign="campaign"></div>
+                        </div>
+                        <div class="column column-space20" column-stretcher></div>
+                        <div class="column column-switch last-column">
+                            <img
+                                ng-click="togglePublished(campaign)"
+                                title="{{ isPublished(campaign) ? 'Deactivate' : 'Activate' }}"
+                                ng-src="assets/images/campaigns/switcher-{{ isPublished(campaign) ? 'on' : 'off'}}.png"
+                                style="width:80%; cursor: pointer;" alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="filter.viewMode === 'json'">
+            <pre ng-bind="campaigns | filter : isVisible | orderBy : comparator | json"></pre>
+        </div>
+
+            <div ng-show="!dataLoading && filter.viewMode === 'table'" style="margin-top:20px; padding-bottom: 200px">
+            <div
+                class="campaignContainer"
+                ng-cloak
+                masonry  style="margin: 0px auto;"
+                preserve-order='true'
+                reload-on-resize
+                load-images="false"
+                masonry-options="{ resize: true, isFitWidth: false, stamp: '.masonry-stamp', itemSelector: '.masonry-brick', columnWidth: 255, gutter: 20, transitionDuration: 0 }"
+            >
+                <div class="masonry-stamp templatesMasonry" >
+                    <a href="#/campaigns/new">
+                        <img src="assets/images/campaigns/new-campaign-tile.png" alt="new campaign" style="width: 255px; height: auto;" />
+                    </a>
+                </div>
+                <div ng-repeat="campaign in campaigns | filter : isVisible | orderBy : comparator"
+                    class="masonry-brick templatesMasonry" masonry-brick
+                    ng-class="isPublished(campaign) ? 'cta-active' : 'cta-inactive'"
+                    >
+                    <div class="header">
+                        <div style="float:right">
+                            <div campaign-health-chart data="health[campaign.name.toLowerCase()]"></div>
+                        </div>
+                        <div class="form-inline" style="margin:5px 0px;">
+                            <strong>{{submissionNumber(campaign)}}</strong>
+                            <span ng-bind="submissionLabel(campaign)"></span>
+                        </div>
+                    </div>
+                    <div class="inner" bl-open-in-builder="{{ campaign.name }}">
+                        <img
+                            style="width:255px; height: 159px"
+                            ng-src="assets/images/projects/project-{{campaign.id}}.png?{{campaign.updated_at}}"
+                        />
+                    </div>
+                    <div class="footer clearfix">
+                        <div class="name">
+                            <h3>{{ campaign.name }}</h3>
+                            <div class="updated">{{:: 'updated' | translate }}: {{ formatTime(campaign.updated_at) }}</div>
+                        </div>
+                        <div campaign-context-menu campaign="campaign"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="no-campaigns" ng-if="!dataLoading && !campaigns.length" class="text-center form">
+        <h3>{{ 'noProjects' | translate }}</h3>
+        <a href="#/new" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            {{ 'createOneNow' | translate }}
+        </a>
+    </div>
+
+
+</section>
+<div id="aiva-color-picker-overlay" aiva-color-picker-overlay></div>

@@ -1,0 +1,10 @@
+<div style="position:relative" class="wrap">
+    <div class="campaign-healthinfo"> 
+        <div class="day clearfix" ng-repeat="(dt, val) in data">
+            <div class="date" ng-bind="val.dt"></div>
+            <div class="total" ng-bind="'Visits: ' + val.total"></div>
+            <div class="success" ng-bind="'Success: ' + val.success"></div>
+            <div class="ratio" ng-bind="'Ratio: ' + getRatio(val) + '%'"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div top-navigation title='{{ title }}'></div>
+
+<section class="document" id="dashboard-container">
+    
+    <div left-navigation></div>
+
+    <div class="inner-container" style="height: {{ innerHeight - 60 }}px">
+        
+        <div class="back-tab" ng-show="clientName !== 'Default'">
+            <a href="#/integrations">
+                <i class="fa fa-chevron-left"></i>
+                View Another Client
+            </a>
+        </div>
+        
+        <div class="spaced">
+            <h1 ng-bind="title"></h1>
+            <p>
+                Quisque non convallis massa, sed cursus risus. Sed at augue efficitur, maximus sapien vel, bibendum sem. Ut felis sapien, tempus vel malesuada semper, mollis eget ipsum. Aenean non purus posuere turpis laoreet volutpat quis et sapien. Sed mattis neque ac metus pharetra elementum. Vivamus ut elementum sapien, ac volutpat ligula. In hac habitasse platea dictumst.
+            </p>
+        </div>
+        <div 
+              ng-cloak 
+              masonry  
+              style="margin: 0px auto; margin-top:20px;"
+              preserve-order='true'
+              load-images="false"
+              masonry-options="masonryOptions"
+              >
+
+          <div 
+              ng-repeat="service in arrIntegrations" 
+              class="masonry-wide-brick" 
+              ng-class="service.locked ? 'disabled' : ''"
+              masonry-brick
+          >
+              <div class="corner" ng-show="!service.locked">
+                  <img 
+                      style="cursor:pointer" ng-click="toggle(service)" 
+                      ng-show="isEnabled(service)" 
+                      src="assets/images/integrations/on.png" alt="" 
+                  />
+                  <img 
+                      style="cursor:pointer" ng-click="select(service)" 
+                      ng-click="toggle(service)" 
+                      ng-show="!isEnabled(service)" 
+                      src="assets/images/integrations/off.png" alt="" 
+                  />
+              </div>
+              
+              <div class="left">
+                  <img ng-src={{service.image}} alt=""  style="width: 100%" />
+              </div>
+              <div class="right form">
+                  
+                  <div ng-if="!service.locked">
+                    <button ng-click="select(service)" class="btn btn-default" ng-show="isEnabled(service)">
+                        Manage 
+                    </button>
+                    <button ng-click="select(service)" class="btn btn-success" ng-show="!isEnabled(service)">
+                        Integrate 
+                    </button>
+                  </div>
+                  <div ng-if="service.locked">
+                    <button disabled ng-click="select(service)" class="btn btn-default" ng-show="isEnabled(service)">
+                        Manage 
+                    </button>
+                    <button disabled class="btn btn-default" ng-show="!isEnabled(service)">
+                        Integrate 
+                    </button>
+                  </div>
+              </div>
+          </div>
+        </div>
+        
+    </div>
+</section>       

@@ -1,0 +1,334 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+.aiva-color-picker-overlay {
+    position: fixed; 
+    display: none;
+    z-index: 1999; 
+    border: none; 
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.aiva-color-picker-slider {
+    cursor: pointer;
+}
+
+@shadowOfTheMenu: 0px 0px 10px #ccc;
+@backgroundOfTheMenu: #fff;
+
+.aiva-color-picker {
+    position:fixed; 
+    z-index:2000; 
+    border: none; 
+    background: transparent; 
+    top: 200px; 
+    left: 160px;
+    width: 940px / 2;
+    height: 580px / 2;
+    
+    .tab {
+        border: 0;
+        margin: 0px;
+        height: 33px;
+        line-height: 33px;
+        background: #eeeeee;
+        text-align: center;
+        font-size: 12px;
+        width: 125px;
+        border: 1px #eeeeee solid;
+        position: relative;
+        
+        &:focus, &.active {
+            outline: none;
+        }
+        
+        &.active {
+            background: #fafafa;
+            border-bottom: 1px transparent solid;
+            border-left: 1px #eeeeee solid;
+            border-right: 1px #eeeeee solid;
+            border-top: 1px #eeeeee solid;
+        }
+        
+        .tab-color {
+            position: absolute;
+            left: 3px;
+            top: 6px;
+            width: 20px;
+            height: 20px;
+            border: 1px #8a8a8a solid;
+            border-radius: 10px;
+        }
+    }
+    
+    .body {
+        margin-top: -1px;
+        background: #fafafa;
+        width: 100%;
+        height: 260px;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        position: relative;
+          
+        button {
+            &:hover, &:active, &:focus { outline: none !important; }
+        }
+        .btn-plus-menu {
+            border: none;
+            background: url(../images/background/btn-plus-closed.png) 0px 0px no-repeat;
+            background-size: 100%;
+            width: 20px;
+            height: 21px;
+        }
+        .btn-plus-menu.open {
+            background: @backgroundOfTheMenu url(../images/background/btn-plus.png) 0px 0px no-repeat;
+            background-size: 100%;
+            box-shadow: @shadowOfTheMenu;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .add-menu-overlap {
+            background: @backgroundOfTheMenu;// #fafafa;
+            border: none;
+            position: absolute; 
+            z-index: 2;
+            top: 37px; 
+            left: 195px; 
+            width: 20px;
+            height: 8px;
+        }
+        .add-menu {
+            border: none;
+            position: absolute; 
+            z-index: 1;
+            background: @backgroundOfTheMenu;// #fafafa;
+            top: 44px; 
+            left: 80px; 
+            width: 135px;
+            padding: 2px 0px;
+            box-shadow: @shadowOfTheMenu;
+            button {
+                border: none;
+                background: transparent;
+                display: block; 
+                width: 100%;
+                color: #666; padding: 0px 6px; 
+                line-height: 24px; 
+                height: 24px;
+                white-space: nowrap;
+                text-decoration: none;
+                font-size: 10px;
+                &:hover { background: #eee; text-decoration: none;}        
+            }
+        }
+        
+        .hex-editor {
+            position: absolute;
+            top: 20px;
+            left: 108px;
+            height: 22px;
+            font-size: 11px;
+            color: #999999;
+            
+            label {
+                display: block;
+                float: left;
+                width: 25px;
+                height: 22px;
+                line-height: 22px;
+            }
+            
+            input, .input { 
+                border-radius: 16px; 
+                float: left;
+                width: 62px;
+                height: 22px;
+                line-height: 22px;
+                font-size: 11px;
+                background-color: white;
+                border: 1px #eeeeee solid;
+                text-align: center;
+                color: #999999;
+                &:active, &:focus { outline: none; }
+            }
+        }
+        
+        .big-color-circle {
+            position: absolute;
+            left: 14px;
+            top: 17px;
+            width: 28px;
+            height: 28px;
+            border: 1px #8a8a8a solid;
+            border-radius: 20px;
+        }
+        
+        .small-color-circles {
+            position: absolute;
+            left: 50px;
+            top: 17px + 6px;
+            .circle {
+                position: absolute;
+                top: 0px;
+                border: 1px #8a8a8a solid;
+                border-radius: 8px;
+                width: 16px;
+                height: 16px;
+                background: #fafafa;
+                cursor: pointer;
+            }
+            
+            .circle-1 { left: -5px; z-index: 10;}
+            .circle-2 { left: 11px-5px; z-index: 9; }
+            .circle-3 { left: 2*11px-5px; z-index: 8; }
+            .circle-4 { left: 3*11px-5px; z-index: 7; }
+        }
+        
+        .rgba-editor {
+            position: absolute;
+            left: 14px;
+            top: 56px;
+            width: 202px;
+            height: 66px;
+            border-bottom: 1px #eeeeee solid;
+            .rgba-row {
+                position: relative;
+                height: 15px;
+                line-height: 15px;
+                color: #999;
+                .letter { font-size: 12px; margin-right: 0px;}
+                .value{ 
+                    font-size: 10px; 
+                    text-align: center; 
+                    max-width: 18px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    overflow: hidden 
+                }
+                .slider { 
+                    position: absolute; left: 32px; top: 3px; width: 172px; height: 8px; background: #eee; 
+                    
+                    .pointer {
+                        position: absolute;
+                        border: 1px #8a8a8a solid;
+                        height: 12px;
+                        top: -2px;
+                        width: 4px;
+                        margin-left: -2px;
+                        background: #fff;
+                        box-shadow: 1px 1px 3px #8a8a8a;
+                        cursor: pointer;
+                    }
+                } 
+            }
+        }
+        
+        .hue-editor {
+            position: absolute;
+            left: 14px;
+            width: 205px;
+            top: 133px;
+            height: 16px;
+            background: url(../images/hue.png) 0px 0px repeat-y;
+            background-size: 100%;
+            
+            .pointer {
+                position: absolute;
+                height: 20px;
+                top: -2px;
+                width: 4px;
+                margin-left: -2px;
+                border: 1px #8a8a8a solid;
+                background: #fff;
+                box-shadow: 1px 1px 3px #8a8a8a;
+                cursor: pointer;
+            }
+        }
+        
+        .sl-editor {
+            position: absolute;
+            left: 14px;
+            width: 205px;
+            top: 160px;
+            height: 90px;
+            background: #eeeeee;
+            
+            .inner {
+                background:  
+                    linear-gradient(180deg, transparent, #000000),
+                    radial-gradient(circle at top left, #ffffff, transparent)
+                ;
+                width: 205px; height: 90px;
+                top: 0px; left: 0px;
+                cursor: pointer;
+            }
+            
+            .pointer {
+                position: absolute;
+                border: 1px #fff solid;
+                box-shadow: 1px 1px 2px #8a8a8a;
+                    
+                height: 10px;
+                width: 10px;
+                border-radius: 5px;
+                margin-bottom: -5px;
+                margin-left: -5px;
+                background: transparent;
+            }
+            
+        }
+        
+        .color-cell {
+            width: 17px;
+            height: 17px;
+            float: left;
+            margin-left: 4px;
+            margin-bottom: 4px;
+            border: 1px #8a8a8a solid;
+            cursor: pointer;
+            position: relative;
+            &.active {
+                border: 2px #000 dashed;
+            }
+        }
+        .menu-item-dropdown {
+            position: absolute;
+            z-index: 1;
+            top: 20px;
+            left: 0px;
+            width: 120px;
+            box-shadow: @shadowOfTheMenu;
+            background: @backgroundOfTheMenu;
+            padding: 2px 0px;
+            button {
+                border: none;
+                background: transparent;
+                display: block; 
+                width: 100%;
+                color: #666; padding: 0px 6px; 
+                line-height: 24px; 
+                height: 24px;
+                white-space: nowrap;
+                text-decoration: none;
+                font-size: 10px;
+                text-align: left;
+                &:hover { background: #eee; text-decoration: none;}        
+            }
+
+        }
+        
+    }
+}

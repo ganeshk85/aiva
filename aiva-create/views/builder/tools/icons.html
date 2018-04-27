@@ -1,0 +1,42 @@
+<!--<div class="icon-search">
+    <input type="text" placeholder="Search icons..." disabled ng-model="iconSearch" style="width: 340px;">
+    <i class="fa fa-search"></i>
+</div>-->
+
+<div class="aiva-element-container" ng-repeat="icon in icons">
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[0].id)">
+        <i class="fa fa-{{icon[0].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[1].id)">
+        <i class="fa fa-{{icon[1].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[2].id)">
+        <i class="fa fa-{{icon[2].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[3].id)">
+        <i class="fa fa-{{icon[3].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[4].id)">
+        <i class="fa fa-{{icon[4].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[5].id)">
+        <i class="fa fa-{{icon[5].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[6].id)">
+        <i class="fa fa-{{icon[6].id}}"></i>
+    </div>
+
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[7].id)">
+        <i class="fa fa-{{icon[7].id}}"></i>
+    </div>
+    <div class="aiva-element-item" ng-click="aivaElementSelected($event, 'icon', icon[8].id)">
+        <i class="fa fa-{{icon[8].id}}"></i>
+    </div>
+</div>
+

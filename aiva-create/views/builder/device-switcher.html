@@ -1,0 +1,13 @@
+<div class="device-switcher" ng-show="devicesPanelOpen">
+    <div class="devices">
+        <button ng-class="{ active: activeCanvasSize === 'xs' }" ng-click="resizeCanvas('xs')"><i class="icon icon-mobile"></i></button>
+        <button ng-class="{ active: activeCanvasSize === 'sm' }" ng-click="resizeCanvas('sm')"><i class="icon icon-tablet-1"></i></button>
+        <button ng-class="{ active: activeCanvasSize === 'md' }" ng-click="resizeCanvas('md')"><i class="icon icon-laptop"></i></button>
+        <button ng-class="{ active: activeCanvasSize === 'lg' }" ng-click="resizeCanvas('lg')"><i class="icon icon-desktop"></i></button>
+    </div>
+    <div class="current-device">
+        <i class="icon icon-desktop"></i>
+        <div class="name">{{ activeCanvasSize | translate }}</div>
+        <div class="size">{{ activeCanvasSize+'Size' | translate }}</div>
+    </div>
+</div>

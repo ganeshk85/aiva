@@ -1,0 +1,47 @@
+<div top-navigation title="Tracking Settings"></div>
+<section class="document">
+    <div left-navigation></div>
+    
+    <div class="inner-container">
+        <div settings-navigation></div>
+        <div class="settings-container" style="height: {{innerHeight}}px">
+            <h1>Tracking Settings</h1>
+            
+            <div class="form form-limited" style="width: 620px">
+                <h4>Tracker Code</h4>
+                <p>Copy paste the code below into the head of the webpage you want Aiva installed. For help contact support@aivalabs.com</p>
+                    
+                <div ng-if="identity">
+                    <div class="form form-inline" style="margin-top:30px; margin-bottom: 30px">
+                        <textarea 
+                            id="codearea" class="form-control no-resize" rows="3" 
+                            readonly
+                            ng-model="code"
+                        >
+                        </textarea>
+                        <button 
+                            ng-click="copy()"
+                            class="btn btn-success btn-copy"
+                            style="padding-left: 40px; padding-right: 40px;"
+                        >
+                            Copy
+                        </button>
+                    </div>
+
+                    <h4>Tracker Status</h4>
+
+                    <div ng-if="statusOk" class="status-row">
+                        <div class="status-icon status-icon-ok"></div>
+                        <label>
+                            Your tracker is active.
+                        .</label>
+                    </div>
+                    <div ng-if="!statusOk" class="status-row">
+                        <div class="status-icon status-icon-fail"></div>
+                        <label>Your tracker is inactive.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>       

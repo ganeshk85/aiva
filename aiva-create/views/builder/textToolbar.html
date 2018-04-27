@@ -1,0 +1,44 @@
+<div class="button-group">
+    
+    <div class="group-row select-row">
+        <div class="clearfix" style="height:32px;padding-right:5px">
+            <div dropdown-font-family ng-model="fontFamily.value" fonts="textStyles.baseFonts"></div>
+        </div>
+    </div>
+
+    <div class="group-row text-row" style="margin-top: 0px">
+        <div class="toolbar-size-wrapper">
+            <div class="clearfix" style="height:32px;">
+                <div dropdown-font-size family="fontFamily.value"  ng-model="fontSize.value" sizes="textStyles.fontSizes"></div> 
+            </div>
+        </div>
+        <div class="style-control btn-tool color-picker-trigger" data-controls="textColor.value" style="font-weight: bold" ng-click="open()">
+            A
+            <div class="clr" style="background-color:{{colors.text ? colors.text : '#666'}}; top: 21px;"></div>
+        </div>
+    </div>
+        
+    <div class="toolbar-style group-row text-row">
+        <div data-name="bold" class="style-control" ng-click="updateTextStyleProperty('fontWeight', 'bold')" 
+             ng-class="fontWeight.value == 'bold' ? 'active' : ''">B</div>
+        <div data-name="italic" class="style-control" ng-click="updateTextStyleProperty('fontStyle', 'italic')"
+             ng-class="fontStyle.value == 'italic' ? 'active' : ''">I</div>
+        <div data-name="underline" class="style-control"  ng-click="updateTextStyleProperty('textDecoration', 'underline')"
+             ng-class="textDecoration.value == 'underline' ? 'active' : ''">U</div>
+    </div>
+    
+    <div class="toolbar-style group-row text-row">
+        
+        <div data-name="align-left" class="style-control" ng-click="updateTextAlignmentProperty('left')" ng-class="alignment.value === 'left' ? 'active' : ''">
+            <i class="icon icon-align-left"></i>
+        </div>
+        
+        <div data-name="align-center" class="style-control" ng-click="updateTextAlignmentProperty('center')" ng-class="alignment.value === 'center' ? 'active' : ''">
+            <i class="icon icon-align-center"></i>
+        </div>
+        <div data-name="align-right" class="style-control" ng-click="updateTextAlignmentProperty('right')" ng-class="alignment.value === 'right' ? 'active' : ''">
+            <i class="icon icon-align-right"></i>
+        </div>
+    </div>
+    
+</div>

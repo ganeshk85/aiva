@@ -1,0 +1,104 @@
+.context-menu-holder {
+    position: absolute;
+    ul.context-menu {
+        top: 0px;
+        right: -80px;
+    }
+}
+
+ul.context-menu {
+    position: absolute;
+    z-index: 201;
+    top: 10px;
+    right: 0px;
+    
+    background: #191f2a;
+    color: #bcbdbf;
+    border: none;
+    list-style: none;
+    width: 210px;
+    margin-right: 10px;
+    
+    padding: 3px 0 3px 0;
+    border-radius: 5px;
+    
+    .context-header {
+        line-height: 30px;
+        height: 30px;
+        border-bottom: 1px #444954 solid;
+        position: relative;
+        text-align:left;
+
+        button.top-right {
+            border: 0px;
+            background: transparent;
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            color: #a5a8ad;
+            &:focus, &:active { outline: none; }
+        }
+
+        span {
+            display: block;
+            line-height: 30px;
+            height: 30px;
+
+            padding-left: 13px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #f0f0f0;
+            text-transform: uppercase;
+        }
+    }
+
+    li {
+        a {
+            display: block;
+            line-height: 35px;
+            background-origin: content-box;
+            background-size: 12%;
+            background-repeat: no-repeat;
+            background-position: left;
+            color: #fcfcfc;
+            padding-left: 12px;
+            text-indent: 32px;
+            overflow: hidden;
+            border-left: 8px transparent solid;
+            text-align:left;
+        }
+
+        a.edit {
+            background-image: url("../images/context-green/edit.png");
+        }
+        a.duplicate {
+            background-image: url("../images/context-green/duplicate.png");
+        }
+        a.createTemplate {
+            background-image: url("../images/context-green/createTemplate.png");
+        }
+        a.analytics {
+            background-image: url("../images/context-green/analytics.png");
+        }
+        a.emails {
+            background-image: url("../images/context-green/emails.png");
+        }
+        a.activate {
+            background-image: url("../images/context-green/activate.png");
+        }
+        a.delete {
+            background-image: url("../images/context-green/delete.png");
+        }
+        a.deactivate {
+            background-image: url("../images/context-green/deactivate.png");
+        }
+        a:active, a:focus {
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: #323b4c;
+            border-left: 8px #1ab644 solid;
+            text-decoration: none;
+        }
+    }
+}

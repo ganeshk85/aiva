@@ -1,0 +1,5 @@
+<div ng-controller="ZoomController as vm" class="zooming-control-panel" ng-class="{ hidden: panels.active !== 'aivabuilder' }">
+    <button ng-click="vm.zoomOut()" class="btn-minus btn-left" type="button"><i class="fa fa-minus"></i></button>
+    <label>{{vm.currentZoom}}%</label>
+    <button ng-click="vm.zoomIn()" class="btn-plus btn-right" type="button"><i class="fa fa-plus"></i></button>
+</div>

@@ -1,0 +1,133 @@
+<div id="rootwizard">
+    
+    <div class="inner-triggers-container container" style="">
+        
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h2>Trigger Settings</h2>
+                <ul>
+                    <li>
+                        <a href="#timing-triggers" data-toggle="tab">Timing</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#targetting-triggers" data-toggle="tab">Targetting</a>
+                    </li>
+                    -->
+                    <li>
+                        <a href="#position-triggers" data-toggle="tab">Position</a>
+                    </li>
+                    <li>
+                        <a href="#transition-triggers" data-toggle="tab">Transition</a>
+                    </li>
+                    <li class="last">
+                        <a href="#scheduling-triggers" data-toggle="tab">Scheduling</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tab-content" style="height: {{innerHeight - 200}}px">
+            
+            <div class="tab-pane" id="timing-triggers" style="margin-top: 36px">
+                <div style="margin: 0px -46px; display: flex; flex-wrap: wrap; align-content: center">
+                    <div 
+                        style='flex:1; margin: 0px 48px' 
+                        ng-repeat="trigger in vm.timingTriggers"
+                        class="timing-triggers-brick" 
+                    >
+                        <timing-trigger trigger="{{ trigger }}"></timing-trigger>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="tab-pane" id="position-triggers">
+                
+                <div class="screen-row">
+                    <div class="column-1">
+                        <div class="triggers-list-heading">
+                            <h3>Pages Displayed</h3>
+                            <p>Select what pages you want this overlay to be active on</p> 
+                        </div>
+                        <aiva-page-selector></aiva-page-selector>    
+                        <div style="margin-top:20px;"> &nbsp; </div>
+                        <position-trigger></position-trigger>
+                    </div>
+                
+                    <div class="column-2 triggers-fixed">
+                        
+                        <div class="triggers-list-heading">
+                            <h3>Fixed Positions</h3>
+                            <p>Overlays in a fixed position will remain stationary in <br> your visitors browser no matter where they scroll.</p><br>
+                        </div>
+                        
+                        <div ng-repeat="trigger in vm.fixedPositionTriggers" ng-if="$index % 3 == 0" class="row">
+                            <div class="col-md-4" style="margin:0; width: 162px;">
+                                <basic-trigger trigger="{{vm.fixedPositionTriggers[$index]}}"></basic-trigger>
+                            </div>
+                            <div class="col-md-4" style="margin:0; width: 162px;" ng-if="vm.fixedPositionTriggers.length > ($index + 1)">
+                                <basic-trigger trigger="{{vm.fixedPositionTriggers[$index + 1]}}"></basic-trigger>
+                            </div>
+                            <div class="col-md-4" style="margin:0; width: 162px;" ng-if="vm.fixedPositionTriggers.length > ($index + 2)">
+                                <basic-trigger trigger="{{vm.fixedPositionTriggers[$index + 2]}}"></basic-trigger>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-3 triggers-relative">
+                        
+                        <div class="triggers-list-heading">
+                            <h3>Relative Positions</h3>
+                            <p>Overlays in a relative position will appear somewhere within your existing page, visitors can scroll away from them</p>
+                        </div>
+                        
+                        <div ng-repeat="trigger in vm.relativePositionTriggers" class="row">
+                            <basic-trigger trigger="{{trigger}}"></basic-trigger>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="transition-triggers" style="margin-top: 36px">
+                <div style="margin: 0px -20px; display: flex; flex-wrap: wrap; align-content: center">
+                    <div 
+                        style='margin: 0px 21px; width: 130px' 
+                        ng-repeat="trigger in vm.transitionTriggers"
+                        class="transition-triggers-brick" 
+                    >
+                        <basic-trigger trigger="{{ trigger }}"></<basic-trigger>
+                    </div>
+                </div>
+            </div>
+                 
+            <div class="tab-pane" id="scheduling-triggers">
+
+                <div scheduling-trigger></div>
+                
+                <!--
+                <div class="clearfix"></div>
+                <pre style="margin-top: 30px" ng-bind='all().schedule | json'></pre>
+                -->
+            </div>
+            <div class="tab-pane" id="targetting-triggers">
+                                
+                <div targetting-trigger></div>
+
+            </div>
+        </div>
+<!--       
+        <table style='width:100%'> 
+            <tbody>
+                <td style='vertical-align: top; width: 50%'>
+                    <strong>Desktop:</strong>
+                    <pre style="margin-top: 30px" ng-bind='all("lg").timing | json'></pre>
+                </td>
+                <td style='vertical-align: top; width: 50%'>
+                    <strong>Mobile:</strong>
+                    <pre style="margin-top: 30px" ng-bind='all("sm").timing | json'></pre>
+                </td>
+            </tbody>
+        </table>
+-->
+    </div>
+    
+</div>

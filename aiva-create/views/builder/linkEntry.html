@@ -1,0 +1,14 @@
+<div class="modal-content">
+    <div class="modal-header clearfix">
+        <h4 class="modal-title pull-left">Enter URL</h4>
+        <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    </div>
+    <div class="modal-body">
+        <input type="text" id="url_entry" ng-model="linkAddress" style="width: 100%;" >
+        
+        <div class="modal-footer clearfix" style="background: #F5F5F5;">
+            <button class="btn btn-primary btn-lg" ng-disabled="!linkAddress" id="setUrl">Set URL</button>
+        </div>
+        
+    </div>
+</div>

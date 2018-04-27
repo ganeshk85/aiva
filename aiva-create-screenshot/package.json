@@ -1,0 +1,21 @@
+{
+  "name": "aiva-create-screenshot",
+  "version": "1.0.0",
+  "description": "Standalone command line utility to take screenshots of CTA documents (PhantomJS based)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "repository": "https://wcrbrm@bitbucket.org/teamaiva/aiva-create-screenshot.git",
+  "author": "Viktor Lopata <webcerebrium@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "commander": "^2.9.0",
+    "express": "^4.14.0",
+    "imagemagick": "^0.1.3",
+    "seq-queue": "0.0.5",
+    "webshot": "^0.18.0"
+  }
+}

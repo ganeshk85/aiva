@@ -1,0 +1,95 @@
+
+.clients-selector {
+    width: 600px;
+    height: 100%;
+    overflow: auto;
+    background: #fcfcfc;
+    border-right: 1px #cfcfcf solid;
+ 
+    .header { padding: 30px; padding-bottom:10px; position: relative; }
+    .manage-defaults { position: absolute; right: 20px; top: 25px; }
+    
+    table.table thead th { 
+        cursor: pointer;
+        font-weight:normal;
+        text-align:left;
+    }
+    
+    table.table tbody th, 
+    table.table tbody td {
+        font-size: 16px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        cursor: pointer;
+        .fa { color: #ddd; }
+    } 
+    table.table tbody tr:hover * { background: #38db62; color: white; }
+}
+
+.masonry-wide-brick {
+    width: 350px;
+    height: 192px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px #f8f8f8 solid;
+    box-shadow: 2px 2px 6px #d4d4d4;
+    margin-bottom: 20px;
+    position: relative;
+    
+    &.disabled { background: #eee;}
+    
+    .corner {
+        position: absolute; 
+        z-index: 2; 
+        right: 12px; 
+        top: 20px; 
+        img { width: 16px; height:16px; }
+    }
+    .right{ 
+        height:130px; 
+        width: 160px;
+        position: absolute; 
+        z-index: 1; 
+        right: 0px; 
+        top: 30px; 
+        padding-top: 50px;
+        border-left: 1px #d4d4d4 solid;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+        .btn { width: 100%; line-height: 20px; }
+        .btn-default { border-color: #2cdd5b; color: #2cdd5b; }
+        .btn-default:hover, .btn-default:focus, .btn-default:active { background: #f3fff3; }
+    }    
+    .left { 
+        line-height: 145px; 
+        margin-left: 10px;
+        width: 140px; 
+        vertical-align:middle; 
+    }
+    
+    .stat {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .usage {
+        font-size: 13px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+
+.integrations-modal {
+    padding: 20px;
+    min-height: 250px;
+    
+    h3 { 
+        color: #666; 
+        text-align:center; 
+        font-size: 22px; 
+        margin: 10px 0px;
+        margin-bottom: 30px;
+    }
+}

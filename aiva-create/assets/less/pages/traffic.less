@@ -1,0 +1,46 @@
+.export-modal {
+    padding: 20px;
+    min-height: 250px;
+    
+    h3 { 
+        color: #666; 
+        text-align:center; 
+        font-size: 22px; 
+        margin: 10px 0px;
+        margin-bottom: 30px;
+    }
+}
+
+table.table-data {
+    border: 1px #cbcbcb solid;
+    tbody {
+        border: 1px #cbcbcb solid;
+    }
+    
+    &.table-striped>tbody>tr:nth-child(odd)>td {
+        background: #fbfbfb;
+    }
+    &.table-striped>tbody>tr:nth-child(even)>td {
+        background: #ffffff;
+    }
+        
+    thead th { 
+        white-space: nowrap; 
+        font-weight: normal;
+        padding: 20px 20px;
+        background: white;
+        border: 1px #cbcbcb solid;
+        color: #666666;
+    }
+    tbody tr.even {}
+    tbody td {
+        line-height: 72px - 20px;
+        padding-left: 20px;
+        white-space: nowrap;
+        border: 1px transparent solid;
+    }
+}
+
+.table-responsive {
+    overflow: auto;
+}

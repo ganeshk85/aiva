@@ -1,0 +1,23 @@
+<div class="campaign-details">
+    <table>
+        <tbody>
+            <tr ng-repeat='item in items'>
+                <td>
+                    <img class="icon" ng-src='{{item.icon}}' />
+                </td>
+                <td colspan="{{ item.value ? 1 : 2 }}">
+                    <div class='caption' ng-bind="item.caption"></div>
+                    <div class='subtitle' ng-bind="item.subtitle"></div>
+                </td>
+                <td ng-if="item.value">
+                    <div class="cell">
+                        <div class="value {{ item.big ? 'big' : ''}}" ng-bind="item.value">
+                        </div>
+                        <div class="measure" ng-bind="item.measure">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,62 @@
+<div class="export-modal">
+    
+    <h3 style="font-size: 26px;">Generate Report</h3>
+    
+    <div class="form form-limited" style="width: 340px;">
+        <div 
+            campaigns-report-date-range 
+            from="startDate" to="endDate"
+            format="{{dateFormat}}"
+        >
+        </div>
+        <div class="form-row">
+            <label>
+                Which campaigns to you want to include?
+            </label>
+            <div campaigns-report-campaigns-list list="campaigns" ng-model="campaignsValue"></div>
+        </div>
+        <div class="form-row">
+            <div>
+                <button 
+                    id='btnOpenColorPicker'
+                    ng-click="openColorPicker()"
+                    style='display:inline-block; border: 1px #ccc solid; vertical-align:middle; margin-right:7px; background: {{reportColor}}; width: 20px; height:20px;'
+                >
+                </button>
+                <span style="color:#666">
+                    Theme Color
+                </span>
+            </div>
+        </div>
+        <!--<div class="form-row">
+            <div>
+                <button
+                    ng-click="toggleAutoGenerate()"
+                    style="display:inline-block; border: none; vertical-align:middle; 
+                            margin-right:7px; outline: none;
+                            background: url(assets/images/campaigns/green-box-{{ auto_generate ? 'on' : 'off'}}.png) 0px 0px no-repeat; 
+                            background-size: 100% 100%;
+                            width: 20px; height:20px;"
+                ></button>
+                <span style="color:#666">Auto-Generate Reports</span>
+            </div>
+        </div>-->
+        
+        <div class="form-row">
+            <label>
+                What kind of report do you want to generate?
+            </label>
+            <div campaigns-report-metrics preselected="true" list="metrics" ng-model="metricsValue"></div>
+        </div>
+        
+        <div class="form-row padded" style="text-align: center">
+            <button ng-click="save()" class="btn btn-success" style="border-radius:11px; width: 48%" ng-disabled="!canBeSaved()">
+                Generate
+            </button>
+            <button ng-click="cancel()" class="btn btn-default" style="border-radius:11px; width: 48%">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+        

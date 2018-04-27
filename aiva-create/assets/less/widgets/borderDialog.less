@@ -1,0 +1,127 @@
+.aiva-border-dialog-overlay {
+    position: fixed; 
+    display: none;
+    z-index: 1997; 
+    border: none; 
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.aiva-border-dialog {
+}
+
+.border-controls {
+    position:fixed; 
+    z-index:1998; 
+    border: none; 
+    background: #fafafa; 
+    padding: 9px 12px;
+    
+    top: 150px; 
+    left: 160px;
+    width: 220px;
+    padding: 20px;
+    margin: 0px;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
+    hr {
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .border-color-preview {
+        height: 23px;
+        width: 64px;
+        background-color: green;
+    }
+
+    .cell {
+        width: 30px !important; 
+        min-width: 30px !important; 
+        max-width: 30px !important;
+        height: 30px; 
+        margin-right: 6px;
+        padding-left: 2px;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid #dadada;
+        height: 100%;
+        padding: 0 5px;
+        background-color: #F3F3F3;
+        border: none;
+
+        &#all, &#top, &#left, &#right, &#bottom {
+            background: #fff url(../images/forms/px-gray.png) no-repeat center right;
+            padding: 0px;
+            width: 30px !important;
+            padding-right: 12px;
+            text-align: right;
+            &:focus{ outline: none;}
+        }
+
+        &#all {
+            border: 2px solid #999;
+        }
+
+        &#top {
+            border-top: 2px solid #999;
+        }
+
+        &#left {
+            border-left: 2px solid #999;
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        &#bottom {
+            border-bottom: 2px solid #999;
+        }
+
+        &#right {
+            border-right: 2px solid #999;
+        }
+
+        &::-webkit-inner-spin-button, 
+        &::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+
+        &#border-roundness {
+            padding: 0px 0px;
+            padding-right: 19px;
+            background: transparent url(../images/forms/px-green.png) no-repeat center right;
+            width: 50px;
+            color: #2cdd5b;
+            text-align: right;
+
+            &[disabled] {
+                display: none;
+            }
+        }
+    }
+
+    select {
+        width: 100%;
+        border: none;
+        height: 25px;
+        background: #F3F3F3;
+    }
+
+}

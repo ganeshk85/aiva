@@ -1,0 +1,20 @@
+<div class="bottom-navigation">
+<!--    <button ng-click="preview()" bl-tooltip="preview" placement="top"><i class="icon icon-eye"></i></button>-->
+    <!--
+    <button ng-click="openPanel('export')" bl-tooltip="export" placement="top"><i class="icon icon-export"></i></button>
+    <button data-toggle="modal" data-target="#publish-modal" bl-tooltip="publish" placement="top"><i class="icon icon-publish"></i></button>
+    <button ng-click="toggleDevicesPanel()" ng-class="{ active: devicesPanelOpen }" bl-tooltip="changeDevice" placement="top"><i class="icon icon-mobile"></i></button>
+    -->
+
+<!--
+    <button bl-tooltip="save" placement="top" ng-click="project.save()" ng-disabled="savingChanges">
+        <i class="icon" ng-class="savingChanges ? 'icon-spin6 icon-spin' : 'icon-floppy-1'"></i>
+    </button>
+-->
+   
+    <div class="button-group">
+        <div class="button-preview" ng-click="project.preview()" ng-disabled="savingChanges"></div>
+        <div class="button-export" ng-click="project.export()" ng-disabled="pushLive"></div>
+        <div class="button-save" ng-click="project.save()" ng-disabled="savingChanges"></div>    
+    </div>
+</div>

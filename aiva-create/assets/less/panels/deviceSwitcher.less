@@ -1,0 +1,108 @@
+.side-device-switcher {
+
+    position:absolute;
+    z-index:5003;
+    top:45px;
+    right:-15px;
+    width: 150px;
+    height: 40px;
+
+    .device-switcher {
+        position: relative;
+        
+        > .current-device {
+            text-align: center;
+            padding: 25px 0;
+
+            > .name {
+                text-transform: capitalize;
+            }
+
+            > i {
+                font-size: 45px;
+            }
+        }
+        > .devices {
+            .clearfix();
+
+            > button {
+                font-size: 30px;
+                width: 60px;
+                // background-color: @panel-box-background;
+                color:black;
+                border: none;
+                float: left;
+                outline: none !important;
+                &.active {
+                    // background-color: lighten(@panel-box-background, 20%) !important;
+                    // color: lighten(@panel-color, 15%);
+                    background-color: white;
+                }
+                &:hover {
+                    // background-color: lighten(@panel-box-background, 5%);
+                    background-color: #ccc;
+                }
+            }
+            
+            div.device-circle {
+                width: 56px;
+                height: 56px;
+                border-radius: 28px;
+                background-color: #FFF; 
+                // background-color: #38db62;
+               
+                margin-left: auto;
+                margin-right: auto;
+                display: table;
+                border: 1px solid #666666;
+                margin-bottom: 15px;
+                -webkit-transition-duration: 200ms;
+                -webkit-transition-property: all;
+                -webkit-transition-timing-function: ease-in-out;
+                
+                > div {
+                    display: table-cell;
+                    background-size: 50% 50%;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+                
+                .size-tablet {
+                    background-image: url('../images/devices/switch-sm-selected.png');
+                }
+                .size-desktop {
+                    background-image: url('../images/devices/switch-lg-selected.png');
+                }
+                
+                .disabled {
+                    opacity: 0.4;
+                }
+                &.disabled {
+                    background-color: #EFEFEF; 
+                    .size-tablet {
+                        background-image: url('../images/devices/switch-sm-selected.png');
+                    }
+                    .size-desktop {
+                        background-image: url('../images/devices/switch-lg-selected.png');
+                    }
+                }
+            }
+            
+            div.deviceLarge {
+                width: 80px;
+                height: 80px;
+                border-radius: 40px;
+                margin-bottom: 18px;
+                background-color: #FFF;
+                .size-tablet {
+                    background-image: url('../images/devices/switch-sm-selected.png');
+                }
+                .size-desktop {
+                    background-image: url('../images/devices/switch-lg-selected.png');
+                }
+                
+            }
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@media only screen and (min-width: 993px) and (max-width: 1199px) /* 993px - 1199px */
+{
+    .customNav .navbar-default .navbar-nav > li > a{margin:0 0px;}
+    .customNav .navbar-collapse {padding:0px;}
+}
+/* 993px */
+@media only screen and (min-width: 993px){
+
+    .customNav .navbar-default .navbar-nav > li > a{display:block;font-size:12px;padding:6px 21px 0;text-shadow: 0 0 rgba(0, 0, 0, 0);color:#333333;line-height:82px;}
+    .customNav .navbar-default .navbar-nav .dropdown-menu li a{padding:5px 20px;}
+    .customNav .navbar-default .navbar-nav > li a.active{box-shadow:0 4px 0 #f46333;}
+    .customNav .navbar-default .navbar-nav > .active > a, .customNav .navbar-default .navbar-nav > .active > a:hover, .customNav .navbar-default .navbar-nav > .active > a:focus
+{ box-shadow:0 3.5px 0 #ec2224;background:rgba(0,0,0,0);}
+
+    .header-btns{float:left;display:inline-block;margin:25px 0;}
+}
+
+/* 992px*/
+@media (max-width: 992px) {
+    .navbar-header {float: none;}
+    .navbar-left,.navbar-right {float: none !important;}
+    .navbar-toggle {display: block;}
+    .navbar-collapse {border-top: 1px solid transparent;box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}
+    .navbar-fixed-top {top: 0;border-width: 0 0 1px;}
+    .navbar-collapse.collapse {display: none!important;}
+    .navbar-nav {float: none!important;margin-top: 7.5px;}
+	.navbar-nav>li {float: none;}
+    .navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}
+    .collapse.in{display:block !important;}
+	.customNav .navbar-default .navbar-toggle{margin-right:0px; margin-bottom:0px; background:rgba(0,0,0,0); border:none;margin-top:0px;padding:34px 10px 9px 0;
+	                                          font-size:24px;}
+	.customNav .navbar-default .navbar-toggle .icon-bar{background:#ffffff;height:3px;}
+	.customNav .navbar-default{position:absolute; right:15px;float:right;}
+	.customNav .navbar-default .navbar-collapse{background:#302f2f; min-width:280px;margin-top:0px;padding:20px 10px 15px;border-top:0 none;box-shadow: 0 0 rgba(0, 0, 0, 0);
+	                                            position: absolute;right: -15px;top: 90px;width: 280px;}
+	.customNav  .navbar-default .navbar-nav > li > a{color:#ffffff !important; text-transform:uppercase;font-size:18px;padding: 8px 20px 6px;text-shadow:0 0 rgba(0,0,0,0);}
+	.customNav ul{margin-top:0;margin:0;text-align:left;}
+	.customNav .navbar-default .navbar-nav > li > a:hover{color:#3ce067 !important;box-shadow:0 0 rgba(0,0,0,0) !important;text-shadow: 0 0 rgba(0, 0, 0, 0);}
+	.customNav .navbar-default .navbar-nav > .active > a, .customNav .navbar-default .navbar-nav > .active > a:hover, 
+	.customNav .navbar-default .navbar-nav > .active > a:focus{ background-color: rgba(0, 0, 0, 0);background-image: none;box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    color: #ec2224 !important;text-shadow: 0 0 rgba(0, 0, 0, 0);}
+    .customNav .sub-menu{top:30px;font-size:14px;border:0 none;}
+    .customNav .navbar-default .navbar-nav > li:hover, .customNav .navbar-default .navbar-nav > li:focus{border:0 none;color:#00b832;}
+    .banner-wrap .banner-text .text-heading{width:96%;}
+    .signin-responsive{display:block;margin:0;padding:0;}
+    .signin-responsive li{font-size: 18px; padding: 4px 20px 6px; text-transform: uppercase;list-style-type:none;}
+    .signin-responsive li a{color:#ffffff;font-size: 18px;font-family: 'OpenSansSemibold', sans-serif;}
+    .signin-responsive li a:hover{color:#3ce067;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px)
+{
+	.container{width:auto;}
+    .header-btns{display:none;}
+    .category-wrap-outer{padding:40px 0;}
+}
+
+@media only screen and (min-width: 280px) and (max-width: 767px)
+{
+	.container{width:auto;}
+    .header-btns{display:none}
+    .sidebar{padding-top:40px;}
+    .tab-content {padding: 40px 0;}
+    .tab-content .panel-default .panel-heading{padding: 0 0 20px;}
+    .tab-content .panel-group .panel + .panel{margin-top:20px;}
+    .tab-content .panel-default .panel-heading h4{font-size:18px;}
+    .category-wrap-outer{padding-bottom:0;padding-top:40px;}
+    .inner-list-wrap{padding: 40px 0 0 0;}
+}
+@media only screen and (min-width: 280px) and (max-width: 580px) 
+{
+    .container{padding:0;}
+    .search-wrap{padding:0 15px;}
+    .banner-header-inner .search-wrap{padding:0 15px;width:auto;float:none;}
+   
+}
+@media(max-width:455px)
+{
+   .login-wrap{padding:0px 20px 20px 20px;}
+   .btn-google{padding:10px 30px;margin:0 2px 15px 2px;}
+   .btn-linkedin{padding:10px 30px;margin:0 2px 15px 2px;}
+}

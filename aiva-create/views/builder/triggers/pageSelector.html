@@ -1,0 +1,76 @@
+<div class="page-selector">
+    
+    <div class="clearfix inline-radio-label">
+        <div class="input-wrapper">
+            <span custom-radio-group group="selection" model="pages.selection" value="any" enabled="true">
+            </span>
+        </div>
+        <label ng-click="select('any')" style="font-weight:normal; cursor: pointer">
+            All Website Pages
+        </label>
+    </div>
+    <div class="clearfix inline-radio-label">
+        <div class="input-wrapper">
+            <span custom-radio-group group="selection" model="pages.selection" value="specific" enabled="true">
+            </span>
+        </div>
+        <label ng-click="select('specific')" style="font-weight:normal; cursor: pointer">
+            Specific Pages
+        </label>
+    </div>
+    
+    <div>&nbsp;</div>
+    
+    <div ng-show="pages.selection === 'specific'">
+        <div class="header" style="font-weight:bold;">
+            Active Pages
+        </div>
+        <div class="pagelist">
+            <div ng-repeat="r in pages.whitelist" class='row'>
+                <button ng-click="removeUrl(r,'whitelist')">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong ng-bind="r"></strong>
+            </div>
+        </div>
+    </div>
+    
+    <div ng-show="pages.selection === 'any'">
+        <div class="header" style="font-weight:bold;">
+            Blacklisted Pages
+        </div>
+        <div class="pagelist">
+            <div ng-repeat="r in pages.blacklist" class='row'>
+                <button ng-click="removeUrl(r,'blacklist')">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong ng-bind="r"></strong>
+            </div>
+        </div>
+    </div>
+        
+    <div class="url-wrapper">
+        <div style="width:20px; float: right"><i class="fa fa-link"></i></div>
+        <strong>URL:</strong>
+        <input type="text" ng-model="url" />
+    </div>
+    
+    <div class="form">
+        <button 
+            style="width:100%; margin-top: 5px"
+            class="btn btn-success"
+            type="button"
+            ng-disabled="!isValidUrl()"
+            ng-click="addUrl()"
+        >
+            <i class="fa fa-plus"></i>
+            <span ng-show="pages.selection === 'specific'">
+                Add New Page
+            </span>
+            <span ng-show="pages.selection === 'any'">
+                Add URL
+            </span>
+        </button>
+    </div>
+    
+</div>

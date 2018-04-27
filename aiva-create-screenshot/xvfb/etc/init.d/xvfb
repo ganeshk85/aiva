@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# /etc/rc.d/init.d/xvfb
+#
+# chkconfig: 345 98 90
+# description: starts virtual framebuffer process to
+# enable server
+#
+#
+
+XVFB_OUTPUT=/tmp/Xvfb.out
+FIREFOX=firefox
+XVFB=/usr/bin/X11/Xvfb
+XVFB_OPTIONS="-screen 0 1680x1050x24  -fbdir /var/run"
+FIREFOX_OPTIONS="about:about -width 1660 -height 1000"
+FIREFOX_OUTPUT=/tmp/firefox.out
+
+start()  {
+  for i in 1 2 3 4
+  do
+        SCREENS=""
+        for scr in 0 1 2 3 4 5 6 7 8 9
+        do
+                SCREENS="$SCREENS -screen $scr 1680x1050x24"
+        done;
+        echo $SCREENS
+        echo -n "Starting #$i: X Virtual Frame Buffer "
+        echo /usr/bin/Xvfb :$i $SCREENS >> $XVFB_OUTPUT
+        /usr/bin/Xvfb :$i $SCREENS >> $XVFB_OUTPUT 2>&1 &
+        echo
+
+        for scr in 0 1 2 3 4 5 6 7 8 9
+        do
+           D="${i}.${scr}"
+           PROFILE="aiva${i}_${scr}"
+           echo "$D :`date`" >> $FIREFOX_OUTPUT
+           echo DISPLAY=:$D $FIREFOX  --display=:$D -P $PROFILE $FIREFOX_OPTIONS
+           DISPLAY=:$D $FIREFOX  --display=:$D -P $PROFILE $FIREFOX_OPTIONS >> $FIREFOX_OUTPUT 2>&1 &
+        done;
+  done;
+  return 0
+}
+
+stop()   {
+  echo -n "Shutting down : X Virtual Frame Buffer"
+  echo
+  killall firefox-esr
+  killall Xvfb
+  echo
+  return 0
+}
+
+stop()   {
+  echo -n "Shutting down : X Virtual Frame Buffer"
+  echo
+  killall firefox-esr
+  killall Xvfb
+  echo
+  return 0
+}
+
+case "$1" in
+start)
+  start
+  ;;
+stop)
+  stop
+  ;;
+
+restart)
+  stop
+  start
+  ;;
+
+*)
+  echo "Usage: xvfb {start|stop|restart}"
+  exit 1
+  ;;
+esac
+
+exit $?
+

@@ -1,0 +1,125 @@
+
+.settings-nav {
+    width: 140px;
+    height: 500px;
+    overflow:hidden;
+    background: #fcfcfc;
+    border-right: #cfcfcf;
+    float: left;
+
+    ul, li { margin: 0px; padding: 0px;}
+    ul { margin-top: 50px;}
+    a {
+        display: block;
+        font-weight: 400;
+        text-decoration: none;
+        text-align: center;
+        height:82px;
+        line-height: 120px;
+
+        background-size: 15%;
+        background-repeat: no-repeat;
+        background-position: center 20px;
+
+        color: #666;
+        border-right: 5px transparent solid;
+    }
+    a.active {
+        color: #2cdd5b;
+        border-right: 5px #2cdd5b solid;
+    }
+}
+
+.settings-profile {
+    background-image: url(../images/settings/profile.png) ;
+}
+.settings-profile.active {
+    background-image: url(../images/settings/profile-active.png) ;
+}
+
+.settings-password {
+    background-image: url(../images/settings/password.png);
+}
+.settings-password.active {
+    background-image: url(../images/settings/password-active.png);
+}
+
+.settings-tracking {
+    background-image: url(../images/settings/tracking.png);
+}
+.settings-tracking.active {
+    background-image: url(../images/settings/tracking-active.png);
+}
+
+.settings-clients {
+    background-image: url(../images/settings/clients.png);
+}
+.settings-clients.active {
+    background-image: url(../images/settings/clients-active.png);
+}
+
+.settings-payment {
+    background-image: url(../images/settings/payment.png);
+}
+.settings-payment.active {
+    background-image: url(../images/settings/payment-active.png);
+}
+
+.settings-container {
+    overflow:hidden;
+    padding-left: 35px !important;
+    padding-top: 50px;
+    border-left: 1px #cfcfcf solid;
+    background: #f7f7f7;
+    color: #666;
+
+    h1 {
+        color: #666;
+        font-size: 28px;
+        font-family: Roboto,Noto,'Helvetica Neue',Helvetica,Arial,sans-serif;
+        margin-bottom: 30px;
+    }
+
+    .upgrade-message {
+        margin-top: 40px;
+        overflow: hidden;
+        max-width: 680px;
+        border-top: 1px solid #e4e4e4;
+        border-bottom: 1px solid #e4e4e4;
+        padding: 10px 0;
+        h3 {
+            font-weight: lighter;
+            margin: 0;
+            margin-top: 8px;
+        }
+    }
+
+    .credit-card {
+        a {
+            color: #37be5b;
+            text-decoration: underline;
+            &.disabled {
+                color: #909090;
+                pointer-events: none;
+            }
+        }
+        h4 {
+            font-weight: 400;
+            a {
+                text-decoration: none;
+            }
+        }
+        .card {
+            border-top: 1px solid #e4e4e4;
+            padding: 15px 0;
+            div {
+                float: left;
+                margin-right: 40px;
+            }
+            .remove-card {
+                float: right;
+            }
+        }
+    }
+}
+

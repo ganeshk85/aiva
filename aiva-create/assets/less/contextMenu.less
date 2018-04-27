@@ -1,0 +1,133 @@
+@context-menu-color: lighten(@panel-light-color, 15%);
+
+#builder-context-menu {
+    display: none;
+    position: absolute; 
+    background-color: #fff;
+    color: #666;
+    .user-select(none);
+    width: 280px;
+    z-index: 49;
+    
+    ul {
+        
+        display: block;
+        
+        li {
+            > a {
+                cursor: pointer;
+                background-position: 14px center;
+                background-size: 24px;
+                text-indent: 12px;
+                font-size: 12px;
+                
+            }
+            // assuming there will be only 2 levels of context menu
+            li > a {
+                text-indent: 34px;
+            }
+            li > a.noimage {
+                text-indent: 10px;
+            }
+        }
+        
+        .divider {
+            height:1px;
+            border-bottom: 1px #e8e8e8 solid;
+            margin: 2px 0px;
+        }
+    }
+}
+
+#context-menu {
+	display: none;
+	position: absolute;
+	border-radius: 4px;
+	background-color: @panel-background;
+	color: @context-menu-color;
+	.user-select(none);
+	width: 240px;
+	z-index: 49;
+
+	> h5 {
+		color: @context-menu-color;
+		margin: 0 0 10px;
+		text-transform: capitalize;
+		border-bottom: 1px solid @panel-box-background;
+		font-size: 13px;
+
+		> .name {
+			padding: 12px 10px 10px;
+			float: left;
+		}
+
+		> .icon {
+			padding: 12px 10px 10px;
+			float: right;
+			border-left: 1px solid @panel-box-background;
+			height: 100%;
+
+			&:hover {
+				color: #fff;
+				cursor: pointer;
+			}
+		}
+	}
+
+	> ul {
+		margin-bottom: 7px;
+	}
+
+	.separator {
+		height: 0;
+		position: relative;
+		border-top: @panel-border;
+		margin: 7px 5px;
+		border-radius: 2px;
+		pointer-events: none;
+		padding: 0;
+	}
+
+	.disabled {
+		color: darken(@context-menu-color, 20%);
+		pointer-events: none;
+
+		&:hover {
+			cursor: initial;
+			background-color: @panel-background;
+		}
+	}
+
+	li {
+		.clearfix();
+		font-size: 13px;
+		padding: 3px 0 3px 25px;
+
+		.icon {
+			padding-right: 8px;
+			margin-left: -25px;
+		}
+
+		.icon-trash {
+			padding-right: 11px;
+		}
+
+		> .command-name {
+			float: left;
+			padding-left: 10px;
+		}
+
+		> .command-keybind {
+			float: right;
+			color: darken(@context-menu-color, 10%);
+			padding-right: 10px; 
+			font-size: 11px;
+			font-weight: 500;
+		}
+
+		&:hover {
+			cursor: pointer;
+			background-color: lighten(@panel-background, 5%);
+		}
+	}
+}

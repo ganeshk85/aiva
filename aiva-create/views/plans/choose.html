@@ -1,0 +1,49 @@
+<h1>Plans</h1>
+<form>
+  <div top-navigation title="Plans">
+    <div>
+      Plans:
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" name="plans" id="free" value="free" checked> Free
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" name="plans" id="grow" value="grow"> Grow
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" name="plans" id="scale" value="scale"> Scale
+      </label>
+    </div>
+    <br>
+    <div>
+      Billing:
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" name="billing" id="inlineRadio1" value="monthly" checked> Monthly
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" name="billing" id="inlineRadio2" value="yearly"> Yearly
+      </label>
+    </div>
+  </div>
+  <!--
+  <br>
+  <div>
+    <a href="/free-month">Free Monthly</a><br>
+    <a href="/grow-month">Grow Monthly</a><br>
+    <a href="/grow-year">Grow Yearly</a><br>
+    <a href="/scale-month">Scale Monthly</a><br>
+    <a href="/scale-year">Scale Yearly</a><br>
+  </div>-->
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type='text/javascript'>
+
+ $(document).ready(function() {
+   $('input[name=plans]').change(function(){
+        $('form').submit();
+   });
+   $('input[name=billing]').change(function(){
+        $('form').submit();
+   });
+  });
+
+</script>

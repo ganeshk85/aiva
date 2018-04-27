@@ -1,0 +1,28 @@
+<div class="multi-select" ng-class="{open: dropdownOpen}">
+    <button type="text" class="value" ng-click="toggle()">
+        <strong ng-bind="getValuesAsString()"></strong>
+    </button>
+    <div ng-show="dropdownOpen">
+        <div class="filter">
+            <div class="tools">
+                <select class="sort-control" ng-model="sortBy">
+                    <option value="name">asc</option>
+                    <option value="-name">desc</option>
+                </select>
+                <input type="text" class="search-control" ng-model="search" placeholder="search" />
+            </div>
+            Select campaigns 
+        </div>
+        <div class="list">
+            <div ng-repeat="item in list | filter: search | orderBy: sortBy">
+                <button 
+                    class="option" 
+                    ng-bind="item.name"
+                    ng-class="{selected: isSelected(item)}"
+                    ng-click="toggleValue(item)"
+                >
+                </button>
+            </div>
+        </div>
+    </div>
+</div>  

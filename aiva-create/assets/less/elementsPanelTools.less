@@ -1,0 +1,129 @@
+.dropdown-submenu a:after {
+    position: absolute;
+    z-index:100;
+    top: 0px;
+    right: 2px;
+    width: 30px;
+    text-align:right;
+    height: 37px;
+    line-height: 37px;
+    color:black;
+    
+    background: url('../images/icons-builder/submenu-arrow.png') no-repeat 0px 0px;
+    background-position: right center;
+}
+
+
+.v-line {
+    position: fixed;
+    z-index: 9999;
+    border: 0px;
+    background: red;
+    width: 1px;
+    top: 0px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.shape-circle {
+    background: url(../images/icons-builder/shapes/shape-circle.png);
+}
+
+.shape-rectangle {
+    background: url(../images/icons-builder/shapes/shape-rectangle.png);
+}
+
+.shape-triangle-up {
+   background: url(../images/icons-builder/shapes/shape-triangle-up.png);
+}
+
+.shape-ellipse {
+    width: 50px !important;
+    background: url(../images/icons-builder/shapes/shape-ellipse.png);
+}
+
+
+.shape-triangle-down {
+    background: url(../images/icons-builder/shapes/shape-triangle-down.png);
+} 
+
+.shape-triangle-left {
+    background: url(../images/icons-builder/shapes/shape-triangle-left.png);
+}
+
+.shape-triangle-right {
+    background: url(../images/icons-builder/shapes/shape-triangle-right.png);
+}
+
+.shape-triangle-bottom-left {
+    background: url(../images/icons-builder/shapes/shape-triangle-bottom-left.png);
+}
+
+
+.shape-triangle-bottom-right {
+    background: url(../images/icons-builder/shapes/shape-triangle-bottom-right.png);
+}
+
+.shape-triangle-top-left {
+    background: url(../images/icons-builder/shapes/shape-triangle-top-left.png);
+}
+
+.shape-triangle-top-right {
+    background: url(../images/icons-builder/shapes/shape-triangle-top-right.png);
+}
+
+.shape-selector{
+    width: 30px; height: 30px;
+    background-color: transparent;
+    // &:hover { background-color: #fff !important; }   
+}
+
+.reset-margins {
+    padding: 0px !important;
+    margin: 0px !important;
+    border: 0px !important;
+}
+
+.aiva-element-emoji {
+    float: left; 
+    padding: 0px !important;
+    margin-left: 0px !important;
+    width: 35px;
+    height: 35px;
+    color: black;
+    overflow: hidden;
+    &:hover, &:active {
+        background-color: #fff;
+    }
+
+}
+.emojis-search-window {
+    width: 265px; 
+    // border: 1px red dotted !important; 
+    background: transparent;
+}
+.emojis-search {
+    width: 100%;
+    padding-left: 10px !important;
+    padding-right: 35px !important;
+    line-height: 32px;
+    height: 32px;
+    color: #8a8a8a;
+    border: none; 
+    background: white url(../images/icons-builder/small-search.png) right center no-repeat; 
+    background-size: 13px 13px;
+    background-position-x: 135px;
+    border-radius: 10px;
+    
+    input:active, input:focus { outline: none; }
+}
+.emojis-search-results {
+    padding-top: 5px !important;
+    margin-left: 3px !important;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.emoji-submenu {
+    width: auto;
+}

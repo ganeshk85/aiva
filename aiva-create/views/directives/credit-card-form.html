@@ -1,0 +1,57 @@
+<div id="credit-card-form">
+    <div class="alert alert-danger" ng-if="paymentError">{{paymentError}}</div>
+    <div class="row form-group" ng-if="model.type != 'card'">
+        <div class="col-md-6" ng-repeat="plan in plans">
+            <div class="radio">
+                <input type="radio" name="plan" id="{{plan.id}}" value="{{plan.id}}" ng-model="model.plan" ng-change="selectPlan()">
+                <label for="{{plan.id}}">{{plan.name}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12">
+            <input type="text" class="form-control card-number" placeholder="Credit Card Number" ng-model="model.card.number" data-stripe="number" ng-class="model.cardType" ng-keyup="detectCardType($event)">
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="CCV" ng-model="model.card.cvc" data-stripe="cvc">
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Expiry Month" ng-model="model.card.exp_month" data-stripe="exp_month">
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Expiry Year" ng-model="model.card.exp_year" data-stripe="exp_year">
+        </div>
+        <div class="col-md-12" ng-if="model.type != 'card'">
+            <div class="form-row">
+                <div class="error-label" ng-if="couponObject.error" ng-bind="couponObject.error"></div>
+                <div class="error-label" ng-if="couponObject.loading">Loading ...</div>
+                <label>Coupon</label>
+                <input type="text" class="form-control" ng-model="object.coupon" ng-change="selectPlan()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group" ng-if="model.type != 'card'">
+        <div class="col-md-6">
+            <div class="total">Total:
+                <span ng-class="{'with-coupon': couponObject.percent_off}">${{selectedPlan.price}} <small>/{{selectedPlan.cycle}}</small></span>
+                <span ng-if="couponObject.percent_off">${{((100 - couponObject.percent_off) / 100 * selectedPlan.price).toFixed(2)}} <small>/{{selectedPlan.cycle}}</small></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-success btn-block" ng-class="{'disabled': loading}">
+                <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span> PAY NOW
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="model.type == 'card'">
+        <button type="submit" class="btn btn-success btn-block" ng-class="{'disabled': loading}">
+            <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span> Add Card
+        </button>
+    </div>
+</div>

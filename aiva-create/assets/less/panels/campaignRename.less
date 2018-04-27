@@ -1,0 +1,88 @@
+
+@project-rename-width: 230px;
+@project-rename-z-index: 1001;
+@project-rename-size: 45px;
+@project-rename-border-radius: 20px;
+@project-rename-border-color: #c6c6c6;
+
+.campaign-rename {
+    position: fixed;
+    z-index: @project-rename-z-index;
+    top: 15px;
+    left: 200px;
+    &.triggers { left: 120px; }
+    
+    width: @project-rename-width;
+    height: @project-rename-size;
+
+    border: 1px @project-rename-border-color solid;
+    border-radius: @project-rename-border-radius;
+    background:white;
+
+    .btn-left {
+        position: absolute;
+        z-index: @project-rename-z-index+1;
+        left: 1px;
+        top: 0px;
+        height: @project-rename-size - 2px;
+        width: @project-rename-width - (@project-rename-size - 1px + 10px);
+        line-height: @project-rename-size - 2px;
+        
+        border: none;
+        
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: @project-rename-border-radius;
+        border-bottom-left-radius: @project-rename-border-radius;
+        background: transparent;
+           
+        color: #38db62;
+        font-size: 14px;
+        font-weight: normal;
+        
+        padding-left: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+        &:focus, &:active { outline: none; }
+        // &:hover { background: #f8f8f8; }
+    }
+   
+    input.btn-left {
+        color: black;
+        border: 1px;
+        padding-right: 30px;
+    }
+    
+    .btn-right {
+        position: absolute;
+        z-index: @project-rename-z-index+1;
+        right: 0px;
+        top: 0px;
+        width: @project-rename-size - 1px + 10px;
+        height: @project-rename-size - 2px;
+        
+        color: black;
+        border: none;
+        border-left: 1px transparent solid;
+       
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: @project-rename-border-radius;
+        border-bottom-right-radius: @project-rename-border-radius;
+        
+        background: transparent;
+        padding-right: 10px;
+        &:focus, &:active { outline: none; }
+        &:hover { background: #f8f8f8; }
+        
+        color: #666; 
+        .fa { font-size: 1.6em; }
+    }
+    
+    .btn-right.btn-confirm {
+        background-color: #38db62;
+        color: white;
+    }
+}

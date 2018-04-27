@@ -1,0 +1,243 @@
+<div top-navigation title="Client Settings"></div>
+<section class="document">
+    <div left-navigation></div>
+
+    <div class="inner-container">
+        <div settings-navigation></div>
+        <div class="settings-container" style="height: {{innerHeight}}px">
+            <h1>Activated Websites</h1>
+
+            <div class="form form-limited" ng-if="Client.mode === ''" style="width: 680px;">
+                <h4>Your Websites</h4>
+                <p>Add websites here to enable overlays for them. Don't forget to install Aiva on the site after adding them here. For help contact support@aivalabs.com</p>
+
+                <div class="table" style="margin-top:30px;">
+                    <div class="table-header clearfix">
+                        <div class="column column-client first-column">Website Name</div>
+                        <div class="column column-url">URL</div>
+                        <div class="column column-timezone">Plan</div>
+                    </div>
+                    <div class="table-row clearfix" style="position:relative; padding-right: 15px;" ng-repeat="client in Client.list">
+                        <div class="column column-client  first-column bold" ng-bind="client.client_name"></div>
+                        <div class="column column-url" ng-bind="client.client_url"></div>
+                        <div class="column column-timezone" ng-bind="client.payment_plan"></div>
+                        <div class="column column-action last-column pull-right">
+                            <button class="btn-transparent" ng-click="removeWebsiteModal(client)"><i class="fa fa-times"></i></button>
+                        </div>
+                        <div class="column column-action pull-right">
+                            <button class="btn-transparent" ng-click="upgradeWebsiteModal(client)"><i class="fa fa-pencil"></i></button>
+                        </div>
+                        <div class="column column-action pull-right">
+                            <button class="btn-transparent" ng-click="moreDetailsModal(client)"><i class="fa fa-eye"></i></button>
+                        </div>
+
+                        <div class='hovered' ng-show="Client.getScreenshot(client.client_url)" style="left: 150px;">
+                            <img ng-src="{{Client.getScreenshot(client.client_url)}}" alt="screenshot"/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-row padded">
+                    <button class="btn btn-success btn-block" ng-click="Client.add()">
+                        <i class="fa fa-plus"></i>
+                        Add New Website
+                    </button>
+                </div>
+            </div>
+
+            <div class="form form-limited" ng-if="Client.mode === 'upgrade'" style="width: 620px">
+                <h4>Upgrade Account</h4>
+
+                <form id="payment-form" ng-submit="makePayment()">
+                    <credit-card-form></credit-card-form>
+                </form>
+
+                <div class="form-row padded">
+                    <a href="" ng-click="Client.cancel()">< Back</a>
+                </div>
+            </div>
+
+            <div ng-if="!$root.user.is_pro && Client.mode != 'upgrade' && Client.list.length == 1" class="upgrade-message">
+                <h3 class="pull-left">Upgrade to PRO for only $49.99<small>/month</small></h3>
+                <button class="btn btn-lg btn-success btn-round pull-right" ng-click="Client.mode = 'upgrade'">Upgrade</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal modal-round fade" id="add-website-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+            <h3 class="modal-title">Add A Website</h3>
+                <div class="form">
+                    <div class="form-row clearfix credit-card-form" ng-if="$root.user.is_pro">
+                        <div class="col-md-6" ng-repeat="plan in plans">
+                            <div class="radio">
+                                <input type="radio" name="plan" id="{{plan.id}}" value="{{plan.id}}" ng-model="object.plan" ng-change="selectPlan()">
+                                <label for="{{plan.id}}">{{plan.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="error-label" ng-if="errors.client_name"  ng-bind="errors.client_name"></div>
+                        <label>Website Name</label>
+                        <input type="text" class="form-control" ng-model="object.client_name" />
+                    </div>
+                    <div class="form-row">
+                        <div class="error-label" ng-if="errors.client_url"  ng-bind="errors.client_url"></div>
+                        <label>URL</label>
+                        <input type="text" class="form-control" ng-model="object.client_url" />
+                    </div>
+                    <div class="form-row">
+                        <div class="error-label" ng-if="errors.client_timezone"  ng-bind="errors.client_timezone"></div>
+                        <label>Time Zone</label>
+                        <select
+                            class="form-control" ng-model="object.client_timezone"
+                            ng-options="(value) for value in timezones"
+                        >
+                        </select>
+                    </div>
+                    <div class="form-row" ng-if="$root.user.is_pro">
+                        <div class="error-label" ng-if="couponObject.error" ng-bind="couponObject.error"></div>
+                        <div class="error-label" ng-if="couponObject.loading">Loading ...</div>
+                        <label>Coupon</label>
+                        <input type="text" class="form-control" ng-model="object.coupon" ng-change="selectPlan()" />
+                    </div>
+                    <div class="form-row padded credit-card-form" ng-if="$root.user.is_pro">
+                        <div class="total">Total:
+                            <span ng-class="{'with-coupon': couponObject.percent_off}">${{selectedPlan.price}} <small>/{{selectedPlan.cycle}}</small></span>
+                            <span ng-if="couponObject.percent_off">${{((100 - couponObject.percent_off) / 100 * selectedPlan.price).toFixed(2)}} <small>/{{selectedPlan.cycle}}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-row padded row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success btn-block" ng-click="submit()" ng-class="{'disabled': loading}">
+                                <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
+                                Add New Website
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default btn-block" ng-click="Client.cancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-round fade" id="upgrade-plan-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">Upgrade Account</h3>
+                <div class="text-center">
+                    <p>You need to upgrade to pro plan to be able to add more domains</p>
+                    <div>
+                        <button class="btn btn-success btn-round btn-lg" ng-click="Client.mode='upgrade'" data-dismiss="modal">Upgrade Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-round fade" id="upgrade-website-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">Upgrade Website</h3>
+                <div class="form">
+                    <div class="alert alert-danger" ng-if="error">{{error}}</div>
+                    <div class="form-row clearfix credit-card-form" ng-if="$root.user.is_pro">
+                        <div class="col-md-6" ng-repeat="plan in plans">
+                            <div class="radio">
+                                <input type="radio" name="website-plan" id="{{plan.id}}" value="{{plan.id}}" ng-model="object.plan" ng-change="selectPlan()">
+                                <label for="{{plan.id}}">{{plan.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row padded credit-card-form" ng-if="$root.user.is_pro">
+                        <div class="total">Total:
+                            <span>${{selectedPlan.price}} <small>/{{selectedPlan.cycle}}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-row padded row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success btn-block" ng-click="upgradeWesbite()" ng-class="{'disabled': loading}">
+                                <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
+                                Upgrade
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default btn-block" ng-click="Client.cancel()" ng-class="{'disabled': loading}">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-round fade" id="delete-website-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">Remove Website</h3>
+                <div class="form">
+                    <div class="form-row padded row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success btn-block" ng-click="remove(selectedWebsite.id)" ng-class="{'disabled': loading}">
+                                <span ng-if="loading"><i class="fa fa-spinner fa-pulse fa-fw"></i></span> Delete
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-round fade" id="more-details-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <button type="button" class="close pull-right" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close' | translate }}</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title">Website Details</h3>
+                <hr>
+                <p><strong>Website name:</strong> {{selectedWebsite.client_name}}</p>
+                <p><strong>Website URL:</strong> {{selectedWebsite.client_url}}</p>
+                <p><strong>Time zone:</strong> {{selectedWebsite.client_timezone}}</p>
+                <p><strong>Plan:</strong> {{selectedWebsite.payment_plan}}</p>
+                <p ng-if="selectedWebsite.subscription_ends_at"><strong>Renewal date:</strong> {{selectedWebsite.subscription_ends_at}}</p>
+                <hr>
+                <button class="btn btn-success btn-round btn-lg btn-block" ng-click="$('#select-website-modal').modal('hide');" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<ul class="list-unstyled">
+    <li ng-repeat="page in project.active.pages track by $index" ng-click="project.changePage(page.name)" ng-class="{active: page.name == project.activePage.name}">
+        <span class="name">{{ page.name }}</span>
+    </li>
+</ul>
+
+<div class="action-buttons">
+    <button ng-click="createNewPage()" bl-tooltip="newPage"><i class="icon icon-doc-add"></i></button>
+    <div class="pull-right">
+        <button ng-click="savePage()" bl-tooltip="savePage"><i class="icon icon-floppy-1"></i></button>
+        <button bl-tooltip="deletePage" ng-disabled="project.activePage.name.toLowerCase() === 'index'" ng-click="deletePage()"><i class="icon icon-trash"></i></button>
+        <button bl-tooltip="copyPage" ng-click="copyPage()"><i class="icon icon-docs-1"></i></button>
+    </div>
+</div>
+
+<div class="page-settings">
+    <div class="form-group">
+        <label for="page-name">{{ 'pageName' | translate }}</label>
+        <input type="text" ng-disabled="project.activePage.name == 'Index'" class="form-control" ng-model="project.activePage.name" id="page-name">
+    </div>
+
+    <div class="form-group">
+        <label for="page-title">{{ 'pageTitle' | translate }}</label>
+        <input type="text" class="form-control" ng-model="project.activePage.title" id="page-title">
+    </div>
+
+    <div class="form-group">
+        <label for="page-description">{{ 'pageDescription' | translate }}</label>
+        <textarea ng-model="project.activePage.description" id="page-description" rows="5" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="page-tags">{{ 'pageTags' | translate }}</label>
+        <textarea ng-model="project.activePage.tags" id="page-tags" rows="5" class="form-control"></textarea>
+    </div>
+</div>
+
+<div class="buttons-bottom">
+    <button class="btn btn-danger" ng-click="emptyProject()">{{:: 'emptyProject' | translate }}</button>
+    <button class="btn btn-primary" ng-click="openPanel('templates')">{{:: 'changeTemplate' | translate }}</button>
+</div>

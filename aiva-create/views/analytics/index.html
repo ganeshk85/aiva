@@ -1,0 +1,86 @@
+<div top-navigation title="Analytics of {{campaignName}}"></div>
+
+<section class="document">
+    <div left-navigation></div>
+    
+    <div class="inner-container" style="overflow-y: scroll; height: {{ innerHeight - 60 }}px">
+        <div ng-cloak class="spaced analytics-document">
+            <div>
+                <div>
+                    <div class="calendar">
+                        <div analytics-calendar></div>
+                    </div>
+
+                    <div class="heading form form-inline clearfix">
+                        <div>
+                            <a href="#/analytics" class="btn btn-success btn-lg" style="border-radius: 10px;">
+                                <i class="fa fa-chevron-left" style="color:#f9f9f9"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <h1 ng-bind="campaignName"></h1>
+                        </div>
+                        <div class="client" ng-bind="object.client"></div>
+                    </div>
+
+                    <div analytics-calendar-popup></div>
+
+                    <div ng-show="errPeriod">
+                        <div class="alert alert-danger" ng-bind="errPeriod"></div>
+                    </div>
+
+                    <div class="dash" ng-show="!errPeriod">
+                        
+                        <div class="tile" style='min-width: 400px; max-width:400px; flex: 1; margin-left:-15px; margin-right: 20px;'>
+                            <div class="header">Campaigns Details</div>
+                            <div campaign-details></div>
+                        </div>
+                        <div class="tile" style='min-width: 758px; max-width: 558px; flex: 1;'>
+                            <div class="header">Campaigns Totals</div>
+                            <div 
+                                campaign-totals 
+                                name="campaignName"
+                                period="period.period"
+                                previous="period.previous"
+                                series="period.series"
+                            >
+                            </div>
+                        </div>
+                        <!-- <div class="tile" style='min-width: 180px; max-width:180px; flex: 1; margin-right: 20px;'>
+                            <div class="header">Versions</div>
+                            <img
+                                style="width:100%"
+                                src="assets/images/analytics/versions.png" 
+                                alt=""
+                                />
+                        </div> -->
+
+                    </div>
+                    
+                    <div ng-show="!errPeriod" class="dash">
+                        <div class="tile" style='min-width: 400px; max-width:400px; flex: 1; margin-left:-15px; margin-right: 20px;'>
+                            <div class="header">Location Overview</div>
+                            <div campaign-locations></div>
+                        </div>
+                        <div class="tile" style="min-width: 758px; max-width: 558px; flex: 1">
+                            <div style="float: right; font-size: 10px;font-weight: bold;">
+                                Attempt = <span class='example-attempt'></span>
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                Success = <span class='example-success'></span>
+                            </div>
+                            <div class="header">Daily Breakdown</div>
+                            <div ng-show="errBreakdown">
+                                <div class="alert alert-danger" ng-bind="errBreakdown"></div>
+                            </div>
+                            <div ng-show="!errBreakdown" campaign-breakdown></div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div
+
+            <div style='height:50px'></div>
+        </div>
+    </div>
+</section>

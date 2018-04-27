@@ -1,0 +1,220 @@
+
+.campaign-selector {
+    width: 400px;
+    height: 100%;
+    overflow: auto;
+    background: #fcfcfc;
+    border-right: 1px #cfcfcf solid;
+ 
+    .header { padding: 30px; padding-bottom:10px; }
+    
+    table.table thead th { 
+        cursor: pointer;
+        font-weight:normal;
+    }
+    
+    table.table tbody th, 
+    table.table tbody td {
+        font-size: 16px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        cursor: pointer;
+        .fa { color: #ddd; }
+    } 
+    table.table tbody tr:hover * { background: #38db62; color: white; }
+}
+
+
+.back-tab {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    a {
+        display: inline-block;
+        background: #f3f3f3;
+        padding-left: 20px;
+        padding-right: 40px;
+
+        color: #2cdd5b !important;
+        font-weight: normal;
+        font-size: 16px;
+        
+        height: 50px;
+        white-space: nowrap;
+        line-height: 50px;
+    }
+}
+
+section.document .analytics-document {
+    padding-top: 0px !important;
+    margin-top: 15px !important;
+    
+    .calendar {
+        float:right; 
+        line-height:52px;
+        height: 52px;
+        
+        .calendar-icon { 
+            color: #919191;
+            font-size:1.5em; vertical-align: middle; margin-right:20px;
+        }
+        label {
+            font-weight: normal;
+            margin-bottom: 0px;
+        }
+        input[type=text] {
+            width: 120px;
+            text-align: center;
+        }
+    }
+        
+    .heading {
+        > div { display: block; float: left; }   
+        h1 { padding-left: 30px; padding-right: 50px; line-height:1.9em;}
+        .client { 
+            border-left: 1px #ccc solid; 
+            font-size: 18px;
+            font-weight: normal;
+            color: #9a9a9a;
+            padding-left: 30px; 
+            line-height:52px;
+            height: 52px;
+        }
+    }
+}
+
+.analytics-document .dash {
+    margin: 0px auto;
+    margin-top:20px; 
+    display: flex;
+    width: 1170px;
+}
+
+.tile {
+    background: white;
+    border: 1px #f8f8f8 solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    vertical-align: top;
+    box-shadow: 3px 3px 6px #eee;
+    .header {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #666666;
+        font-weight: normal;
+    }
+}
+
+.campaign-details {
+    padding-top: 7px;
+    table { width: 100%; }
+    tr td { height: 80px; vertical-align:center; }
+    img { width: 56px; height: auto; }
+    .caption { font-size: 22px; white-space: nowrap; color: #666; }
+    .subtitle { font-size: 12px; }
+    .cell { border-left: 1px #ccc solid; padding-left: 20px; padding-right: 10px; width: 100px; text-align: center;}
+    .value { font-size: 16px; font-weight: bold; }
+    .value.big { font-size: 38px; line-height: 40px; font-weight: bold; }
+    .measure { font-size: 12px; }
+}
+
+.campaign-totals {
+    .value.big { font-size: 38px; line-height: 40px; font-weight: bold; }
+}
+
+
+@week-breakdown-column-size: 87px;
+
+.campaign-week {
+    margin:0px; padding: 0px;
+    .table {
+        width: auto;
+        th, td { border: 0px !important; }
+        thead {
+            .column { white-space:nowrap; width: @week-breakdown-column-size; font-weight:normal; text-align:center; font-size: 11px; border-left: 1px #d7d7d7 solid !important; }
+            td, th { height: 26px; line-height: 26px; padding: 0px; margin: 0px;  }
+        }
+        tbody {
+            .hour { width: 100px; white-space:nowrap; font-weight:normal; font-size: 10px; text-align:center; }
+            td, th { height: 20px; line-height: 20px; padding: 0px; margin: 0px; }
+            .column { width: @week-breakdown-column-size; vertical-align: middle; white-space:nowrap; border-left: 1px #d7d7d7 solid !important; }
+            .column {
+                .total { position:relative; height:6px; border: 1px #eee solid; border-radius: 2px;  background: #eee; }
+                .value { position:absolute; top:0px; left:0px; border: 1px #2cdd5b solid; background:transparent; border-radius: 2px; height: 5px; }
+            }
+            tr { height: 20px; line-height: 20px; }
+            tr:nth-child(odd) { background: #fdfdfd; }
+        }
+    }
+}
+.tile {
+    .example-attempt,
+    .example-success {
+        display: inline-block;
+        width: 20px;
+        height: 6px; 
+        border-radius: 2px; 
+    }
+    .example-attempt {
+        border: 1px #eee solid; 
+        background: #eee;
+    }
+    .example-success {
+        border: 1px #2cdd5b solid; 
+        background: transparent; 
+    }
+    
+}
+
+
+.campaign-devices {
+    
+    .space {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+     
+    .device {
+        border: 2px #42bb60 solid;
+        border-radius: 30px;
+        background-color: white;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 50% 50%; 
+        width: 50px;
+        height: 50px;
+        padding: 30px;
+        &:focus, &:active { outline: none;} 
+    }
+    
+    .device.selected {
+        background-color: #38db62;
+    }
+        
+    .device-lg {
+        background-image: url(../images/devices/device-lg.png);
+    }
+    .device-md {
+        background-image: url(../images/devices/device-md.png);
+    }
+    .device-sm {
+        background-image: url(../images/devices/device-sm.png);
+    }
+    .device-xs {
+        background-image: url(../images/devices/device-xs.png);
+    }
+    
+    .device-lg.selected {
+        background-image: url(../images/devices/device-lg-selected.png);
+    }
+    .device-md.selected {
+        background-image: url(../images/devices/device-md-selected.png);
+    }
+    .device-sm.selected {
+        background-image: url(../images/devices/device-sm-selected.png);
+    }
+    .device-xs.selected {
+        background-image: url(../images/devices/device-xs-selected.png);
+    }
+
+}
